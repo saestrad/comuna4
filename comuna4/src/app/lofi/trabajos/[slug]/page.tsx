@@ -221,15 +221,8 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         </section>
 
         {/* Hero visual */}
-        <section className="relative border-b border-neutral-200 overflow-hidden">
+        <section className="border-b border-neutral-200">
           <div className="aspect-[16/7] lofi-img" />
-          <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/60 via-transparent to-transparent" />
-          <div className="absolute bottom-6 left-6">
-            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-5 py-4 inline-block">
-              <p className="text-xs font-mono text-white/60 mb-1">{project.client} · {project.category} · {project.year}</p>
-              <p className="text-base md:text-lg font-display font-semibold text-white leading-tight max-w-[32ch]">{project.title}</p>
-            </div>
-          </div>
         </section>
 
         {/* Proceso */}
