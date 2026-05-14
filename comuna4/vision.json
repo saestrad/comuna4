@@ -1,0 +1,78 @@
+{
+  "meta": {
+    "version": "2.0",
+    "created": "2026-05-13",
+    "updated": "2026-05-13",
+    "source": "Design-Brief-C4.docx"
+  },
+  "about": {
+    "name": "Comuna 4",
+    "expertise": "Agencia creativa — branding, contenido, producción y renta de espacios/equipos",
+    "background": "Agencia creativa regional que busca diferenciarse del mercado con una propuesta visual editorial y con funcionalidad operativa real integrada en su web."
+  },
+  "purpose": {
+    "who": "Clientes potenciales de agencia creativa, empresas que rentan espacios o equipos, colaboradores internos, suplidores recurrentes y clientes con proyectos activos",
+    "problem": "Las webs de agencias en la región siguen el mismo patrón genérico (hero con video, grid de portafolio, formulario plano) y no resuelven nada operativo. Internamente, la gestión de calendarios, dashboards y recursos está dispersa, generando carga administrativa.",
+    "transformation": "Posicionar a Comuna 4 como referente creativo regional, convertir visitantes en leads calificados a través de un flujo claro de solicitud de servicios, habilitar la renta de espacios/equipos en línea y centralizar la operación interna en un portal por roles.",
+    "why": "El equipo ya opera con una identidad diferenciada; la web es el espejo digital de esa propuesta y la herramienta que elimina fricción para clientes, suplidores y colaboradores."
+  },
+  "product": {
+    "name": "Comuna 4 Web Platform",
+    "oneliner": "La vitrina creativa y herramienta operativa de la agencia más distinta de la región.",
+    "howItWorks": "Capa pública con flujo de solicitud de servicios (wizard multi-paso con consentimiento), portafolio filtrable, renta de espacios/equipos con calendario en tiempo real. Capa interna protegida con dashboards, calendario integrado y recursos organizados por rol (colaborador, suplidor, cliente).",
+    "capabilities": [
+      "Flujo guiado de solicitud de servicios — wizard de 5 pasos con consentimiento previo y autoguardado por sesión",
+      "Catálogo de renta de espacios y equipos con disponibilidad en tiempo real y carrito básico",
+      "Portal interno con 3 roles: Colaborador interno, Suplidor, Cliente activo",
+      "Dashboards de crecimiento con KPIs conectables a Meta, GA4 y Google Sheets",
+      "Calendario integrado Google Calendar / Outlook (bidireccional)",
+      "Portafolio filtrable por servicio o industria con casos de estudio detallados",
+      "Modo claro y oscuro nativo (system preference + toggle manual)",
+      "Microinteracciones y animaciones editoriales (Framer Motion)",
+      "Cursor personalizado, page transitions, scroll narrativo"
+    ],
+    "platform": "web",
+    "differentiation": "Identidad visual con personalidad (tipografía display editorial + paleta arriesgada), microinteracciones cinematográficas, lenguaje humano sin clichés de agencia, y funcionalidad real que resuelve cosas (renta, dashboards, solicitudes).",
+    "magicMoment": "El visitante entiende quiénes son en menos de 3 segundos y puede iniciar una solicitud de servicio sin fricción, o reservar un espacio directamente desde el catálogo."
+  },
+  "audience": {
+    "primary": {
+      "name": "Cliente potencial / prospecto",
+      "description": "Empresa o marca que busca agencia creativa para branding, contenido o producción, o que necesita rentar un espacio o equipo para su proyecto.",
+      "currentAlternatives": "Webs genéricas de agencias regionales — formulario de contacto plano, portafolio sin contexto, sin información de proceso ni precios.",
+      "frustrations": "No pueden evaluar el fit cultural antes de contactar, el proceso de solicitud es un formulario largo y sin guía, y la respuesta post-contacto es lenta y poco estructurada."
+    },
+    "secondary": [
+      "Colaboradores internos de Comuna 4 — necesitan acceso a calendarios, recursos y proyectos en curso",
+      "Suplidores recurrentes — necesitan ver su calendario de eventos y los recursos compartidos con ellos",
+      "Clientes con proyectos activos — necesitan ver el estado de su proyecto, archivos compartidos y KPIs de sus campañas"
+    ]
+  },
+  "business": {
+    "revenueModel": "Servicios de agencia (branding, contenido, producción) + renta de espacios y equipos por hora/día",
+    "goals90Days": "Lanzar capa pública completa; aumentar solicitudes de servicio un 40% respecto al canal actual; habilitar reservas online de espacios y equipos; activar portal interno con los tres roles.",
+    "vision6Months": "Ser la referencia regional de web de agencia creativa; tener el área interna con adopción activa semanal de colaboradores, suplidores y clientes; iniciar sprints de mejora continua con datos de analítica.",
+    "constraints": "Presupuesto y cronograma a definir con el webmaster tras entrega de propuesta técnica y económica. Contenido editorial (textos de marca, portafolio) a proveer por el equipo de Comuna 4.",
+    "gtmApproach": "Lanzamiento escalonado por fases — primero capa pública (Fase 2), luego capa interna (Fase 3). Comunicación directa a clientes y suplidores existentes para adopción del portal interno. Métricas de conversión del flujo de solicitud como KPI principal."
+  },
+  "feeling": {
+    "brandPersonality": "Editorial, directa, con personalidad, humana. Sin clichés de agencia. Confiada sin ser arrogante.",
+    "visualMood": "Base neutra negro/crema con 1-2 colores acento vibrantes. Espacio en blanco amplio e intencional. Fotografía y video con tratamiento consistente (filtro o textura propia). Iconografía de un solo set coherente.",
+    "toneOfVoice": "Directo, humano, sin jerga corporativa. Un lenguaje propio que se siente como una persona real, no como un comunicado institucional.",
+    "antiPatterns": "Hero genérico con video de stock, paleta de azules corporativos, grid de portafolio sin edición ni contexto, formulario plano de contacto, textos con clichés de agencia ('soluciones integrales', 'potenciamos tu marca')."
+  },
+  "techStack": {
+    "frontend": "Next.js 15 (App Router) + TypeScript + Tailwind CSS + Framer Motion",
+    "backend": "Next.js API Routes + Node.js para servicios externos (calendario, notificaciones)",
+    "database": "PostgreSQL (Neon o Railway) para datos relacionales — reservas, usuarios, proyectos, roles",
+    "auth": "Clerk con SSO Google/Microsoft + 2FA opcional para colaboradores internos",
+    "cms": "Sanity para contenido editorial (portafolio, servicios, blog)",
+    "hosting": "Vercel (frontend + API routes) + Railway (base de datos + servicios)",
+    "email": "Resend para transaccionales — confirmaciones de reserva, solicitudes, notificaciones internas",
+    "analytics": "Plausible (privacidad-first) + Microsoft Clarity para mapas de calor",
+    "other": "FullCalendar + Google Calendar API, Recharts o Tremor para dashboards internos, shadcn/ui como base de componentes"
+  },
+  "tooling": {
+    "codingAgent": "Claude Code"
+  }
+}
