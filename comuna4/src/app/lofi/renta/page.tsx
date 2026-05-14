@@ -70,7 +70,7 @@ export default function LofiRenta() {
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-end">
           <div>
             <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-6">Renta</p>
-            <h1 className="text-4xl md:text-6xl font-black text-neutral-900 tracking-tight leading-none mb-6 max-w-[16ch]">
+            <h1 className="text-4xl md:text-6xl font-display font-black text-neutral-900 tracking-tight leading-none mb-6 max-w-[16ch]">
               Tu idea necesita un espacio. Nosotros lo tenemos.
             </h1>
             <p className="text-base text-neutral-500 leading-relaxed">

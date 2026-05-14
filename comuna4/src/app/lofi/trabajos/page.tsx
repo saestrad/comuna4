@@ -25,7 +25,7 @@ export default function LofiTrabajos() {
       <section className="px-6 md:px-12 pt-[104px] pb-[104px] border-b border-neutral-200">
         <div className="max-w-5xl mx-auto">
           <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-6">Trabajos</p>
-          <h1 className="text-4xl md:text-6xl font-black text-neutral-900 tracking-tight leading-none mb-6 max-w-[16ch]">
+          <h1 className="text-4xl md:text-6xl font-display font-black text-neutral-900 tracking-tight leading-none mb-6 max-w-[16ch]">
             Proyectos reales, resultados reales.
           </h1>
           <p className="text-base text-neutral-500 leading-relaxed max-w-[44ch]">

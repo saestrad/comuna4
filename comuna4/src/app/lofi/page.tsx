@@ -24,7 +24,7 @@ export default function LofiHome() {
           <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-8">
             Agencia creativa — Puerto Rico
           </p>
-          <h1 className="text-5xl md:text-7xl font-black text-neutral-900 tracking-tight leading-none mb-8 max-w-[14ch]">
+          <h1 className="text-5xl md:text-7xl font-display font-black text-neutral-900 tracking-tight leading-none mb-8 max-w-[14ch]">
             Hacemos que tu marca crezca.
           </h1>
           <p className="text-lg text-neutral-500 leading-relaxed mb-12 max-w-[44ch]">
@@ -112,7 +112,7 @@ export default function LofiHome() {
       <section className="px-6 md:px-12 py-[120px] border-b border-neutral-200 bg-neutral-50">
         <div className="max-w-5xl mx-auto">
           <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-4">El Hub</p>
-          <h2 className="text-3xl md:text-4xl font-black text-neutral-900 tracking-tight leading-none mb-6 max-w-[22ch]">
+          <h2 className="text-3xl md:text-4xl font-display font-black text-neutral-900 tracking-tight leading-none mb-6 max-w-[22ch]">
             Donde la creatividad se produce.
           </h2>
           <p className="text-sm text-neutral-500 leading-relaxed mb-16 max-w-[48ch]">
@@ -138,7 +138,7 @@ export default function LofiHome() {
       <section className="px-6 md:px-12 py-[120px]">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row md:items-end md:justify-between gap-10">
           <div>
-            <h2 className="text-3xl md:text-5xl font-black text-neutral-900 tracking-tight leading-none mb-5">
+            <h2 className="text-3xl md:text-5xl font-display font-black text-neutral-900 tracking-tight leading-none mb-5">
               ¿Tienes un proyecto?
             </h2>
             <p className="text-base text-neutral-500 max-w-[38ch] leading-relaxed">

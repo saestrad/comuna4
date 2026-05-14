@@ -52,7 +52,7 @@ export default async function ServicioDetail({ params }: { params: Promise<{ slu
 
             <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-6">{service.name}</p>
 
-            <h1 className="text-3xl md:text-5xl font-black text-neutral-900 tracking-tight leading-tight mb-6 max-w-[18ch]">
+            <h1 className="text-3xl md:text-5xl font-display font-black text-neutral-900 tracking-tight leading-tight mb-6 max-w-[18ch]">
               {service.tagline}
             </h1>
 
@@ -115,7 +115,7 @@ export default async function ServicioDetail({ params }: { params: Promise<{ slu
         {/* Siguiente — CTA */}
         <section id="siguiente" className="px-6 md:px-12 py-[120px]">
           <div className="max-w-[882px] mx-auto">
-            <h2 className="text-3xl md:text-5xl font-black text-neutral-900 tracking-tight leading-tight mb-5 max-w-[20ch]">
+            <h2 className="text-3xl md:text-5xl font-display font-black text-neutral-900 tracking-tight leading-tight mb-5 max-w-[20ch]">
               ¿Es esto lo que necesita tu marca?
             </h2>
             <p className="text-base text-neutral-500 leading-relaxed mb-10 max-w-[44ch]">

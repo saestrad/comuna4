@@ -129,7 +129,7 @@ export default function RentaDetail({ params }: { params: Promise<{ slug: string
               <span className="text-xs font-mono uppercase tracking-widest text-neutral-500">{item.size}</span>
             </div>
 
-            <h1 className="text-3xl md:text-5xl font-black text-neutral-900 tracking-tight leading-tight mb-6">
+            <h1 className="text-3xl md:text-5xl font-display font-black text-neutral-900 tracking-tight leading-tight mb-6">
               {item.name}
             </h1>
 

@@ -83,7 +83,7 @@ function SolicitudForm() {
       <div className="min-h-screen bg-white flex items-center justify-center px-6">
         <div className="max-w-md text-center">
           <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-6">Solicitud enviada</p>
-          <h1 className="text-4xl font-black text-neutral-900 tracking-tight leading-none mb-4">
+          <h1 className="text-4xl font-display font-black text-neutral-900 tracking-tight leading-none mb-4">
             Recibido.
           </h1>
           <p className="text-sm text-neutral-500 leading-relaxed mb-8">
@@ -125,7 +125,7 @@ function SolicitudForm() {
         {/* Step 0: Service */}
         {step === 0 && (
           <div>
-            <h1 className="text-4xl font-black text-neutral-900 tracking-tight leading-none mb-3">
+            <h1 className="text-4xl font-display font-black text-neutral-900 tracking-tight leading-none mb-3">
               ¿Qué necesitas?
             </h1>
             <p className="text-sm text-neutral-500 mb-8 leading-relaxed">
@@ -165,7 +165,7 @@ function SolicitudForm() {
         {/* Step 1: Brief */}
         {step === 1 && (
           <div>
-            <h1 className="text-4xl font-black text-neutral-900 tracking-tight leading-none mb-3">
+            <h1 className="text-4xl font-display font-black text-neutral-900 tracking-tight leading-none mb-3">
               Cuéntanos el proyecto.
             </h1>
             <p className="text-sm text-neutral-500 mb-8 leading-relaxed">
@@ -253,7 +253,7 @@ function SolicitudForm() {
         {/* Step 2: Contact */}
         {step === 2 && (
           <div>
-            <h1 className="text-4xl font-black text-neutral-900 tracking-tight leading-none mb-3">
+            <h1 className="text-4xl font-display font-black text-neutral-900 tracking-tight leading-none mb-3">
               ¿Cómo te contactamos?
             </h1>
             <p className="text-sm text-neutral-500 mb-8 leading-relaxed">
@@ -346,7 +346,7 @@ function SolicitudForm() {
         {/* Step 3: Review */}
         {step === 3 && (
           <div>
-            <h1 className="text-4xl font-black text-neutral-900 tracking-tight leading-none mb-3">
+            <h1 className="text-4xl font-display font-black text-neutral-900 tracking-tight leading-none mb-3">
               Revisa y envía.
             </h1>
             <p className="text-sm text-neutral-500 mb-8 leading-relaxed">

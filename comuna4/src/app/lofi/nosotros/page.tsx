@@ -43,7 +43,7 @@ export default function LofiSobre() {
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-end">
           <div>
             <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-6">Nosotros</p>
-            <h1 className="text-4xl md:text-6xl font-black text-neutral-900 tracking-tight leading-none mb-6">
+            <h1 className="text-4xl md:text-6xl font-display font-black text-neutral-900 tracking-tight leading-none mb-6">
               Más que una agencia, un motor de cambio.
             </h1>
             <p className="text-base text-neutral-500 leading-relaxed">
@@ -58,7 +58,7 @@ export default function LofiSobre() {
       <section className="px-6 md:px-12 py-[104px] border-b border-neutral-200">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-8">Manifiesto</h2>
-          <p className="text-3xl font-black text-neutral-900 tracking-tight leading-tight mb-8 max-w-[22ch]">
+          <p className="text-3xl font-display font-black text-neutral-900 tracking-tight leading-tight mb-8 max-w-[22ch]">
             No trabajamos con todas las marcas. Solo con las que quieren ganar.
           </p>
           <div className="flex flex-col gap-4 text-sm text-neutral-500 leading-relaxed max-w-[56ch]">
@@ -126,7 +126,7 @@ export default function LofiSobre() {
       <section className="px-6 md:px-12 py-[120px]">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row md:items-end md:justify-between gap-8">
           <div>
-            <h2 className="text-3xl md:text-4xl font-black text-neutral-900 tracking-tight leading-none mb-3">
+            <h2 className="text-3xl md:text-4xl font-display font-black text-neutral-900 tracking-tight leading-none mb-3">
               ¿Trabajamos juntos?
             </h2>
             <p className="text-sm text-neutral-500 leading-relaxed max-w-[38ch]">

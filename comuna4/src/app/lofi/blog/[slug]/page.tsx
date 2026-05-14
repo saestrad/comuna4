@@ -57,7 +57,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
               <span className="text-xs font-mono uppercase tracking-widest text-neutral-500">{article.readTime} de lectura</span>
             </div>
 
-            <h1 className="text-3xl md:text-5xl font-black text-neutral-900 tracking-tight leading-tight mb-6 max-w-[22ch]">
+            <h1 className="text-3xl md:text-5xl font-display font-black text-neutral-900 tracking-tight leading-tight mb-6 max-w-[22ch]">
               {article.title}
             </h1>
 
@@ -102,7 +102,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
           <div className="max-w-[882px] mx-auto">
             <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-16">Datos</p>
 
-            <p className="text-6xl md:text-8xl font-black text-neutral-900 tracking-tight leading-none mb-4">
+            <p className="text-6xl md:text-8xl font-display font-black text-neutral-900 tracking-tight leading-none mb-4">
               {article.insight.stat}
             </p>
             <p className="text-base text-neutral-700 font-semibold mb-6 max-w-[38ch]">

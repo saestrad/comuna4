@@ -46,7 +46,7 @@ export default function LofiServicios() {
       <section className="px-6 md:px-12 pt-[104px] pb-[104px] border-b border-neutral-200">
         <div className="max-w-5xl mx-auto">
           <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-6">Servicios</p>
-          <h1 className="text-4xl md:text-6xl font-black text-neutral-900 tracking-tight leading-none mb-6 max-w-[18ch]">
+          <h1 className="text-4xl md:text-6xl font-display font-black text-neutral-900 tracking-tight leading-none mb-6 max-w-[18ch]">
             Publicidad de alto nivel. Sin las barreras de costo tradicionales.
           </h1>
           <p className="text-base text-neutral-500 leading-relaxed max-w-[48ch]">
@@ -102,7 +102,7 @@ export default function LofiServicios() {
       <section className="px-6 md:px-12 py-[120px]">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row md:items-end md:justify-between gap-8">
           <div>
-            <h2 className="text-3xl md:text-4xl font-black text-neutral-900 tracking-tight leading-none mb-3">
+            <h2 className="text-3xl md:text-4xl font-display font-black text-neutral-900 tracking-tight leading-none mb-3">
               ¿Qué necesita tu marca?
             </h2>
             <p className="text-sm text-neutral-500 max-w-[38ch] leading-relaxed">
