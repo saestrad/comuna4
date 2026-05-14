@@ -1,12 +1,7 @@
 import Link from 'next/link'
+import { featuredProjects } from '@/lib/projects'
 
 const ticker = ['Producción de Contenido', 'Estrategia Creativa', 'Compra de Medios', 'Influencer Collabs', 'Renta de Espacios', 'Branding', 'Performance Digital']
-
-const projects = [
-  { title: 'Identidad completa para marca de gastronomía', category: 'Branding', metric: '↑ 40% reconocimiento' },
-  { title: 'Campaña Meta + TikTok para marca local', category: 'Performance', metric: '↑ 3.2× ROAS' },
-  { title: 'Producción audiovisual para lanzamiento', category: 'Producción', metric: '2.4M impresiones' },
-]
 
 const studios = [
   { name: 'Ciclorama Profesional', size: "25' × 25'", desc: 'Producciones publicitarias, fotografía de producto y contenido.' },
@@ -68,11 +63,17 @@ export default function LofiHome() {
             </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {projects.map((p) => (
-              <Link href="/lofi/trabajos" key={p.title} className="group block">
-                <div className="aspect-[4/3] bg-neutral-100 rounded border border-neutral-200 mb-4" />
+            {featuredProjects.map((p) => (
+              <Link href={`/lofi/trabajos/${p.slug}`} key={p.slug} className="group block">
+                <div className="relative overflow-hidden rounded border border-neutral-200 mb-4">
+                  <div className="aspect-[4/3] bg-neutral-100 transition-transform duration-500 ease-out group-hover:-translate-y-1.5" />
+                  <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-[0.07] transition-opacity duration-500 pointer-events-none"
+                    style={{ backgroundColor: p.color }}
+                  />
+                </div>
                 <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-1.5">{p.category}</p>
-                <p className="text-sm font-semibold text-neutral-800 leading-snug mb-1">{p.title}</p>
+                <p className="text-sm font-semibold text-neutral-800 leading-snug mb-1 group-hover:text-neutral-600 transition-colors duration-300">{p.title}</p>
                 <p className="text-xs text-neutral-500">{p.metric}</p>
               </Link>
             ))}

@@ -2,17 +2,9 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { projects } from '@/lib/projects'
 
 const categories = ['Todos', 'Branding', 'Performance', 'Producción', 'Web']
-
-const projects = [
-  { title: 'Identidad completa para restaurante de cocina caribeña', category: 'Branding', sector: 'Gastronomía', metric: '↑ 40% reconocimiento de marca en 60 días', slug: 'restaurante-caribeno' },
-  { title: 'Campaña Meta + TikTok para marca de moda local', category: 'Performance', sector: 'Moda', metric: '3.2× ROAS sostenido en 90 días', slug: 'marca-moda-performance' },
-  { title: 'Producción audiovisual para lanzamiento de producto', category: 'Producción', sector: 'Consumo', metric: '2.4M impresiones orgánicas', slug: 'lanzamiento-audiovisual' },
-  { title: 'Rediseño de marca para firma de arquitectura', category: 'Branding', sector: 'Servicios profesionales', metric: 'Sistema visual en 4 semanas', slug: 'firma-arquitectura' },
-  { title: 'Google Ads + Performance Max para e-commerce', category: 'Performance', sector: 'E-commerce', metric: '↓ 28% CPA vs campaña anterior', slug: 'ecommerce-performance-max' },
-  { title: 'Sitio web para consultoría de negocios', category: 'Web', sector: 'B2B', metric: '↑ 55% tiempo en página', slug: 'consultoria-web' },
-]
 
 export default function LofiTrabajos() {
   const [active, setActive] = useState('Todos')
@@ -59,17 +51,23 @@ export default function LofiTrabajos() {
         </div>
       </div>
 
-      {/* Projects grid */}
+      {/* Grid */}
       <section className="px-6 py-14">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {filtered.map((p) => (
               <Link key={p.slug} href={`/lofi/trabajos/${p.slug}`} className="group block">
-                <div className="aspect-[4/3] bg-neutral-100 rounded border border-neutral-200 mb-4" />
+                <div className="relative overflow-hidden rounded border border-neutral-200 mb-4">
+                  <div className="aspect-[4/3] bg-neutral-100 transition-transform duration-500 ease-out group-hover:-translate-y-1.5" />
+                  <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-[0.07] transition-opacity duration-500 pointer-events-none"
+                    style={{ backgroundColor: p.color }}
+                  />
+                </div>
                 <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-1.5">
                   {p.category} · {p.sector}
                 </p>
-                <p className="text-sm font-semibold text-neutral-800 leading-snug mb-2 group-hover:text-neutral-600 transition-colors">
+                <p className="text-sm font-semibold text-neutral-800 leading-snug mb-2 group-hover:text-neutral-600 transition-colors duration-300">
                   {p.title}
                 </p>
                 <p className="text-xs text-neutral-500">{p.metric}</p>
@@ -78,7 +76,7 @@ export default function LofiTrabajos() {
           </div>
 
           {filtered.length === 0 && (
-            <p className="text-sm text-neutral-500 py-16 text-center">
+            <p className="text-sm text-neutral-400 py-16 text-center">
               No hay proyectos en esta categoría aún.
             </p>
           )}
