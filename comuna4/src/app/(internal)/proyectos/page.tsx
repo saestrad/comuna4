@@ -43,12 +43,18 @@ export default function ProyectosPage() {
         ]}
         sections={[
           {
-            name: 'Estructura de cada card',
+            name: 'Vista listado',
             items: [
-              'Nombre del proyecto + cliente',
-              'Badge de estado: Briefing / En diseño / Producción / Revisión / Entregado',
-              'Fechas: inicio y entrega estimada',
-              'Avatares del equipo asignado',
+              'Cards de proyectos con badge de status (briefing / diseño / producción / revisión / entregado)',
+              'Nombre del proyecto, cliente, fechas',
+              'Filtros: estado, cliente, fecha',
+            ],
+            suggestion: [
+              'Nombre: "Campaña Q3 — Restaurante La Mar"',
+              'Badge estado con color semántico: azul=En diseño, verde=Entregado, rojo=Bloqueado',
+              'Barra de progreso: % completado según fases',
+              'Próxima entrega: "Revisión de artes — 3 días" · alerta si vence en <48h',
+              'Equipo: avatares con tooltip de nombre + rol',
             ],
           },
           {

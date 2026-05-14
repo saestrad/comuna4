@@ -9,7 +9,7 @@ export default function Home() {
         <MockPage
           title="Home"
           badge="Capa pública"
-          description="Agencia creativa en Puerto Rico. Branding + medios + web + producción + innovación. Todo bajo un mismo techo. Todo con métricas vivas."
+          description="Comunica quiénes somos en menos de 3 segundos. CTA principal hacia solicitud de servicios, secundario hacia el portafolio de trabajos."
           links={[
             { href: '/solicitud', label: 'Solicitar servicio →' },
             { href: '/trabajos', label: 'Ver trabajos' },
@@ -18,32 +18,42 @@ export default function Home() {
             {
               name: 'Secciones de la página',
               items: [
-                'Hero — manifiesto: "Crecimiento con status." + CTA primario (Solicitar) + CTA secundario (Ver trabajos)',
-                'Ticker animado — servicios en loop: Branding · Medios · Web · Producción · Innovación',
-                'Trabajos destacados — 3-4 casos con resultado medible visible en la card',
-                'El hueco que ocupamos — comparativa visual vs. agencias solo de diseño vs. solo de medios',
-                'Renta de espacios — bloque con CTA directo al catálogo',
-                'Clientes — logos o testimonios con resultado concreto (no "nos encantó trabajar con ellos")',
-                'CTA final — "Cuéntanos tu proyecto"',
+                'Hero — frase de manifiesto + CTA primario (Solicitar servicio) + CTA secundario (Ver trabajos)',
+                'Ticker animado — servicios principales en loop horizontal',
+                'Proyectos destacados — grid con hover cinematográfico (3-4 casos)',
+                'Renta de espacios — bloque visual con CTA directo al catálogo',
+                'Clientes / Testimonios — logos o citas',
+                'CTA final — iniciar conversación',
+              ],
+              suggestion: [
+                'Hero headline: "Hacemos que tu marca crezca." — directo, sin jerga',
+                'Hero sub: "Branding, medios y producción bajo un mismo techo. Desde Puerto Rico."',
+                'CTA primario: "Empieza hoy" → wizard de solicitud',
+                'CTA secundario: "Ver nuestro trabajo" → /trabajos',
+                'Ticker: Branding · Performance Media · Web · Producción · AI Ads · TV & Digital',
+                'Proyectos: mostrar resultado en la card — "↑38% leads en 90 días"',
+                'Clientes: cita con resultado concreto, no "nos encantó trabajar con ellos"',
+                'CTA final: "¿Tienes un proyecto? Cuéntanos." + campo de email inline',
               ],
             },
             {
-              name: 'Tono de voz (anti-clichés)',
+              name: 'Animaciones requeridas (v3)',
               items: [
-                'No: "Potenciamos tu marca con soluciones integrales"',
-                'Sí: "Construimos lo que necesitas para crecer, y lo medimos."',
-                'No: "Somos apasionados del diseño"',
-                'Sí: "Hacemos branding, medios y producción bajo un mismo techo — desde Puerto Rico."',
-              ],
-            },
-            {
-              name: 'Animaciones (v3)',
-              items: [
-                'Scroll narrativo — secciones que se revelan con propósito (Locomotive)',
-                'Hover en trabajos — overlay con resultado del proyecto + CTA (Resn)',
-                'Ticker — pausa en hover, velocidad configurable',
-                'Cursor personalizado desktop (Resn)',
+                'Scroll narrativo — secciones que revelan al entrar en viewport',
+                'Hover en proyectos — overlay con detalle del proyecto',
+                'Ticker — velocidad configurable, pausa en hover',
+                'Cursor personalizado (desktop)',
                 'Page transitions (Framer Motion)',
+              ],
+            },
+            {
+              name: 'Tono de voz',
+              isNew: true,
+              items: [
+                '"No vendemos diseño. Vendemos crecimiento con status."',
+                '"Una sola agencia. Branding que posiciona. Medios que convierten. Web que retiene."',
+                '"Trabajamos con marcas que quieren crecer de verdad — no solo verse bien."',
+                '"Métricas vivas. Siempre. No reportes mensuales en PDF."',
               ],
             },
           ]}

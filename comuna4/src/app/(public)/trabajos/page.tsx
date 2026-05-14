@@ -16,7 +16,7 @@ export default function TrabajosPage() {
       <div className="border-b border-dashed border-neutral-300 px-6 py-4 font-mono bg-neutral-50">
         <div className="max-w-3xl mx-auto space-y-3">
           <div className="flex items-center gap-3 flex-wrap">
-            <span className="text-xs uppercase tracking-widest text-neutral-400 w-20 shrink-0">Disciplina</span>
+            <span className={['text-xs uppercase tracking-widest w-20 shrink-0 transition-colors', discipline !== 'Todos' ? '' : 'text-neutral-400'].join(' ')} style={discipline !== 'Todos' ? { color: 'oklch(0.63 0.14 162)' } : {}}>Disciplina</span>
             <div className="flex gap-2 flex-wrap">
               {disciplines.map((d) => (
                 <button
@@ -35,7 +35,7 @@ export default function TrabajosPage() {
             </div>
           </div>
           <div className="flex items-center gap-3 flex-wrap">
-            <span className="text-xs uppercase tracking-widest text-neutral-400 w-20 shrink-0">Sector</span>
+            <span className={['text-xs uppercase tracking-widest w-20 shrink-0 transition-colors', sector !== 'Todos' ? '' : 'text-neutral-400'].join(' ')} style={sector !== 'Todos' ? { color: 'oklch(0.63 0.14 162)' } : {}}>Sector</span>
             <div className="flex gap-2 flex-wrap">
               {sectors.map((s) => (
                 <button
@@ -78,6 +78,13 @@ export default function TrabajosPage() {
               'Tipo de servicio (badge de disciplina)',
               'Sector (badge secundario)',
               'Hover → overlay con descripción corta + CTA ver caso',
+            ],
+            suggestion: [
+              'Thumbnail: foto o video del resultado final — no del proceso',
+              'Nombre del cliente (si aprueba publicarse) o nombre del proyecto',
+              'Badge disciplina: Branding / Performance / Web / Producción / Innovación',
+              'Resultado visible en la card: "↑42% conversión" o "Lanzamiento en 3 semanas"',
+              'Hover: headline del caso + CTA "Ver caso completo →"',
             ],
           },
           {

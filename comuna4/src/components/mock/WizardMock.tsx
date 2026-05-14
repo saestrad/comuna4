@@ -67,7 +67,7 @@ export function WizardMock() {
   const isFirst = currentStep === 0
 
   return (
-    <div className="max-w-2xl mx-auto px-6 py-12 font-mono">
+    <div className="max-w-2xl mx-auto px-6 py-12">
       <div className="mb-8">
         <div className="flex items-center gap-2">
           {steps.map((s, i) => (
@@ -85,18 +85,18 @@ export function WizardMock() {
       </div>
 
       <div className="mb-2">
-        <span className="text-xs text-neutral-400 uppercase tracking-widest">v0 — mock</span>
+        <span className="text-xs text-neutral-400 uppercase tracking-widest font-mono">v0 — mock</span>
       </div>
-      <h1 className="text-2xl font-bold text-neutral-900 mb-2">
+      <h1 className="text-4xl font-black text-neutral-900 tracking-tight leading-tight mb-3">
         Paso {step.number} — {step.title}
       </h1>
-      <p className="text-sm text-neutral-500 leading-relaxed mb-8">{step.description}</p>
+      <p className="text-base font-light text-neutral-600 leading-relaxed mb-8">{step.description}</p>
 
       <div className="mb-10">
-        <h2 className="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-3">
+        <h2 className="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-3 font-mono">
           Campos / contenido de este paso
         </h2>
-        <ul className="space-y-2 border-l-2 border-dashed border-neutral-200 pl-4">
+        <ul className="space-y-2 pl-4">
           {step.fields.map((field) => (
             <li key={field} className="text-sm text-neutral-600">
               — {field}
@@ -106,6 +106,9 @@ export function WizardMock() {
       </div>
 
       <div className="flex items-center gap-3 pt-6 border-t border-dashed border-neutral-200">
+        <Link href="/" className="text-xs text-neutral-400 hover:text-neutral-600 underline transition-colors">
+          Cancelar
+        </Link>
         {!isFirst && (
           <button
             onClick={() => setCurrentStep((s) => s - 1)}

@@ -36,7 +36,7 @@ export function MockSidebar({ children }: { children: React.ReactNode }) {
           >
             ← Sitio público
           </Link>
-          <p className="font-mono text-xs tracking-widest text-white font-bold">[C4] Interno</p>
+          <p className="font-mono text-sm tracking-widest text-white font-black">[C4] Interno</p>
         </div>
 
         <p className="text-xs uppercase tracking-widest text-neutral-500 mb-3">Navegación</p>
