@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { LofiHeader } from '@/components/lofi/LofiHeader'
+import { LofiShell } from '@/components/lofi/LofiShell'
 
 const footerLinks = [
   { href: '/lofi/trabajos', label: 'Trabajos' },
@@ -11,8 +11,7 @@ const footerLinks = [
 
 export default function LofiLayout({ children }: { children: React.ReactNode }) {
   return (
-    <>
-      <LofiHeader />
+    <LofiShell>
       <main className="flex-1">{children}</main>
       <footer className="border-t border-neutral-200 px-6 md:px-12 py-12">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-8">
@@ -49,6 +48,6 @@ export default function LofiLayout({ children }: { children: React.ReactNode }) 
           <p className="text-xs text-neutral-400 font-mono">© 2026 Comuna 4. Todos los derechos reservados.</p>
         </div>
       </footer>
-    </>
+    </LofiShell>
   )
 }

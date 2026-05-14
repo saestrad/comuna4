@@ -2,10 +2,14 @@ import Link from 'next/link'
 
 const ticker = ['Producción de Contenido', 'Estrategia Creativa', 'Compra de Medios', 'Influencer Collabs', 'Renta de Espacios', 'Branding', 'Performance Digital']
 
+// Pentagram + Active Theory: 6 proyectos curados, trabajo protagonista
 const projects = [
-  { title: 'Identidad completa para marca de gastronomía', category: 'Branding', metric: '↑ 40% reconocimiento' },
-  { title: 'Campaña Meta + TikTok para marca local', category: 'Performance', metric: '↑ 3.2× ROAS' },
-  { title: 'Producción audiovisual para lanzamiento', category: 'Producción', metric: '2.4M impresiones' },
+  { title: 'Identidad completa para restaurante de cocina caribeña', category: 'Branding', sector: 'Gastronomía', metric: '↑ 40% reconocimiento de marca', period: '60 días', slug: 'restaurante-caribeno' },
+  { title: 'Campaña Meta + TikTok para marca de moda local', category: 'Performance', sector: 'Moda', metric: '3.2× ROAS sostenido', period: '90 días', slug: 'marca-moda-performance' },
+  { title: 'Producción audiovisual para lanzamiento de producto', category: 'Producción', sector: 'Gastronomía', metric: '2.4M impresiones orgánicas', period: '', slug: 'lanzamiento-audiovisual' },
+  { title: 'Rediseño de marca para firma de arquitectura', category: 'Branding', sector: 'B2B', metric: 'Sistema visual completo', period: '4 semanas', slug: 'firma-arquitectura' },
+  { title: 'Google Ads + Performance Max para e-commerce', category: 'Performance', sector: 'E-commerce', metric: '↓ 28% CPA vs campaña anterior', period: '', slug: 'ecommerce-performance-max' },
+  { title: 'Sitio web para consultoría de negocios', category: 'Web', sector: 'B2B', metric: '↑ 55% tiempo en página', period: '', slug: 'consultoria-web' },
 ]
 
 const studios = [
@@ -19,29 +23,29 @@ export default function LofiHome() {
     <div>
 
       {/* Hero */}
-      <section className="lofi-img px-6 md:px-12 pt-[104px] pb-[104px] border-b border-neutral-200">
-        <div className="max-w-5xl mx-auto">
-          <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-8">
+      <section className="lofi-img px-6 md:px-12 pt-[140px] pb-[120px] border-b border-neutral-200">
+        <div className="max-w-5xl mx-auto flex flex-col items-center text-center">
+          <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-10">
             Agencia creativa — Puerto Rico
           </p>
           <h1 className="text-5xl md:text-7xl font-display font-semibold text-neutral-900 tracking-tight leading-none mb-8 max-w-[14ch]">
-            Hacemos que tu marca crezca.
+            Tu marca, construida para durar.
           </h1>
-          <p className="text-lg text-neutral-500 leading-relaxed mb-12 max-w-[44ch]">
-            Producción, estrategia y medios bajo un mismo techo. Desde Puerto Rico, con resultados medibles.
+          <p className="text-lg text-neutral-500 leading-relaxed mb-14 max-w-[40ch]">
+            Meta, Google y TikTok con datos reales. Foto, video y activaciones. Rápido, con nivel.
           </p>
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-4">
             <Link
               href="/lofi/solicitud"
-              className="inline-block bg-c4-brand text-white text-sm font-medium px-7 py-3.5 rounded-full transition-colors hover:bg-c4-brand-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-c4-brand focus-visible:ring-offset-2"
+              className="inline-block bg-accent text-accent-foreground text-sm font-medium px-8 py-4 rounded-full transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
             >
-              Empieza hoy →
+              Solicitar →
             </Link>
             <Link
               href="/lofi/trabajos"
-              className="text-sm text-neutral-500 hover:text-neutral-900 transition-colors underline underline-offset-4"
+              className="inline-block text-sm font-medium px-8 py-4 rounded-full border border-neutral-300 text-neutral-700 transition-colors hover:border-neutral-600 hover:text-neutral-900"
             >
-              Ver nuestro trabajo
+              Ver trabajos
             </Link>
           </div>
         </div>
@@ -64,7 +68,7 @@ export default function LofiHome() {
         </div>
       </section>
 
-      {/* Featured works */}
+      {/* Trabajos — Pentagram: portfolio primero, 6 curados, métrica visible */}
       <section className="px-6 md:px-12 py-[104px] border-b border-neutral-200">
         <div className="max-w-5xl mx-auto">
           <div className="flex items-baseline justify-between mb-16">
@@ -75,20 +79,35 @@ export default function LofiHome() {
               Ver todos →
             </Link>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-14">
             {projects.map((p) => (
-              <Link href="/lofi/trabajos" key={p.title} className="group block">
+              <Link href={`/lofi/trabajos/${p.slug}`} key={p.slug} className="group block">
+                {/* Imagen */}
                 <div className="aspect-[4/3] lofi-img rounded-lg border border-neutral-200 mb-5" />
-                <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-2">{p.category}</p>
-                <p className="text-sm font-semibold text-neutral-800 leading-snug mb-1.5">{p.title}</p>
-                <p className="text-xs text-neutral-500">{p.metric}</p>
+
+                {/* Disciplina + sector */}
+                <p className="text-xs font-mono uppercase tracking-widest text-neutral-400 mb-3">
+                  {p.category} · {p.sector}
+                </p>
+
+                {/* Título */}
+                <p className="text-sm font-semibold text-neutral-800 leading-snug mb-4 group-hover:text-neutral-500 transition-colors">
+                  {p.title}
+                </p>
+
+                {/* Métrica prominente */}
+                <div className="flex items-baseline gap-2">
+                  <span className="text-sm font-semibold text-neutral-900">{p.metric}</span>
+                  {p.period && <span className="text-xs text-neutral-400">{p.period}</span>}
+                </div>
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Services */}
+      {/* Servicios — después del trabajo, no antes */}
       <section className="px-6 md:px-12 py-[104px] border-b border-neutral-200">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-16">Lo que hacemos</h2>
@@ -108,7 +127,7 @@ export default function LofiHome() {
         </div>
       </section>
 
-      {/* Hub / Spaces */}
+      {/* Hub */}
       <section className="px-6 md:px-12 py-[120px] border-b border-neutral-200 bg-neutral-50">
         <div className="max-w-5xl mx-auto">
           <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-4">El Hub</p>
@@ -134,7 +153,7 @@ export default function LofiHome() {
         </div>
       </section>
 
-      {/* Final CTA */}
+      {/* CTA final */}
       <section className="px-6 md:px-12 py-[120px]">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row md:items-end md:justify-between gap-10">
           <div>
@@ -147,7 +166,7 @@ export default function LofiHome() {
           </div>
           <Link
             href="/lofi/solicitud"
-            className="shrink-0 inline-block bg-c4-brand text-white text-sm font-medium px-8 py-4 rounded-full transition-colors hover:bg-c4-brand-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-c4-brand focus-visible:ring-offset-2"
+            className="shrink-0 inline-block bg-accent text-accent-foreground text-sm font-medium px-8 py-4 rounded-full transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
           >
             Solicitar →
           </Link>

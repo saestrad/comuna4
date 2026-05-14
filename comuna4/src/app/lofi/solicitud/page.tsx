@@ -91,7 +91,7 @@ function SolicitudForm() {
           </p>
           <Link
             href="/lofi"
-            className="inline-block bg-c4-brand text-white text-sm font-medium px-8 py-4 rounded-full transition-colors hover:bg-c4-brand-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-c4-brand focus-visible:ring-offset-2"
+            className="inline-block bg-accent text-accent-foreground text-sm font-medium px-8 py-4 rounded-full transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
           >
             Volver al inicio →
           </Link>
@@ -145,7 +145,7 @@ function SolicitudForm() {
                         className={[
                           'text-sm text-center px-4 py-3 rounded-full border transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-1',
                           selectedService === s
-                            ? 'border-neutral-900 bg-neutral-900 text-white'
+                            ? 'bg-primary text-primary-foreground border-primary'
                             : 'border-neutral-200 text-neutral-700 hover:border-neutral-400',
                         ].join(' ')}
                       >
@@ -157,7 +157,7 @@ function SolicitudForm() {
               ))}
             </div>
             {errors.service && (
-              <p className="text-xs text-red-600 mt-4">{errors.service}</p>
+              <p className="text-xs text-destructive mt-4">{errors.service}</p>
             )}
           </div>
         )}
@@ -212,7 +212,7 @@ function SolicitudForm() {
                       className={[
                         'text-xs text-center px-3 py-2.5 rounded-full border transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-1',
                         selectedBudget === b && !showCustomBudget
-                          ? 'border-neutral-900 bg-neutral-900 text-white'
+                          ? 'bg-primary text-primary-foreground border-primary'
                           : 'border-neutral-200 text-neutral-600 hover:border-neutral-400',
                       ].join(' ')}
                     >
@@ -225,7 +225,7 @@ function SolicitudForm() {
                     className={[
                       'text-xs text-center px-3 py-2.5 rounded-full border transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-1',
                       showCustomBudget
-                        ? 'border-neutral-900 bg-neutral-900 text-white'
+                        ? 'bg-primary text-primary-foreground border-primary'
                         : 'border-neutral-200 text-neutral-600 hover:border-neutral-400',
                     ].join(' ')}
                   >
@@ -243,7 +243,7 @@ function SolicitudForm() {
                   />
                 )}
                 {errors.budget && (
-                  <p className="text-xs text-red-600 mt-3">{errors.budget}</p>
+                  <p className="text-xs text-destructive mt-3">{errors.budget}</p>
                 )}
               </div>
             </div>
@@ -273,11 +273,11 @@ function SolicitudForm() {
                   placeholder="Tu nombre"
                   className={[
                     'w-full text-sm border rounded-lg px-4 py-3 placeholder:text-neutral-300 focus:outline-none focus:border-neutral-500',
-                    errors.name ? 'border-red-400' : 'border-neutral-200',
+                    errors.name ? 'border-destructive' : 'border-neutral-200',
                   ].join(' ')}
                 />
                 {errors.name && (
-                  <p className="text-xs text-red-600 mt-1.5">{errors.name}</p>
+                  <p className="text-xs text-destructive mt-1.5">{errors.name}</p>
                 )}
               </div>
               <div>
@@ -296,11 +296,11 @@ function SolicitudForm() {
                   placeholder="tu@empresa.com"
                   className={[
                     'w-full text-sm border rounded-lg px-4 py-3 placeholder:text-neutral-300 focus:outline-none focus:border-neutral-500',
-                    errors.email ? 'border-red-400' : 'border-neutral-200',
+                    errors.email ? 'border-destructive' : 'border-neutral-200',
                   ].join(' ')}
                 />
                 {errors.email && (
-                  <p className="text-xs text-red-600 mt-1.5">{errors.email}</p>
+                  <p className="text-xs text-destructive mt-1.5">{errors.email}</p>
                 )}
               </div>
               <div>
@@ -330,7 +330,7 @@ function SolicitudForm() {
                       className={[
                         'text-xs px-4 py-2.5 rounded-full border transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-1',
                         selectedChannel === c
-                          ? 'border-neutral-900 bg-neutral-900 text-white'
+                          ? 'bg-primary text-primary-foreground border-primary'
                           : 'border-neutral-200 text-neutral-600 hover:border-neutral-400',
                       ].join(' ')}
                     >
@@ -407,7 +407,7 @@ function SolicitudForm() {
                 </label>
               ))}
               {errors.consents && (
-                <p className="text-xs text-red-600">{errors.consents}</p>
+                <p className="text-xs text-destructive">{errors.consents}</p>
               )}
             </div>
           </div>
@@ -431,7 +431,7 @@ function SolicitudForm() {
             <button
               type="button"
               onClick={advance}
-              className="ml-auto text-sm font-medium bg-c4-brand text-white px-6 py-2.5 rounded-full transition-colors hover:bg-c4-brand-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-c4-brand focus-visible:ring-offset-2"
+              className="ml-auto text-sm font-medium bg-accent text-accent-foreground px-6 py-2.5 rounded-full transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
             >
               Siguiente →
             </button>
@@ -439,7 +439,7 @@ function SolicitudForm() {
             <button
               type="button"
               onClick={submit}
-              className="ml-auto text-sm font-medium bg-c4-brand text-white px-6 py-2.5 rounded-full transition-colors hover:bg-c4-brand-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-c4-brand focus-visible:ring-offset-2"
+              className="ml-auto text-sm font-medium bg-accent text-accent-foreground px-6 py-2.5 rounded-full transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
             >
               Enviar solicitud →
             </button>

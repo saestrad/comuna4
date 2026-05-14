@@ -19,25 +19,16 @@ export function MockSectionToggle({ name, items, suggestion, isNew }: Props) {
     return (
       <div>
         <div className="flex items-center gap-3 mb-2">
-          <h2
-            className="text-xs font-bold uppercase tracking-widest"
-            style={{ color: 'oklch(0.65 0.17 50)' }}
-          >
+          <h2 className="text-xs font-bold uppercase tracking-widest text-warning">
             {name}
           </h2>
-          <span
-            className="text-xs px-2 py-0.5 rounded font-mono"
-            style={{
-              color: 'oklch(0.65 0.17 50)',
-              border: '1px solid oklch(0.65 0.17 50)',
-            }}
-          >
+          <span className="text-xs px-2 py-0.5 rounded font-mono text-warning border border-warning">
             nuevo
           </span>
         </div>
         <ul className="space-y-1 pl-4">
           {items.map((item) => (
-            <li key={item} className="text-sm" style={{ color: 'oklch(0.50 0.10 50)' }}>
+            <li key={item} className="text-sm text-on-warning-container">
               — {item}
             </li>
           ))}
@@ -56,12 +47,12 @@ export function MockSectionToggle({ name, items, suggestion, isNew }: Props) {
         {suggestion && (
           <button
             onClick={() => setShowSuggestion((s) => !s)}
-            className="text-xs px-2.5 py-1 rounded transition-colors font-mono"
-            style={{
-              color: showSuggestion ? 'oklch(1 0 0)' : 'oklch(0.63 0.14 162)',
-              background: showSuggestion ? 'oklch(0.63 0.14 162)' : 'transparent',
-              border: '1px solid oklch(0.63 0.14 162)',
-            }}
+            className={[
+              'text-xs px-2.5 py-1 rounded transition-colors font-mono border border-accent',
+              showSuggestion
+                ? 'bg-accent text-accent-foreground'
+                : 'bg-transparent text-accent',
+            ].join(' ')}
           >
             {showSuggestion ? 'original' : 'sugerencia'}
           </button>

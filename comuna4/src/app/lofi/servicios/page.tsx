@@ -63,7 +63,7 @@ export default function LofiServicios() {
               <div key={s.name} className="bg-white p-8 flex flex-col gap-5">
                 <div>
                   <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-2">{s.name}</p>
-                  <h2 className="text-2xl font-bold text-neutral-900 tracking-tight leading-tight mb-3">{s.tagline}</h2>
+                  <h2 className="text-2xl font-semibold text-neutral-900 tracking-tight leading-tight mb-3">{s.tagline}</h2>
                   <p className="text-sm text-neutral-500 leading-relaxed">{s.description}</p>
                 </div>
                 <ul className="flex flex-col gap-1.5">
@@ -111,7 +111,7 @@ export default function LofiServicios() {
           </div>
           <Link
             href="/lofi/solicitud"
-            className="shrink-0 inline-block bg-c4-brand text-white text-sm font-medium px-8 py-4 rounded-full transition-colors hover:bg-c4-brand-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-c4-brand focus-visible:ring-offset-2"
+            className="shrink-0 inline-block bg-accent text-accent-foreground text-sm font-medium px-8 py-4 rounded-full transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
           >
             Solicitar →
           </Link>

@@ -103,7 +103,7 @@ export default function LofiRenta() {
                 className={[
                   'text-xs px-3 py-2.5 rounded-full border transition-colors',
                   active === c
-                    ? 'border-neutral-900 bg-neutral-900 text-white'
+                    ? 'bg-primary text-primary-foreground border-primary'
                     : 'border-neutral-300 text-neutral-500 hover:border-neutral-600 hover:text-neutral-800',
                 ].join(' ')}
               >
@@ -146,7 +146,7 @@ export default function LofiRenta() {
           </div>
           <Link
             href="/lofi/solicitud"
-            className="shrink-0 inline-block bg-c4-brand text-white text-sm font-medium px-8 py-4 rounded-full transition-colors hover:bg-c4-brand-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-c4-brand focus-visible:ring-offset-2"
+            className="shrink-0 inline-block bg-accent text-accent-foreground text-sm font-medium px-8 py-4 rounded-full transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
           >
             Reservar →
           </Link>

@@ -48,7 +48,7 @@ export default function LofiBlog() {
                 className={[
                   'text-xs px-3 py-2.5 rounded-full border transition-colors',
                   active === c
-                    ? 'border-neutral-900 bg-neutral-900 text-white'
+                    ? 'bg-primary text-primary-foreground border-primary'
                     : 'border-neutral-300 text-neutral-500 hover:border-neutral-600 hover:text-neutral-800',
                 ].join(' ')}
               >

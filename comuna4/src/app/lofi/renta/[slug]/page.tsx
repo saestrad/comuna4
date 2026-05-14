@@ -244,7 +244,7 @@ export default function RentaDetail({ params }: { params: Promise<{ slug: string
             <div className="flex flex-col gap-2 mt-auto">
               <button
                 onClick={handleProceder}
-                className="w-full text-sm font-medium py-3.5 rounded-full bg-c4-brand text-white hover:bg-c4-brand-dark transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-c4-brand focus-visible:ring-offset-2"
+                className="w-full text-sm font-medium py-3.5 rounded-full bg-accent text-accent-foreground hover:opacity-90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
               >
                 Confirmar y solicitar →
               </button>
@@ -272,7 +272,7 @@ export default function RentaDetail({ params }: { params: Promise<{ slug: string
                 className={[
                   'flex-1 text-xs py-2 rounded-full border transition-colors',
                   duracion === d
-                    ? 'border-neutral-900 bg-neutral-900 text-white'
+                    ? 'bg-primary text-primary-foreground border-primary'
                     : 'border-neutral-200 text-neutral-500 hover:border-neutral-500',
                 ].join(' ')}
               >
@@ -331,7 +331,7 @@ export default function RentaDetail({ params }: { params: Promise<{ slug: string
                       className={[
                         'w-full h-full rounded-md text-xs transition-colors flex items-center justify-center',
                         selected
-                          ? 'bg-c4-brand text-white font-semibold'
+                          ? 'bg-accent text-accent-foreground font-semibold'
                           : avail
                             ? 'hover:bg-neutral-100 text-neutral-700'
                             : booked
@@ -352,7 +352,7 @@ export default function RentaDetail({ params }: { params: Promise<{ slug: string
           {/* Legend */}
           <div className="flex items-center gap-3 flex-wrap mt-3 pt-3 border-t border-neutral-100">
             <div className="flex items-center gap-1.5">
-              <div className="w-2 h-2 rounded-sm bg-c4-brand" />
+              <div className="w-2 h-2 rounded-sm bg-accent" />
               <span className="text-[10px] text-neutral-400">Seleccionado</span>
             </div>
             <div className="flex items-center gap-1.5">
@@ -379,7 +379,7 @@ export default function RentaDetail({ params }: { params: Promise<{ slug: string
           )}
           <button
             onClick={handleConfirmar}
-            className="w-full text-center text-sm font-medium py-3.5 rounded-full bg-c4-brand text-white hover:bg-c4-brand-dark transition-colors mb-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-c4-brand focus-visible:ring-offset-2"
+            className="w-full text-center text-sm font-medium py-3.5 rounded-full bg-accent text-accent-foreground hover:opacity-90 transition-colors mb-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
           >
             {selectedDay ? 'Confirmar fecha →' : 'Solicitar reserva →'}
           </button>
@@ -399,7 +399,7 @@ export default function RentaDetail({ params }: { params: Promise<{ slug: string
         </div>
         <button
           onClick={confirming ? handleProceder : handleConfirmar}
-          className="shrink-0 text-sm font-medium px-6 py-3 rounded-full bg-c4-brand text-white hover:bg-c4-brand-dark transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-c4-brand focus-visible:ring-offset-2"
+          className="shrink-0 text-sm font-medium px-6 py-3 rounded-full bg-accent text-accent-foreground hover:opacity-90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
         >
           {confirming ? 'Confirmar y solicitar →' : 'Solicitar reserva →'}
         </button>

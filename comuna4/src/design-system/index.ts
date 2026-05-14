@@ -1,6 +1,6 @@
 /**
  * Entry point del sistema de diseño de Comuna 4.
- * Re-exporta tokens de la etapa activa según el stage del proyecto.
+ * Jerarquía: primitivos → semánticos → componente → stage activo.
  */
 
 export * from './tokens/base'
@@ -12,5 +12,6 @@ export { v1Tokens } from './stages/v1-low'
 export { v3Tokens } from './stages/v3-high'
 
 export type Stage = 'v0-mock' | 'v1-low' | 'v3-high'
+export type { StatusVariant } from './tokens/semantic'
 
 export const CURRENT_STAGE: Stage = 'v0-mock'
