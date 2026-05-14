@@ -143,7 +143,7 @@ function SolicitudForm() {
                         aria-pressed={selectedService === s}
                         onClick={() => { setSelectedService(s); setErrors({}) }}
                         className={[
-                          'text-sm text-left px-4 py-3 rounded-full border transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-1',
+                          'text-sm text-center px-4 py-3 rounded-full border transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-1',
                           selectedService === s
                             ? 'border-neutral-900 bg-neutral-900 text-white'
                             : 'border-neutral-200 text-neutral-700 hover:border-neutral-400',
@@ -210,7 +210,7 @@ function SolicitudForm() {
                       aria-pressed={selectedBudget === b}
                       onClick={() => { setSelectedBudget(b); setShowCustomBudget(false); setErrors((prev) => ({ ...prev, budget: '' })) }}
                       className={[
-                        'text-xs text-left px-3 py-2.5 rounded-full border transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-1',
+                        'text-xs text-center px-3 py-2.5 rounded-full border transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-1',
                         selectedBudget === b && !showCustomBudget
                           ? 'border-neutral-900 bg-neutral-900 text-white'
                           : 'border-neutral-200 text-neutral-600 hover:border-neutral-400',
@@ -223,7 +223,7 @@ function SolicitudForm() {
                     type="button"
                     onClick={() => { setShowCustomBudget(true); setSelectedBudget(''); setErrors((prev) => ({ ...prev, budget: '' })) }}
                     className={[
-                      'text-xs text-left px-3 py-2.5 rounded-full border transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-1',
+                      'text-xs text-center px-3 py-2.5 rounded-full border transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-1',
                       showCustomBudget
                         ? 'border-neutral-900 bg-neutral-900 text-white'
                         : 'border-neutral-200 text-neutral-600 hover:border-neutral-400',
