@@ -84,7 +84,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
             {/* Pull quote */}
             <blockquote className="my-16">
               <p className="text-4xl font-black text-neutral-200 leading-none mb-2 select-none">"</p>
-              <p className="text-xl md:text-2xl font-black text-neutral-900 tracking-tight leading-tight max-w-[34ch]">
+              <p className="text-xl md:text-2xl font-bold text-neutral-900 tracking-tight leading-tight max-w-[34ch]">
                 {article.pullQuote}
               </p>
             </blockquote>

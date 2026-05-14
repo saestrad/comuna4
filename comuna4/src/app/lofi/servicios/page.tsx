@@ -63,7 +63,7 @@ export default function LofiServicios() {
               <div key={s.name} className="bg-white p-8 flex flex-col gap-5">
                 <div>
                   <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-2">{s.name}</p>
-                  <h2 className="text-2xl font-black text-neutral-900 tracking-tight leading-tight mb-3">{s.tagline}</h2>
+                  <h2 className="text-2xl font-bold text-neutral-900 tracking-tight leading-tight mb-3">{s.tagline}</h2>
                   <p className="text-sm text-neutral-500 leading-relaxed">{s.description}</p>
                 </div>
                 <ul className="flex flex-col gap-1.5">

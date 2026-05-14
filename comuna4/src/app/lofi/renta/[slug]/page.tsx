@@ -207,7 +207,7 @@ export default function RentaDetail({ params }: { params: Promise<{ slug: string
 
         {/* Header */}
         <div className="px-5 pt-6 pb-4 border-b border-neutral-100">
-          <p className="text-sm font-black text-neutral-900 leading-tight">{item.name}</p>
+          <p className="text-sm font-semibold text-neutral-900 leading-tight">{item.name}</p>
           <p className="text-xs font-mono text-neutral-400 mt-0.5">{item.category} · {item.size}</p>
         </div>
 
@@ -392,7 +392,7 @@ export default function RentaDetail({ params }: { params: Promise<{ slug: string
       {/* Mobile booking bar */}
       <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-neutral-200 px-6 py-4 flex items-center justify-between gap-4">
         <div>
-          <p className="text-base font-black text-neutral-900">
+          <p className="text-base font-bold text-neutral-900">
             {price}
             <span className="text-xs font-normal text-neutral-500 ml-1">/ {duracion === 'hora' ? 'hora' : 'día'}</span>
           </p>

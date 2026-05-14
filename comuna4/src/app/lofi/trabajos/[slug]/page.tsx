@@ -275,7 +275,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             >
               <div>
                 <p className="text-xs font-mono uppercase tracking-widest text-neutral-400 mb-3">{project.next.category}</p>
-                <p className="text-2xl font-black text-neutral-900 tracking-tight leading-tight">{project.next.title}</p>
+                <p className="text-2xl font-semibold text-neutral-900 tracking-tight leading-tight">{project.next.title}</p>
               </div>
               <span className="text-neutral-400 group-hover:text-neutral-900 transition-colors text-2xl shrink-0">→</span>
             </Link>
