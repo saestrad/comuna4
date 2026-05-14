@@ -91,7 +91,7 @@ function SolicitudForm() {
           </p>
           <Link
             href="/lofi"
-            className="inline-block bg-neutral-900 text-white text-sm font-medium px-7 py-3.5 rounded-full transition-colors hover:bg-neutral-700"
+            className="inline-block bg-c4-brand text-white text-sm font-medium px-7 py-3.5 rounded-full transition-colors hover:bg-c4-brand-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-c4-brand focus-visible:ring-offset-2"
           >
             Volver al inicio →
           </Link>
@@ -431,7 +431,7 @@ function SolicitudForm() {
             <button
               type="button"
               onClick={advance}
-              className="ml-auto text-sm font-medium bg-neutral-900 text-white px-6 py-2.5 rounded-full transition-colors hover:bg-neutral-700"
+              className="ml-auto text-sm font-medium bg-c4-brand text-white px-6 py-2.5 rounded-full transition-colors hover:bg-c4-brand-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-c4-brand focus-visible:ring-offset-2"
             >
               Siguiente →
             </button>
@@ -439,7 +439,7 @@ function SolicitudForm() {
             <button
               type="button"
               onClick={submit}
-              className="ml-auto text-sm font-medium bg-neutral-900 text-white px-6 py-2.5 rounded-full transition-colors hover:bg-neutral-700"
+              className="ml-auto text-sm font-medium bg-c4-brand text-white px-6 py-2.5 rounded-full transition-colors hover:bg-c4-brand-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-c4-brand focus-visible:ring-offset-2"
             >
               Enviar solicitud →
             </button>

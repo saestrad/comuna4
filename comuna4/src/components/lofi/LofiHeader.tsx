@@ -21,7 +21,7 @@ export function LofiHeader() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 border-b border-neutral-200 bg-white px-6 md:px-12 py-4 flex items-center justify-between relative">
+      <header className="sticky top-0 z-50 border-b border-neutral-200 bg-white/95 backdrop-blur-sm px-6 md:px-12 py-4 flex items-center justify-between relative">
         <Link
           href="/lofi"
           className="font-mono font-black text-base tracking-widest shrink-0 text-c4-brand"
@@ -36,7 +36,7 @@ export function LofiHeader() {
               key={link.href}
               href={link.href}
               className={[
-                'text-sm px-3 py-3 rounded-full transition-colors',
+                'text-sm px-3 py-3 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-1',
                 isActive(link.href)
                   ? 'text-neutral-900 font-medium'
                   : 'text-neutral-500 hover:text-neutral-900',
@@ -50,7 +50,7 @@ export function LofiHeader() {
         {/* Desktop CTA */}
         <Link
           href="/lofi/solicitud"
-          className="hidden md:inline-block text-sm font-medium px-5 py-2 rounded-full bg-neutral-900 text-white hover:bg-neutral-700 transition-colors shrink-0"
+          className="hidden md:inline-block text-sm font-medium px-5 py-2 rounded-full bg-c4-brand text-white hover:bg-c4-brand-dark transition-colors shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-c4-brand focus-visible:ring-offset-2"
         >
           Solicitar →
         </Link>
@@ -69,36 +69,40 @@ export function LofiHeader() {
       </header>
 
       {/* Mobile drawer */}
-      {open && (
-        <div className="md:hidden fixed inset-0 top-[57px] z-40 bg-white border-t border-neutral-200 flex flex-col px-6 py-8 gap-1">
-          <nav aria-label="Navegación móvil" className="flex flex-col gap-1">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className={[
-                  'text-base px-4 py-3 rounded-full transition-colors',
-                  isActive(link.href)
-                    ? 'text-neutral-900 font-medium bg-neutral-100'
-                    : 'text-neutral-500 hover:text-neutral-900 hover:bg-neutral-50',
-                ].join(' ')}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-          <div className="mt-auto pt-8">
+      <div
+        aria-hidden={!open}
+        className={[
+          'md:hidden fixed inset-0 top-[57px] z-40 bg-white border-t border-neutral-200 flex flex-col px-6 py-8 gap-1 transition-all duration-200',
+          open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none',
+        ].join(' ')}
+      >
+        <nav aria-label="Navegación móvil" className="flex flex-col gap-1">
+          {navLinks.map((link) => (
             <Link
-              href="/lofi/solicitud"
+              key={link.href}
+              href={link.href}
               onClick={() => setOpen(false)}
-              className="block text-center text-sm font-medium px-5 py-3.5 rounded-full bg-neutral-900 text-white hover:bg-neutral-700 transition-colors"
+              className={[
+                'text-base px-4 py-3 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-1',
+                isActive(link.href)
+                  ? 'text-neutral-900 font-medium bg-neutral-100'
+                  : 'text-neutral-500 hover:text-neutral-900 hover:bg-neutral-50',
+              ].join(' ')}
             >
-              Solicitar →
+              {link.label}
             </Link>
-          </div>
+          ))}
+        </nav>
+        <div className="mt-auto pt-8">
+          <Link
+            href="/lofi/solicitud"
+            onClick={() => setOpen(false)}
+            className="block text-center text-sm font-medium px-5 py-3.5 rounded-full bg-c4-brand text-white hover:bg-c4-brand-dark transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-c4-brand focus-visible:ring-offset-2"
+          >
+            Solicitar →
+          </Link>
         </div>
-      )}
+      </div>
     </>
   )
 }

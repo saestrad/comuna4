@@ -146,7 +146,7 @@ export default function LofiRenta() {
           </div>
           <Link
             href="/lofi/solicitud"
-            className="shrink-0 inline-block bg-neutral-900 text-white text-sm font-medium px-7 py-3 rounded-full transition-colors hover:bg-neutral-700"
+            className="shrink-0 inline-block bg-c4-brand text-white text-sm font-medium px-7 py-3 rounded-full transition-colors hover:bg-c4-brand-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-c4-brand focus-visible:ring-offset-2"
           >
             Reservar →
           </Link>

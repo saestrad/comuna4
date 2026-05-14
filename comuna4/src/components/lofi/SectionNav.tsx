@@ -43,7 +43,7 @@ export function SectionNav({ sections = defaultSections }: { sections?: Section[
           href={`#${id}`}
           aria-current={active === id ? 'true' : undefined}
           className={[
-            'text-xs transition-colors duration-150',
+            'text-xs transition-colors duration-150 rounded focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-400',
             active === id
               ? 'text-neutral-900 font-medium'
               : 'text-neutral-500 hover:text-neutral-700',

@@ -244,7 +244,7 @@ export default function RentaDetail({ params }: { params: Promise<{ slug: string
             <div className="flex flex-col gap-2 mt-auto">
               <button
                 onClick={handleProceder}
-                className="w-full text-sm font-medium py-3.5 rounded-full bg-neutral-900 text-white hover:bg-neutral-700 transition-colors"
+                className="w-full text-sm font-medium py-3.5 rounded-full bg-c4-brand text-white hover:bg-c4-brand-dark transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-c4-brand focus-visible:ring-offset-2"
               >
                 Confirmar y solicitar →
               </button>
@@ -331,7 +331,7 @@ export default function RentaDetail({ params }: { params: Promise<{ slug: string
                       className={[
                         'w-full h-full rounded-md text-xs transition-colors flex items-center justify-center',
                         selected
-                          ? 'bg-neutral-900 text-white font-semibold'
+                          ? 'bg-c4-brand text-white font-semibold'
                           : avail
                             ? 'hover:bg-neutral-100 text-neutral-700'
                             : booked
@@ -352,7 +352,7 @@ export default function RentaDetail({ params }: { params: Promise<{ slug: string
           {/* Legend */}
           <div className="flex items-center gap-3 flex-wrap mt-3 pt-3 border-t border-neutral-100">
             <div className="flex items-center gap-1.5">
-              <div className="w-2 h-2 rounded-sm bg-neutral-900" />
+              <div className="w-2 h-2 rounded-sm bg-c4-brand" />
               <span className="text-[10px] text-neutral-400">Seleccionado</span>
             </div>
             <div className="flex items-center gap-1.5">
@@ -379,7 +379,7 @@ export default function RentaDetail({ params }: { params: Promise<{ slug: string
           )}
           <button
             onClick={handleConfirmar}
-            className="w-full text-center text-sm font-medium py-3.5 rounded-full bg-neutral-900 text-white hover:bg-neutral-700 transition-colors mb-2"
+            className="w-full text-center text-sm font-medium py-3.5 rounded-full bg-c4-brand text-white hover:bg-c4-brand-dark transition-colors mb-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-c4-brand focus-visible:ring-offset-2"
           >
             {selectedDay ? 'Confirmar fecha →' : 'Solicitar reserva →'}
           </button>
@@ -399,7 +399,7 @@ export default function RentaDetail({ params }: { params: Promise<{ slug: string
         </div>
         <button
           onClick={confirming ? handleProceder : handleConfirmar}
-          className="shrink-0 text-sm font-medium px-6 py-3 rounded-full bg-neutral-900 text-white hover:bg-neutral-700 transition-colors"
+          className="shrink-0 text-sm font-medium px-6 py-3 rounded-full bg-c4-brand text-white hover:bg-c4-brand-dark transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-c4-brand focus-visible:ring-offset-2"
         >
           {confirming ? 'Confirmar y solicitar →' : 'Solicitar reserva →'}
         </button>
