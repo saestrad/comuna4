@@ -69,21 +69,18 @@ export function WizardMock() {
   return (
     <div className="max-w-2xl mx-auto px-6 py-12 font-mono">
       <div className="mb-8">
-        <p className="text-xs uppercase tracking-widest text-neutral-400 mb-4">Barra de progreso — siempre visible</p>
         <div className="flex items-center gap-2">
           {steps.map((s, i) => (
-            <button
+            <div
               key={s.number}
-              onClick={() => setCurrentStep(i)}
               className={`flex-1 h-1.5 rounded-full transition-colors ${
                 i <= currentStep ? 'bg-neutral-800' : 'bg-neutral-200'
               }`}
-              title={`Paso ${s.number}: ${s.title}`}
             />
           ))}
         </div>
         <p className="text-xs text-neutral-400 mt-2">
-          Paso {step.number} de {steps.length}
+          Paso {step.number} de {steps.length} — {step.title}
         </p>
       </div>
 

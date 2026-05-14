@@ -15,7 +15,7 @@ export default function CalendarioPage() {
             'Click en evento → modal con detalle, notas y archivos adjuntos',
             'Crear/editar evento — formulario modal',
             'Integración Google Calendar API (bidireccional)',
-            'Filtrado por rol: supplier y client ven solo sus eventos',
+            'Supplier y client ven solo sus eventos',
           ],
         },
         {
@@ -27,10 +27,6 @@ export default function CalendarioPage() {
             'Reserva de espacio o equipo',
           ],
         },
-      ]}
-      links={[
-        { href: '/dashboard', label: 'Dashboard' },
-        { href: '/proyectos', label: 'Proyectos' },
       ]}
     />
   )

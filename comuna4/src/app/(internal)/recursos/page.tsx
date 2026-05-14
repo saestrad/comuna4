@@ -22,13 +22,10 @@ export default function RecursosPage() {
           items: [
             'Búsqueda en tiempo real (client-side filter)',
             'CRUD de recursos (solo collaborators)',
-            'Visibilidad por rol (collaborator limita qué ven suppliers)',
+            'Visibilidad por rol',
             'Cada recurso: nombre, URL, descripción corta, categoría',
           ],
         },
-      ]}
-      links={[
-        { href: '/dashboard', label: 'Dashboard' },
       ]}
     />
   )

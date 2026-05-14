@@ -11,42 +11,59 @@ Estas son agencias y estudios cuya **forma** (no contenido) usamos como referenc
 
 ### Pentagram
 **URL:** https://www.pentagram.com/
+**ADN competitivo:** Prestigio + pensamiento. Branding estratégico de élite. "No necesito impresionar, ya sé que soy bueno."
+**Debilidad que aprovechamos:** Distante, sin músculo en performance marketing, poca agilidad.
+
 **Qué tomamos:**
 - Uso radical del espacio en blanco como elemento de diseño
 - Tipografía editorial de gran tamaño como protagonista
 - Grid asimétrico con disciplina — no es desorden, es intención
-- Cada proyecto tiene su propio "lenguaje visual" dentro de un sistema coherente
+- Nav de dos niveles: categoría principal + filtros por disciplina y sector (13 disciplinas, 16 sectores)
+- Active state por categoría visible, no solo por URL
+- Tags como sistema de navegación cruzada entre proyectos
 
 **Qué no tomamos / cómo lo adaptamos:**
 - Su minimalismo puede sentirse frío — nosotros añadimos calidez con tono de voz humano
-- Sus colores son neutros — nosotros añadimos 1-2 acentos vibrantes
+- Su marca depende de reputación, no de color — nosotros sí usamos acento vibrante (#00a873)
+- No persiguen performance — nosotros medimos todo
 
 ---
 
 ### Locomotive
 **URL:** https://locomotive.ca/en
+**ADN competitivo:** Craft + UX. Boutique premium. "Somos cool, pero también serios."
+**Debilidad que aprovechamos:** Sin músculo en medios, no full-funnel, sin escala masiva.
+
 **Qué tomamos:**
+- Nav horizontal de máx 4 ítems + 1 CTA separado visualmente ("Let's talk" → nuestro "Solicitar")
 - Scroll narrativo — las secciones se revelan con propósito, no solo aparecen
 - Page transitions que dan continuidad entre páginas (no saltos abruptos)
 - Velocidad de scroll personalizada (smooth scroll con Lenis o similar)
 - Microinteracciones que hacen que el sitio "respire"
+- Footer duplica nav principal — punto de reenganche al fondo de cada página
 
 **Qué no tomamos / cómo lo adaptamos:**
-- Sus efectos pueden ser pesados en mobile — nosotros priorizamos performance y respetamos `prefers-reduced-motion`
-- No replicamos efectos por el efecto mismo — cada animación tiene un propósito narrativo
+- Sus efectos pueden ser pesados en mobile — nosotros priorizamos performance y `prefers-reduced-motion`
+- No replicamos efectos por el efecto mismo — cada animación tiene propósito narrativo
+- Ellos son solo craft digital — nosotros añadimos medios y métricas
 
 ---
 
 ### Resn
 **URL:** https://resn.co.nz/
+**ADN competitivo:** Tecnología + sorpresa. "Internet todavía puede sorprender." 350+ premios.
+**Debilidad que aprovechamos:** Priorizan wow sobre ROI, clientes no siempre entienden ese nivel experimental.
+
 **Qué tomamos:**
-- Cursor personalizado como extensión de la identidad de marca
-- Experiencias que sorprenden sin perder usabilidad
+- Cursor personalizado como extensión de la identidad de marca (v3, desktop only)
+- Grilla de proyectos navegable con filtros por categoría — cada card revela contexto en hover
 - Hover states que revelan información en lugar de solo cambiar color
-- Uso de WebGL / Canvas para momentos de impacto (fase v3+)
+- Uso de WebGL / Canvas para momentos de impacto específicos (v3+)
+- Experiencias que sorprenden sin sacrificar usabilidad
 
 **Qué no tomamos / cómo lo adaptamos:**
-- Sus experiencias son a veces experimentales en detrimento de la conversión — nosotros balanceamos deleite con funcionalidad
+- Sus proyectos son standalone experimentales — nosotros necesitamos conversión y funcionalidad real
+- Priorizan premios — nosotros priorizamos resultados medibles del cliente
 - El cursor personalizado es desktop only; mobile tiene su propia experiencia táctil
 
 ---
@@ -255,7 +272,35 @@ Al definir el color acento en Fase 1, verificar ratio contra fondo claro Y oscur
 
 ---
 
-## 5. Anti-patrones documentados
+## 5. Posicionamiento competitivo — el hueco
+
+Lo que Pentagram + Locomotive + Resn **no cubren juntos:**
+
+| Capacidad | Pentagram | Locomotive | Resn | **C4** |
+|---|---|---|---|---|
+| Branding | ✓✓ | ✓ | ~ | ✓✓ |
+| UX/UI web | ✓ | ✓✓ | ✓✓ | ✓✓ |
+| Innovación digital | ~ | ✓ | ✓✓ | ✓✓ |
+| Publicidad tradicional (TV/radio/OOH) | ~ | ✗ | ✗ | **✓✓** |
+| Performance marketing | ✗ | ~ | ✗ | **✓✓** |
+| Métricas vivas / growth dashboard | ✗ | ✗ | ✗ | **✓✓** |
+| Mercado US Hispanic + LATAM | ✗ | ✗ | ✗ | **✓✓** |
+
+**Triple ventaja estructural de Puerto Rico:**
+- US market access — sin barreras regulatorias ni de moneda
+- LATAM talento y costos — producción eficiente
+- Cultura hispana premium — autenticidad que Londres, NY y NZ no pueden replicar
+
+**Posicionamiento resultante:**
+> "La agencia que une creatividad mundial + velocidad + resultados medibles."
+
+No vendemos diseño. Vendemos **crecimiento con status.**
+
+→ Ver análisis completo: `docs/competitive-analysis.md`
+
+---
+
+## 6. Anti-patrones documentados
 
 Lo que NO hacemos, extraído del brief original y de decisiones en proceso.
 
@@ -272,7 +317,7 @@ Lo que NO hacemos, extraído del brief original y de decisiones en proceso.
 
 ---
 
-## 6. Stack de referencia y herramientas de diseño
+## 7. Stack de referencia y herramientas de diseño
 
 | Herramienta | Propósito |
 |---|---|

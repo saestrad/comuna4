@@ -1,59 +1,59 @@
 import Link from 'next/link'
-import { MockHeader } from '@/components/mock/MockHeader'
 
 export default function LoginPage() {
   return (
-    <>
-      <MockHeader />
-      <main className="max-w-md mx-auto px-6 py-16 font-mono">
-        <div className="mb-2">
-          <span className="text-xs text-neutral-400 uppercase tracking-widest">v0 — mock</span>
-        </div>
-        <h1 className="text-2xl font-bold text-neutral-900 mb-2">Iniciar sesión</h1>
-        <p className="text-sm text-neutral-500 mb-8 leading-relaxed">
-          Acceso al área interna de Comuna 4. En producción: email + contraseña, Google SSO, Microsoft SSO. Recuperación de contraseña y 2FA opcionales.
-        </p>
+    <div className="min-h-screen bg-neutral-50 flex flex-col">
+      <header className="px-6 py-4 flex items-center justify-between border-b border-dashed border-neutral-300">
+        <Link href="/" className="font-mono font-bold text-sm tracking-widest text-neutral-500 hover:text-neutral-900 transition-colors">
+          ← [C4]
+        </Link>
+        <Link href="/solicitud" className="text-xs text-neutral-400 hover:text-neutral-700 transition-colors">
+          ¿Cliente nuevo? Solicitar servicio
+        </Link>
+      </header>
 
-        <div className="space-y-4 mb-8">
-          <div>
-            <p className="text-xs uppercase tracking-widest text-neutral-400 mb-1">Campo</p>
-            <div className="border border-dashed border-neutral-300 rounded px-3 py-2 text-sm text-neutral-400">
-              Email — validación en línea
-            </div>
+      <main className="flex-1 flex items-center justify-center px-6">
+        <div className="w-full max-w-sm font-mono">
+          <div className="mb-6">
+            <span className="text-xs text-neutral-400 uppercase tracking-widest">v0 — mock</span>
+            <h1 className="text-2xl font-bold text-neutral-900 mt-1">Área interna</h1>
+            <p className="text-sm text-neutral-500 mt-2 leading-relaxed">
+              Acceso para colaboradores, suplidores y clientes de Comuna 4.
+            </p>
           </div>
-          <div>
-            <div className="border border-dashed border-neutral-300 rounded px-3 py-2 text-sm text-neutral-400">
+
+          <div className="space-y-3 mb-6">
+            <div className="border border-dashed border-neutral-300 rounded px-3 py-2.5 text-sm text-neutral-400">
+              Email
+            </div>
+            <div className="border border-dashed border-neutral-300 rounded px-3 py-2.5 text-sm text-neutral-400">
               Contraseña — con toggle de visibilidad
             </div>
+            <div className="text-xs text-neutral-400 text-right">
+              <span className="underline cursor-pointer">Olvidé mi contraseña</span>
+            </div>
           </div>
-          <div className="text-xs text-neutral-400">
-            — Olvidé mi contraseña (link a flujo de recuperación)
-          </div>
-        </div>
 
-        <div className="space-y-3 mb-8">
-          <Link
-            href="/dashboard"
-            className="block w-full text-center text-sm font-bold bg-neutral-900 text-white px-4 py-2.5 rounded transition-colors hover:bg-neutral-700"
-          >
-            Ingresar [MOCK — ir a dashboard]
-          </Link>
-          <div className="border border-dashed border-neutral-300 rounded px-4 py-2.5 text-center text-sm text-neutral-400">
-            Continuar con Google (SSO)
+          <div className="space-y-3 mb-6">
+            <Link
+              href="/dashboard"
+              className="block w-full text-center text-sm font-bold bg-neutral-900 text-white px-4 py-2.5 rounded hover:bg-neutral-700 transition-colors"
+            >
+              Ingresar [MOCK]
+            </Link>
+            <div className="border border-dashed border-neutral-300 rounded px-4 py-2.5 text-center text-sm text-neutral-400">
+              Continuar con Google
+            </div>
+            <div className="border border-dashed border-neutral-300 rounded px-4 py-2.5 text-center text-sm text-neutral-400">
+              Continuar con Microsoft
+            </div>
           </div>
-          <div className="border border-dashed border-neutral-300 rounded px-4 py-2.5 text-center text-sm text-neutral-400">
-            Continuar con Microsoft (SSO)
-          </div>
-        </div>
 
-        <div className="pt-4 border-t border-dashed border-neutral-200 text-xs text-neutral-400">
-          — En producción: Clerk maneja auth, SSO y 2FA
-          <br />
-          — Roles: collaborator / supplier / client
-          <br />
-          — Sesión con expiración automática
+          <p className="text-xs text-neutral-400 text-center">
+            En producción: Clerk · SSO · 2FA · Roles: collaborator / supplier / client
+          </p>
         </div>
       </main>
-    </>
+    </div>
   )
 }
