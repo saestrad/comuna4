@@ -20,30 +20,33 @@ export default function LofiHome() {
 
       {/* Hero */}
       <section className="px-6 md:px-12 pt-[104px] pb-[104px] border-b border-neutral-200">
-        <div className="max-w-5xl mx-auto">
-          <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-8">
-            Agencia creativa — Puerto Rico
-          </p>
-          <h1 className="text-5xl md:text-7xl font-display font-black text-neutral-900 tracking-tight leading-none mb-8 max-w-[14ch]">
-            Hacemos que tu marca crezca.
-          </h1>
-          <p className="text-lg text-neutral-500 leading-relaxed mb-12 max-w-[44ch]">
-            Producción, estrategia y medios bajo un mismo techo. Desde Puerto Rico, con resultados medibles.
-          </p>
-          <div className="flex items-center gap-5">
-            <Link
-              href="/lofi/solicitud"
-              className="inline-block bg-c4-brand text-white text-sm font-medium px-7 py-3.5 rounded-full transition-colors hover:bg-c4-brand-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-c4-brand focus-visible:ring-offset-2"
-            >
-              Empieza hoy →
-            </Link>
-            <Link
-              href="/lofi/trabajos"
-              className="text-sm text-neutral-500 hover:text-neutral-900 transition-colors underline underline-offset-4"
-            >
-              Ver nuestro trabajo
-            </Link>
+        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+          <div>
+            <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-8">
+              Agencia creativa — Puerto Rico
+            </p>
+            <h1 className="text-5xl md:text-7xl font-display font-black text-neutral-900 tracking-tight leading-none mb-8">
+              Hacemos que tu marca crezca.
+            </h1>
+            <p className="text-lg text-neutral-500 leading-relaxed mb-12 max-w-[44ch]">
+              Producción, estrategia y medios bajo un mismo techo. Desde Puerto Rico, con resultados medibles.
+            </p>
+            <div className="flex items-center gap-5">
+              <Link
+                href="/lofi/solicitud"
+                className="inline-block bg-c4-brand text-white text-sm font-medium px-7 py-3.5 rounded-full transition-colors hover:bg-c4-brand-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-c4-brand focus-visible:ring-offset-2"
+              >
+                Empieza hoy →
+              </Link>
+              <Link
+                href="/lofi/trabajos"
+                className="text-sm text-neutral-500 hover:text-neutral-900 transition-colors underline underline-offset-4"
+              >
+                Ver nuestro trabajo
+              </Link>
+            </div>
           </div>
+          <div className="lofi-img rounded-2xl aspect-[4/3] w-full hidden md:block" aria-hidden="true" />
         </div>
       </section>
 
