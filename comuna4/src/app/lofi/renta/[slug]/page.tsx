@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { use, useState } from 'react'
 
 const item = {
   name: 'Ciclorama Profesional',
@@ -47,7 +47,8 @@ function getFirstWeekday(year: number, month: number) {
   return day === 0 ? 6 : day - 1
 }
 
-export default function RentaDetail({ params }: { params: { slug: string } }) {
+export default function RentaDetail({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = use(params)
   const router = useRouter()
   const [duracion, setDuracion] = useState<'hora' | 'dia'>('hora')
   const [selectedDay, setSelectedDay] = useState<number | null>(null)
@@ -88,13 +89,13 @@ export default function RentaDetail({ params }: { params: { slug: string } }) {
     if (selectedDay) {
       setConfirming(true)
     } else {
-      router.push(`/lofi/solicitud?espacio=${params.slug}`)
+      router.push(`/lofi/solicitud?espacio=${slug}`)
     }
   }
 
   function handleProceder() {
     const fecha = `${calYear}-${String(calMonth + 1).padStart(2, '0')}-${String(selectedDay).padStart(2, '0')}`
-    router.push(`/lofi/solicitud?espacio=${params.slug}&fecha=${fecha}`)
+    router.push(`/lofi/solicitud?espacio=${slug}&fecha=${fecha}`)
   }
 
   const price = duracion === 'hora' ? item.priceHour : item.priceDay

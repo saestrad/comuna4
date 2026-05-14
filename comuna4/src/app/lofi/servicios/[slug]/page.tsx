@@ -34,7 +34,8 @@ const cases = [
   { title: 'Campaña Meta + TikTok para marca de moda local', category: 'Performance', metric: '3.2× ROAS sostenido', slug: 'marca-moda-performance' },
 ]
 
-export default function ServicioDetail({ params }: { params: { slug: string } }) {
+export default async function ServicioDetail({ params }: { params: Promise<{ slug: string }> }) {
+  await params
   return (
     <div className="flex">
       <div className="flex-1 min-w-0">

@@ -33,7 +33,8 @@ const article = {
   },
 }
 
-export default function BlogPost({ params }: { params: { slug: string } }) {
+export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
+  await params
   return (
     <div className="flex">
       <div className="flex-1 min-w-0">
