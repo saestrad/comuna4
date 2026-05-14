@@ -11,6 +11,7 @@ const sections = [
 ]
 
 const projects: Record<string, {
+  client: string
   title: string
   category: string
   sector: string
@@ -24,6 +25,7 @@ const projects: Record<string, {
   next: { slug: string; category: string; title: string }
 }> = {
   'restaurante-caribeno': {
+    client: 'Casa Caribe',
     title: 'Identidad completa para restaurante de cocina caribeña',
     category: 'Branding',
     sector: 'Gastronomía',
@@ -48,6 +50,7 @@ const projects: Record<string, {
   },
 
   'marca-moda-performance': {
+    client: 'Moda Local',
     title: 'Campaña Meta + TikTok para marca de moda local',
     category: 'Performance',
     sector: 'Moda',
@@ -72,6 +75,7 @@ const projects: Record<string, {
   },
 
   'lanzamiento-audiovisual': {
+    client: 'Marca Nacional',
     title: 'Producción audiovisual para lanzamiento de producto',
     category: 'Producción',
     sector: 'Consumo',
@@ -96,6 +100,7 @@ const projects: Record<string, {
   },
 
   'firma-arquitectura': {
+    client: 'Arq. & Co.',
     title: 'Rediseño de marca para firma de arquitectura',
     category: 'Branding',
     sector: 'Servicios profesionales',
@@ -120,6 +125,7 @@ const projects: Record<string, {
   },
 
   'ecommerce-performance-max': {
+    client: 'Tienda Online',
     title: 'Google Ads + Performance Max para e-commerce',
     category: 'Performance',
     sector: 'E-commerce',
@@ -144,6 +150,7 @@ const projects: Record<string, {
   },
 
   'consultoria-web': {
+    client: 'Consultoría BG',
     title: 'Sitio web para consultoría de negocios',
     category: 'Web',
     sector: 'B2B',
@@ -214,8 +221,15 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         </section>
 
         {/* Hero visual */}
-        <section className="border-b border-neutral-200">
+        <section className="relative border-b border-neutral-200 overflow-hidden">
           <div className="aspect-[16/7] lofi-img" />
+          <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/60 via-transparent to-transparent" />
+          <div className="absolute bottom-6 left-6">
+            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-5 py-4 inline-block">
+              <p className="text-xs font-mono text-white/60 mb-1">{project.client} · {project.category} · {project.year}</p>
+              <p className="text-base md:text-lg font-display font-semibold text-white leading-tight max-w-[32ch]">{project.title}</p>
+            </div>
+          </div>
         </section>
 
         {/* Proceso */}

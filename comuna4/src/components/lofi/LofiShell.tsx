@@ -66,11 +66,20 @@ export function LofiShell({ children }: { children: React.ReactNode }) {
         style={{
           transform: open ? `translateX(-${MENU_W}px)` : 'translateX(0)',
           borderRadius: open ? '20px' : '0',
-          overflow: 'hidden',
+          overflow: open ? 'hidden' : 'visible',
         }}
       >
         {children}
       </div>
+
+      {/* ── Backdrop invisible para cerrar con click/tap fuera del panel ── */}
+      {open && (
+        <div
+          className="fixed inset-0 z-30"
+          onClick={() => setOpen(false)}
+          aria-hidden
+        />
+      )}
 
       {/* ── Panel del menú — entra desde la derecha ── */}
       <div

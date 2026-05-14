@@ -415,6 +415,10 @@
   animation: skeleton-pulse 1.5s ease-in-out infinite;
 }
 
+/* Hide scrollbar for horizontal scroll containers */
+.scrollbar-none { scrollbar-width: none; }
+.scrollbar-none::-webkit-scrollbar { display: none; }
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .skeleton { animation: none; }
