@@ -1,64 +1,63 @@
-import { MockHeader } from '@/components/mock/MockHeader'
-import { MockPage } from '@/components/mock/MockPage'
+import Link from 'next/link'
 
-export default function Home() {
+const versions = [
+  {
+    label: 'v0 — Mock',
+    href: '/mock',
+    desc: 'Navegabilidad y estructura. Sin diseño real.',
+    badge: 'Activo',
+    color: 'oklch(0.63 0.14 162)',
+  },
+  {
+    label: 'v1 — Low Fidelity',
+    href: '/lofi',
+    desc: 'Tipografía, grilla y layout real. Sin assets de marca.',
+    badge: 'En construcción',
+    color: 'oklch(0.55 0.20 245)',
+  },
+  {
+    label: 'v3 — High Fidelity',
+    href: '#',
+    desc: 'Sistema de marca completo, animaciones y producción.',
+    badge: 'Pendiente',
+    color: 'oklch(0.50 0 0)',
+  },
+]
+
+export default function VersionSelector() {
   return (
-    <>
-      <MockHeader />
-      <main>
-        <MockPage
-          title="Home"
-          badge="Capa pública"
-          description="Comunica quiénes somos en menos de 3 segundos. CTA principal hacia solicitud de servicios, secundario hacia el portafolio de trabajos."
-          links={[
-            { href: '/solicitud', label: 'Solicitar servicio →' },
-            { href: '/trabajos', label: 'Ver trabajos' },
-          ]}
-          sections={[
-            {
-              name: 'Secciones de la página',
-              items: [
-                'Hero — frase de manifiesto + CTA primario (Solicitar servicio) + CTA secundario (Ver trabajos)',
-                'Ticker animado — servicios principales en loop horizontal',
-                'Proyectos destacados — grid con hover cinematográfico (3-4 casos)',
-                'Renta de espacios — bloque visual con CTA directo al catálogo',
-                'Clientes / Testimonios — logos o citas',
-                'CTA final — iniciar conversación',
-              ],
-              suggestion: [
-                'Hero headline: "Hacemos que tu marca crezca." — directo, sin jerga',
-                'Hero sub: "Branding, medios y producción bajo un mismo techo. Desde Puerto Rico."',
-                'CTA primario: "Empieza hoy" → wizard de solicitud',
-                'CTA secundario: "Ver nuestro trabajo" → /trabajos',
-                'Ticker: Branding · Performance Media · Web · Producción · AI Ads · TV & Digital',
-                'Proyectos: mostrar resultado en la card — "↑38% leads en 90 días"',
-                'Clientes: cita con resultado concreto, no "nos encantó trabajar con ellos"',
-                'CTA final: "¿Tienes un proyecto? Cuéntanos." + campo de email inline',
-              ],
-            },
-            {
-              name: 'Animaciones requeridas (v3)',
-              items: [
-                'Scroll narrativo — secciones que revelan al entrar en viewport',
-                'Hover en proyectos — overlay con detalle del proyecto',
-                'Ticker — velocidad configurable, pausa en hover',
-                'Cursor personalizado (desktop)',
-                'Page transitions (Framer Motion)',
-              ],
-            },
-            {
-              name: 'Tono de voz',
-              isNew: true,
-              items: [
-                '"No vendemos diseño. Vendemos crecimiento con status."',
-                '"Una sola agencia. Branding que posiciona. Medios que convierten. Web que retiene."',
-                '"Trabajamos con marcas que quieren crecer de verdad — no solo verse bien."',
-                '"Métricas vivas. Siempre. No reportes mensuales en PDF."',
-              ],
-            },
-          ]}
-        />
-      </main>
-    </>
+    <div className="min-h-screen flex flex-col items-center justify-center px-6 bg-white">
+      <div className="max-w-xl w-full">
+        <p className="text-xs font-mono uppercase tracking-widest mb-2" style={{ color: 'oklch(0.63 0.14 162)' }}>
+          [C4] — Sitio web
+        </p>
+        <h1 className="text-4xl font-black text-neutral-900 tracking-tight leading-none mb-10">
+          Versiones
+        </h1>
+        <div className="flex flex-col gap-px bg-neutral-200">
+          {versions.map((v) => (
+            <Link
+              key={v.href}
+              href={v.href}
+              className={[
+                'bg-white px-6 py-5 flex items-center justify-between gap-6 transition-colors',
+                v.href === '#' ? 'pointer-events-none opacity-40' : 'hover:bg-neutral-50',
+              ].join(' ')}
+            >
+              <div>
+                <p className="text-sm font-semibold text-neutral-900 mb-1">{v.label}</p>
+                <p className="text-xs text-neutral-500">{v.desc}</p>
+              </div>
+              <span
+                className="text-xs font-mono shrink-0"
+                style={{ color: v.color }}
+              >
+                {v.badge}
+              </span>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </div>
   )
 }

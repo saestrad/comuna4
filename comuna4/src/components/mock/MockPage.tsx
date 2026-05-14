@@ -30,7 +30,7 @@ type MockPageProps = {
 
 export function MockPage({ title, description, sections = [], links = [], badge, breadcrumb }: MockPageProps) {
   return (
-    <div className="max-w-3xl mx-auto px-6 py-12">
+    <div className="max-w-3xl mx-auto px-6 md:px-12 py-[104px]">
 
       {breadcrumb && breadcrumb.length > 0 && (
         <nav className="flex items-center gap-2 text-xs text-neutral-400 mb-6 font-mono">
