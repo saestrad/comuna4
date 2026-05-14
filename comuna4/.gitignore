@@ -1,5 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# Claude settings (may contain API tokens)
+.claude/settings.json
+
 # dependencies
 /node_modules
 /.pnp
@@ -43,3 +46,5 @@ externos/
 
 # Claude Code — settings locales con secrets (tokens, API keys)
 .claude/settings.local.json
+
+.vercel

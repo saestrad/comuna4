@@ -1,6 +1,6 @@
 import { MockPage } from '@/components/mock/MockPage'
 
-export default async function ServicioDetallePage(props: PageProps<'/servicios/[slug]'>) {
+export default async function ServicioDetallePage(props: { params: Promise<{ slug: string }> }) {
   const { slug } = await props.params
 
   return (

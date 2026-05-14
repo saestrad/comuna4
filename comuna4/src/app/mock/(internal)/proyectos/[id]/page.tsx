@@ -1,6 +1,6 @@
 import { MockPage } from '@/components/mock/MockPage'
 
-export default async function ProyectoDetallePage(props: PageProps<'/proyectos/[id]'>) {
+export default async function ProyectoDetallePage(props: { params: Promise<{ id: string }> }) {
   const { id } = await props.params
 
   return (

@@ -1,6 +1,6 @@
 import { MockPage } from '@/components/mock/MockPage'
 
-export default async function KpisClientePage(props: PageProps<'/kpis/[clientId]'>) {
+export default async function KpisClientePage(props: { params: Promise<{ clientId: string }> }) {
   const { clientId } = await props.params
 
   return (

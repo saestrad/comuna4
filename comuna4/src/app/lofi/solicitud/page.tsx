@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 
@@ -11,6 +11,14 @@ const steps = ['Servicio', 'Brief', 'Contacto', 'Revisar y enviar']
 const consentLabels = ['Acepto los términos y condiciones', 'Acepto la política de privacidad', 'Autorizo el uso de mis datos']
 
 export default function LofiSolicitud() {
+  return (
+    <Suspense>
+      <SolicitudForm />
+    </Suspense>
+  )
+}
+
+function SolicitudForm() {
   const searchParams = useSearchParams()
   const [step, setStep] = useState(0)
   const [selectedService, setSelectedService] = useState('')
