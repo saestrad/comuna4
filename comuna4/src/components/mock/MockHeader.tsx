@@ -18,12 +18,12 @@ export function MockHeader() {
     href === '/mock' ? pathname === '/mock' : pathname.startsWith(href)
 
   return (
-    <header className="border-b border-dashed border-neutral-300 bg-neutral-50 px-6 py-4 flex items-center gap-6">
+    <header className="sticky top-0 z-50 border-b border-dashed border-neutral-300 bg-neutral-50 px-6 md:px-12 py-4 flex items-center justify-between relative">
       <Link href="/mock" className="font-mono font-black text-base tracking-widest shrink-0 text-c4-brand">
         [C4]
       </Link>
 
-      <nav className="flex items-center gap-1 flex-1">
+      <nav className="absolute left-1/2 -translate-x-1/2 flex items-center gap-1">
         {navLinks.map((link) => (
           <Link
             key={link.href}
@@ -40,7 +40,7 @@ export function MockHeader() {
         ))}
       </nav>
 
-      <div className="flex items-center gap-3 shrink-0">
+      <div className="flex items-center gap-3 shrink-0 ml-auto">
         <Link
           href="/mock/solicitud"
           className={[

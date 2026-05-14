@@ -2,9 +2,17 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { projects } from '@/lib/projects'
 
 const categories = ['Todos', 'Branding', 'Performance', 'Producción', 'Web']
+
+const projects = [
+  { title: 'Identidad completa para restaurante de cocina caribeña', category: 'Branding', sector: 'Gastronomía', metric: '↑ 40% reconocimiento de marca en 60 días', slug: 'restaurante-caribeno' },
+  { title: 'Campaña Meta + TikTok para marca de moda local', category: 'Performance', sector: 'Moda', metric: '3.2× ROAS sostenido en 90 días', slug: 'marca-moda-performance' },
+  { title: 'Producción audiovisual para lanzamiento de producto', category: 'Producción', sector: 'Consumo', metric: '2.4M impresiones orgánicas', slug: 'lanzamiento-audiovisual' },
+  { title: 'Rediseño de marca para firma de arquitectura', category: 'Branding', sector: 'Servicios profesionales', metric: 'Sistema visual en 4 semanas', slug: 'firma-arquitectura' },
+  { title: 'Google Ads + Performance Max para e-commerce', category: 'Performance', sector: 'E-commerce', metric: '↓ 28% CPA vs campaña anterior', slug: 'ecommerce-performance-max' },
+  { title: 'Sitio web para consultoría de negocios', category: 'Web', sector: 'B2B', metric: '↑ 55% tiempo en página', slug: 'consultoria-web' },
+]
 
 export default function LofiTrabajos() {
   const [active, setActive] = useState('Todos')
@@ -14,10 +22,10 @@ export default function LofiTrabajos() {
     <div>
 
       {/* Hero */}
-      <section className="px-6 pt-16 pb-10 border-b border-neutral-200">
+      <section className="px-6 md:px-12 pt-[104px] pb-[104px] border-b border-neutral-200">
         <div className="max-w-5xl mx-auto">
           <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-6">Trabajos</p>
-          <h1 className="text-6xl font-black text-neutral-900 tracking-tight leading-none mb-6 max-w-[16ch]">
+          <h1 className="text-4xl md:text-6xl font-black text-neutral-900 tracking-tight leading-none mb-6 max-w-[16ch]">
             Proyectos reales, resultados reales.
           </h1>
           <p className="text-base text-neutral-500 leading-relaxed max-w-[44ch]">
@@ -27,7 +35,7 @@ export default function LofiTrabajos() {
       </section>
 
       {/* Filter */}
-      <div className="border-b border-neutral-200 px-6 py-4 bg-neutral-50">
+      <div className="border-b border-neutral-200 px-6 md:px-12 py-5 bg-neutral-50">
         <div className="max-w-5xl mx-auto flex items-center gap-2 flex-wrap">
           <span className="text-xs font-mono uppercase tracking-widest text-neutral-500 w-20 shrink-0">
             Disciplina
@@ -38,7 +46,7 @@ export default function LofiTrabajos() {
                 key={c}
                 onClick={() => setActive(c)}
                 className={[
-                  'text-xs px-3 py-2.5 rounded border transition-colors',
+                  'text-xs px-3 py-2.5 rounded-full border transition-colors',
                   active === c
                     ? 'border-neutral-900 bg-neutral-900 text-white'
                     : 'border-neutral-300 text-neutral-500 hover:border-neutral-600 hover:text-neutral-800',
@@ -51,23 +59,17 @@ export default function LofiTrabajos() {
         </div>
       </div>
 
-      {/* Grid */}
-      <section className="px-6 py-14">
+      {/* Projects grid */}
+      <section className="px-6 md:px-12 py-[104px]">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {filtered.map((p) => (
               <Link key={p.slug} href={`/lofi/trabajos/${p.slug}`} className="group block">
-                <div className="relative overflow-hidden rounded border border-neutral-200 mb-4">
-                  <div className="aspect-[4/3] bg-neutral-100 transition-transform duration-500 ease-out group-hover:-translate-y-1.5" />
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-[0.07] transition-opacity duration-500 pointer-events-none"
-                    style={{ backgroundColor: p.color }}
-                  />
-                </div>
+                <div className="aspect-[4/3] bg-neutral-100 rounded-lg border border-neutral-200 mb-4" />
                 <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-1.5">
                   {p.category} · {p.sector}
                 </p>
-                <p className="text-sm font-semibold text-neutral-800 leading-snug mb-2 group-hover:text-neutral-600 transition-colors duration-300">
+                <p className="text-sm font-semibold text-neutral-800 leading-snug mb-2 group-hover:text-neutral-600 transition-colors">
                   {p.title}
                 </p>
                 <p className="text-xs text-neutral-500">{p.metric}</p>
@@ -76,7 +78,7 @@ export default function LofiTrabajos() {
           </div>
 
           {filtered.length === 0 && (
-            <p className="text-sm text-neutral-400 py-16 text-center">
+            <p className="text-sm text-neutral-500 py-16 text-center">
               No hay proyectos en esta categoría aún.
             </p>
           )}
@@ -84,14 +86,14 @@ export default function LofiTrabajos() {
       </section>
 
       {/* CTA */}
-      <section className="px-6 py-16 border-t border-neutral-200">
+      <section className="px-6 md:px-12 py-[104px] border-t border-neutral-200">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <p className="text-sm text-neutral-500 max-w-[44ch]">
             ¿Tu proyecto podría estar aquí? Cuéntanos qué necesitas.
           </p>
           <Link
             href="/lofi/solicitud"
-            className="shrink-0 inline-block bg-neutral-900 text-white text-sm font-medium px-7 py-3.5 rounded transition-colors hover:bg-neutral-700"
+            className="shrink-0 inline-block bg-neutral-900 text-white text-sm font-medium px-7 py-3.5 rounded-full transition-colors hover:bg-neutral-700"
           >
             Solicitar →
           </Link>

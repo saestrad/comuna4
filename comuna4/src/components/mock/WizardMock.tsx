@@ -106,7 +106,7 @@ export function WizardMock() {
       </div>
 
       <div className="flex items-center gap-3 pt-6 border-t border-dashed border-neutral-200">
-        <Link href="/" className="text-xs text-neutral-400 hover:text-neutral-600 underline transition-colors">
+        <Link href="/mock" className="text-xs text-neutral-400 hover:text-neutral-600 underline transition-colors">
           Cancelar
         </Link>
         {!isFirst && (
@@ -126,7 +126,7 @@ export function WizardMock() {
           </button>
         ) : (
           <Link
-            href="/"
+            href="/mock"
             className="text-sm text-neutral-900 border border-dashed border-neutral-700 px-4 py-2 rounded transition-colors hover:bg-neutral-900 hover:text-white ml-auto"
           >
             Volver al inicio ↩

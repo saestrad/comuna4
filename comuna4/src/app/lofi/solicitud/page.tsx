@@ -69,7 +69,7 @@ export default function LofiSolicitud() {
           </p>
           <Link
             href="/lofi"
-            className="inline-block bg-neutral-900 text-white text-sm font-medium px-7 py-3.5 rounded transition-colors hover:bg-neutral-700"
+            className="inline-block bg-neutral-900 text-white text-sm font-medium px-7 py-3.5 rounded-full transition-colors hover:bg-neutral-700"
           >
             Volver al inicio →
           </Link>
@@ -80,7 +80,7 @@ export default function LofiSolicitud() {
 
   return (
     <div className="min-h-screen bg-white">
-      <div className="max-w-2xl mx-auto px-6 py-14">
+      <div className="max-w-2xl mx-auto px-6 md:px-12 py-[104px]">
 
         {/* Progress */}
         <div className="mb-10">
@@ -109,14 +109,15 @@ export default function LofiSolicitud() {
             <p className="text-sm text-neutral-500 mb-8 leading-relaxed">
               Selecciona el servicio. Puedes volver y cambiar antes de enviar.
             </p>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {services.map((s) => (
                 <button
                   key={s}
                   type="button"
+                  aria-pressed={selectedService === s}
                   onClick={() => { setSelectedService(s); setErrors({}) }}
                   className={[
-                    'text-sm text-left px-4 py-3 rounded border transition-colors',
+                    'text-sm text-left px-4 py-3 rounded-full border transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-1',
                     selectedService === s
                       ? 'border-neutral-900 bg-neutral-900 text-white'
                       : 'border-neutral-200 text-neutral-700 hover:border-neutral-400',
@@ -152,7 +153,7 @@ export default function LofiSolicitud() {
                   value={objetivo}
                   onChange={(e) => setObjetivo(e.target.value)}
                   placeholder="¿Qué quieres lograr?"
-                  className="w-full text-sm border border-neutral-200 rounded px-4 py-3 placeholder:text-neutral-300 focus:outline-none focus:border-neutral-500 resize-none"
+                  className="w-full text-sm border border-neutral-200 rounded-lg px-4 py-3 placeholder:text-neutral-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-1 focus:border-neutral-500 resize-none"
                 />
               </div>
               <div>
@@ -165,21 +166,22 @@ export default function LofiSolicitud() {
                   value={audiencia}
                   onChange={(e) => setAudiencia(e.target.value)}
                   placeholder="¿A quién le habla tu marca?"
-                  className="w-full text-sm border border-neutral-200 rounded px-4 py-3 placeholder:text-neutral-300 focus:outline-none focus:border-neutral-500 resize-none"
+                  className="w-full text-sm border border-neutral-200 rounded-lg px-4 py-3 placeholder:text-neutral-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-1 focus:border-neutral-500 resize-none"
                 />
               </div>
               <div>
                 <label className="text-xs font-mono uppercase tracking-widest text-neutral-500 block mb-2">
                   Rango de inversión <span className="normal-case tracking-normal">(USD)</span>
                 </label>
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {budgets.map((b) => (
                     <button
                       key={b}
                       type="button"
+                      aria-pressed={selectedBudget === b}
                       onClick={() => { setSelectedBudget(b); setErrors((prev) => ({ ...prev, budget: '' })) }}
                       className={[
-                        'text-xs text-left px-3 py-2.5 rounded border transition-colors',
+                        'text-xs text-left px-3 py-2.5 rounded-full border transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-1',
                         selectedBudget === b
                           ? 'border-neutral-900 bg-neutral-900 text-white'
                           : 'border-neutral-200 text-neutral-600 hover:border-neutral-400',
@@ -218,7 +220,7 @@ export default function LofiSolicitud() {
                   onChange={(e) => { setName(e.target.value); setErrors((prev) => ({ ...prev, name: '' })) }}
                   placeholder="Tu nombre"
                   className={[
-                    'w-full text-sm border rounded px-4 py-3 placeholder:text-neutral-300 focus:outline-none focus:border-neutral-500',
+                    'w-full text-sm border rounded-lg px-4 py-3 placeholder:text-neutral-300 focus:outline-none focus:border-neutral-500',
                     errors.name ? 'border-red-400' : 'border-neutral-200',
                   ].join(' ')}
                 />
@@ -237,7 +239,7 @@ export default function LofiSolicitud() {
                   onChange={(e) => { setEmail(e.target.value); setErrors((prev) => ({ ...prev, email: '' })) }}
                   placeholder="tu@empresa.com"
                   className={[
-                    'w-full text-sm border rounded px-4 py-3 placeholder:text-neutral-300 focus:outline-none focus:border-neutral-500',
+                    'w-full text-sm border rounded-lg px-4 py-3 placeholder:text-neutral-300 focus:outline-none focus:border-neutral-500',
                     errors.email ? 'border-red-400' : 'border-neutral-200',
                   ].join(' ')}
                 />
@@ -255,7 +257,7 @@ export default function LofiSolicitud() {
                   value={empresa}
                   onChange={(e) => setEmpresa(e.target.value)}
                   placeholder="Nombre de tu empresa"
-                  className="w-full text-sm border border-neutral-200 rounded px-4 py-3 placeholder:text-neutral-300 focus:outline-none focus:border-neutral-500"
+                  className="w-full text-sm border border-neutral-200 rounded-lg px-4 py-3 placeholder:text-neutral-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-1 focus:border-neutral-500"
                 />
               </div>
               <div>
@@ -267,9 +269,10 @@ export default function LofiSolicitud() {
                     <button
                       key={c}
                       type="button"
+                      aria-pressed={selectedChannel === c}
                       onClick={() => setSelectedChannel(c)}
                       className={[
-                        'text-xs px-4 py-2.5 rounded border transition-colors',
+                        'text-xs px-4 py-2.5 rounded-full border transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-1',
                         selectedChannel === c
                           ? 'border-neutral-900 bg-neutral-900 text-white'
                           : 'border-neutral-200 text-neutral-600 hover:border-neutral-400',
@@ -293,7 +296,7 @@ export default function LofiSolicitud() {
             <p className="text-sm text-neutral-500 mb-8 leading-relaxed">
               Te respondemos en menos de 24 horas.
             </p>
-            <div className="border border-neutral-200 rounded p-6 mb-8 flex flex-col gap-5">
+            <div className="border border-neutral-200 rounded-xl p-6 mb-8 flex flex-col gap-5">
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-1">Servicio</p>
@@ -363,7 +366,7 @@ export default function LofiSolicitud() {
             <button
               type="button"
               onClick={() => setStep((s) => s - 1)}
-              className="text-sm text-neutral-500 hover:text-neutral-900 border border-neutral-200 px-4 py-2.5 rounded transition-colors"
+              className="text-sm text-neutral-500 hover:text-neutral-900 border border-neutral-200 px-4 py-2.5 rounded-full transition-colors"
             >
               ← Anterior
             </button>
@@ -372,7 +375,7 @@ export default function LofiSolicitud() {
             <button
               type="button"
               onClick={advance}
-              className="ml-auto text-sm font-medium bg-neutral-900 text-white px-6 py-2.5 rounded transition-colors hover:bg-neutral-700"
+              className="ml-auto text-sm font-medium bg-neutral-900 text-white px-6 py-2.5 rounded-full transition-colors hover:bg-neutral-700"
             >
               Siguiente →
             </button>
@@ -380,7 +383,7 @@ export default function LofiSolicitud() {
             <button
               type="button"
               onClick={submit}
-              className="ml-auto text-sm font-medium bg-neutral-900 text-white px-6 py-2.5 rounded transition-colors hover:bg-neutral-700"
+              className="ml-auto text-sm font-medium bg-neutral-900 text-white px-6 py-2.5 rounded-full transition-colors hover:bg-neutral-700"
             >
               Enviar solicitud →
             </button>

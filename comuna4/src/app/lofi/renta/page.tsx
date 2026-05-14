@@ -66,11 +66,11 @@ export default function LofiRenta() {
     <div>
 
       {/* Hero */}
-      <section className="px-6 pt-16 pb-10 border-b border-neutral-200">
+      <section className="px-6 md:px-12 pt-[104px] pb-[104px] border-b border-neutral-200">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-end">
           <div>
             <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-6">Renta</p>
-            <h1 className="text-6xl font-black text-neutral-900 tracking-tight leading-none mb-6 max-w-[16ch]">
+            <h1 className="text-4xl md:text-6xl font-black text-neutral-900 tracking-tight leading-none mb-6 max-w-[16ch]">
               Tu idea necesita un espacio. Nosotros lo tenemos.
             </h1>
             <p className="text-base text-neutral-500 leading-relaxed">
@@ -92,7 +92,7 @@ export default function LofiRenta() {
       </section>
 
       {/* Filter */}
-      <div className="border-b border-neutral-200 px-6 py-4 bg-neutral-50">
+      <div className="border-b border-neutral-200 px-6 md:px-12 py-5 bg-neutral-50">
         <div className="max-w-5xl mx-auto flex items-center gap-2 flex-wrap">
           <span className="text-xs font-mono uppercase tracking-widest text-neutral-500 w-20 shrink-0">Categoría</span>
           <div className="flex gap-2 flex-wrap">
@@ -101,7 +101,7 @@ export default function LofiRenta() {
                 key={c}
                 onClick={() => setActive(c)}
                 className={[
-                  'text-xs px-3 py-2.5 rounded border transition-colors',
+                  'text-xs px-3 py-2.5 rounded-full border transition-colors',
                   active === c
                     ? 'border-neutral-900 bg-neutral-900 text-white'
                     : 'border-neutral-300 text-neutral-500 hover:border-neutral-600 hover:text-neutral-800',
@@ -115,12 +115,12 @@ export default function LofiRenta() {
       </div>
 
       {/* Items */}
-      <section className="px-6 py-14">
+      <section className="px-6 md:px-12 py-[104px]">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {filtered.map((item) => (
               <Link key={item.slug} href={`/lofi/renta/${item.slug}`} className="group block">
-                <div className="aspect-[4/3] bg-neutral-100 rounded border border-neutral-200 mb-4" />
+                <div className="aspect-[4/3] bg-neutral-100 rounded-lg border border-neutral-200 mb-4" />
                 <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-1.5">
                   {item.category} · {item.size}
                 </p>
@@ -135,7 +135,7 @@ export default function LofiRenta() {
       </section>
 
       {/* CTA */}
-      <section className="px-6 py-14 border-t border-neutral-200 bg-neutral-50">
+      <section className="px-6 md:px-12 py-[104px] border-t border-neutral-200 bg-neutral-50">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div>
             <p className="text-sm font-semibold text-neutral-800 mb-1">¿Necesitas algo específico?</p>
@@ -143,7 +143,7 @@ export default function LofiRenta() {
           </div>
           <Link
             href="/lofi/solicitud"
-            className="shrink-0 inline-block bg-neutral-900 text-white text-sm font-medium px-7 py-3 rounded transition-colors hover:bg-neutral-700"
+            className="shrink-0 inline-block bg-neutral-900 text-white text-sm font-medium px-7 py-3 rounded-full transition-colors hover:bg-neutral-700"
           >
             Reservar →
           </Link>

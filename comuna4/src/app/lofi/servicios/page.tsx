@@ -43,10 +43,10 @@ export default function LofiServicios() {
     <div>
 
       {/* Hero */}
-      <section className="px-6 pt-16 pb-14 border-b border-neutral-200">
+      <section className="px-6 md:px-12 pt-[104px] pb-[104px] border-b border-neutral-200">
         <div className="max-w-5xl mx-auto">
           <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-6">Servicios</p>
-          <h1 className="text-6xl font-black text-neutral-900 tracking-tight leading-none mb-6 max-w-[18ch]">
+          <h1 className="text-4xl md:text-6xl font-black text-neutral-900 tracking-tight leading-none mb-6 max-w-[18ch]">
             Publicidad de alto nivel. Sin las barreras de costo tradicionales.
           </h1>
           <p className="text-base text-neutral-500 leading-relaxed max-w-[48ch]">
@@ -56,7 +56,7 @@ export default function LofiServicios() {
       </section>
 
       {/* Services */}
-      <section className="px-6 py-16 border-b border-neutral-200">
+      <section className="px-6 md:px-12 py-[104px] border-b border-neutral-200">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-neutral-200">
             {services.map((s) => (
@@ -84,7 +84,7 @@ export default function LofiServicios() {
       </section>
 
       {/* Models */}
-      <section className="px-6 py-16 border-b border-neutral-200">
+      <section className="px-6 md:px-12 py-[104px] border-b border-neutral-200">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-10">Modelos de trabajo</h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-px bg-neutral-200">
@@ -99,10 +99,10 @@ export default function LofiServicios() {
       </section>
 
       {/* CTA */}
-      <section className="px-6 py-20">
+      <section className="px-6 md:px-12 py-[120px]">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row md:items-end md:justify-between gap-8">
           <div>
-            <h2 className="text-4xl font-black text-neutral-900 tracking-tight leading-none mb-3">
+            <h2 className="text-3xl md:text-4xl font-black text-neutral-900 tracking-tight leading-none mb-3">
               ¿Qué necesita tu marca?
             </h2>
             <p className="text-sm text-neutral-500 max-w-[38ch] leading-relaxed">
@@ -111,7 +111,7 @@ export default function LofiServicios() {
           </div>
           <Link
             href="/lofi/solicitud"
-            className="shrink-0 inline-block bg-neutral-900 text-white text-sm font-medium px-8 py-4 rounded transition-colors hover:bg-neutral-700"
+            className="shrink-0 inline-block bg-neutral-900 text-white text-sm font-medium px-8 py-4 rounded-full transition-colors hover:bg-neutral-700"
           >
             Solicitar →
           </Link>

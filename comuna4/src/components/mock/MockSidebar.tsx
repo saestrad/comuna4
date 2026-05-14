@@ -11,11 +11,11 @@ type NavItem = {
 }
 
 const navItems: NavItem[] = [
-  { href: '/dashboard',  label: 'Dashboard',  roles: ['collaborator', 'supplier', 'client'] },
-  { href: '/calendario', label: 'Calendario', roles: ['collaborator', 'supplier', 'client'] },
-  { href: '/proyectos',  label: 'Proyectos',  roles: ['collaborator', 'supplier', 'client'] },
-  { href: '/kpis',       label: 'KPIs',       roles: ['collaborator', 'client'] },
-  { href: '/recursos',   label: 'Recursos',   roles: ['collaborator', 'supplier'] },
+  { href: '/mock/dashboard',  label: 'Dashboard',  roles: ['collaborator', 'supplier', 'client'] },
+  { href: '/mock/calendario', label: 'Calendario', roles: ['collaborator', 'supplier', 'client'] },
+  { href: '/mock/proyectos',  label: 'Proyectos',  roles: ['collaborator', 'supplier', 'client'] },
+  { href: '/mock/kpis',       label: 'KPIs',       roles: ['collaborator', 'client'] },
+  { href: '/mock/recursos',   label: 'Recursos',   roles: ['collaborator', 'supplier'] },
 ]
 
 export function MockSidebar({ children }: { children: React.ReactNode }) {
@@ -31,7 +31,7 @@ export function MockSidebar({ children }: { children: React.ReactNode }) {
       <aside className="w-56 shrink-0 bg-neutral-900 text-white flex flex-col px-4 py-6 border-r border-dashed border-neutral-700">
         <div className="mb-6 space-y-1">
           <Link
-            href="/"
+            href="/mock"
             className="block font-mono text-xs tracking-widest text-neutral-500 hover:text-neutral-300 transition-colors"
           >
             ← Sitio público

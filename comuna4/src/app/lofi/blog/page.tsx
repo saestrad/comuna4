@@ -22,10 +22,10 @@ export default function LofiBlog() {
     <div>
 
       {/* Hero */}
-      <section className="px-6 pt-16 pb-10 border-b border-neutral-200">
+      <section className="px-6 md:px-12 pt-[104px] pb-[104px] border-b border-neutral-200">
         <div className="max-w-5xl mx-auto">
           <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-6">Blog</p>
-          <h1 className="text-6xl font-black text-neutral-900 tracking-tight leading-none mb-6 max-w-[18ch]">
+          <h1 className="text-4xl md:text-6xl font-black text-neutral-900 tracking-tight leading-none mb-6 max-w-[18ch]">
             Perspectiva de industria.
           </h1>
           <p className="text-base text-neutral-500 leading-relaxed max-w-[44ch]">
@@ -35,7 +35,7 @@ export default function LofiBlog() {
       </section>
 
       {/* Filter */}
-      <div className="border-b border-neutral-200 px-6 py-4 bg-neutral-50">
+      <div className="border-b border-neutral-200 px-6 md:px-12 py-5 bg-neutral-50">
         <div className="max-w-5xl mx-auto flex items-center gap-2 flex-wrap">
           <span className="text-xs font-mono uppercase tracking-widest text-neutral-500 w-24 shrink-0">
             Categoría
@@ -46,7 +46,7 @@ export default function LofiBlog() {
                 key={c}
                 onClick={() => setActive(c)}
                 className={[
-                  'text-xs px-3 py-2.5 rounded border transition-colors',
+                  'text-xs px-3 py-2.5 rounded-full border transition-colors',
                   active === c
                     ? 'border-neutral-900 bg-neutral-900 text-white'
                     : 'border-neutral-300 text-neutral-500 hover:border-neutral-600 hover:text-neutral-800',
@@ -60,12 +60,12 @@ export default function LofiBlog() {
       </div>
 
       {/* Articles */}
-      <section className="px-6 py-14">
+      <section className="px-6 md:px-12 py-[104px]">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {filtered.map((a) => (
               <Link key={a.slug} href={`/lofi/blog/${a.slug}`} className="group block">
-                <div className="aspect-[16/9] bg-neutral-100 rounded border border-neutral-200 mb-4" />
+                <div className="aspect-[16/9] bg-neutral-100 rounded-lg border border-neutral-200 mb-4" />
                 <div className="flex items-center gap-3 mb-2">
                   <span className="text-xs font-mono uppercase tracking-widest text-neutral-500">{a.category}</span>
                   <span className="text-xs text-neutral-300">·</span>
