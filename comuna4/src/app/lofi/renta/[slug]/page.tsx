@@ -32,21 +32,77 @@ const similar = [
   { name: 'Sony FX3 Full-Frame Cinema', size: 'Con baterías y tarjetas', category: 'Cámaras', slug: 'sony-fx3' },
 ]
 
-const days = ['L', 'M', 'X', 'J', 'V', 'S', 'D']
-const calDays = Array.from({ length: 35 }, (_, i) => {
-  const d = i - 2
-  const available = d > 0 && d <= 31 && ![4, 5, 11, 12, 18, 19, 25, 26].includes(d)
-  const booked = [7, 8, 14, 21, 22].includes(d)
-  return { d, available, booked }
-})
+const WEEK_DAYS = ['L', 'M', 'X', 'J', 'V', 'S', 'D']
+const MONTHS = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+
+const BOOKED = new Set([7, 8, 14, 21, 22])
+const WEEKENDS = new Set([4, 5, 11, 12, 18, 19, 25, 26])
+
+function getDaysInMonth(year: number, month: number) {
+  return new Date(year, month + 1, 0).getDate()
+}
+
+function getFirstWeekday(year: number, month: number) {
+  const day = new Date(year, month, 1).getDay()
+  return day === 0 ? 6 : day - 1
+}
 
 export default function RentaDetail({ params }: { params: { slug: string } }) {
   const router = useRouter()
   const [duracion, setDuracion] = useState<'hora' | 'dia'>('hora')
-  function handleDateClick(d: number) {
-    const fecha = `2026-05-${String(d).padStart(2, '0')}`
-    router.push(`/lofi/solicitud?espacio=${params.slug}&fecha=${fecha}`)
+  const [selectedDay, setSelectedDay] = useState<number | null>(null)
+  const [calYear, setCalYear] = useState(2026)
+  const [calMonth, setCalMonth] = useState(4) // Mayo = 4
+
+  const daysInMonth = getDaysInMonth(calYear, calMonth)
+  const firstWeekday = getFirstWeekday(calYear, calMonth)
+  const today = new Date()
+
+  function isBooked(d: number) {
+    return calMonth === 4 && calYear === 2026 && BOOKED.has(d)
   }
+  function isWeekend(d: number) {
+    return calMonth === 4 && calYear === 2026 && WEEKENDS.has(d)
+  }
+  function isPast(d: number) {
+    const date = new Date(calYear, calMonth, d)
+    return date < new Date(today.getFullYear(), today.getMonth(), today.getDate())
+  }
+  function isAvailable(d: number) {
+    return !isBooked(d) && !isWeekend(d) && !isPast(d)
+  }
+
+  function prevMonth() {
+    if (calMonth === 0) { setCalMonth(11); setCalYear(y => y - 1) }
+    else setCalMonth(m => m - 1)
+    setSelectedDay(null)
+  }
+  function nextMonth() {
+    if (calMonth === 11) { setCalMonth(0); setCalYear(y => y + 1) }
+    else setCalMonth(m => m + 1)
+    setSelectedDay(null)
+  }
+
+  function handleReservar() {
+    const fecha = selectedDay
+      ? `${calYear}-${String(calMonth + 1).padStart(2, '0')}-${String(selectedDay).padStart(2, '0')}`
+      : undefined
+    const url = fecha
+      ? `/lofi/solicitud?espacio=${params.slug}&fecha=${fecha}`
+      : `/lofi/solicitud?espacio=${params.slug}`
+    router.push(url)
+  }
+
+  const price = duracion === 'hora' ? item.priceHour : item.priceDay
+  const priceLabel = duracion === 'hora' ? 'por hora' : 'por día completo (8h)'
+
+  // Build calendar cells: empty prefix + days
+  const cells: (number | null)[] = [
+    ...Array(firstWeekday).fill(null),
+    ...Array.from({ length: daysInMonth }, (_, i) => i + 1),
+  ]
+  // Pad to complete last row
+  while (cells.length % 7 !== 0) cells.push(null)
 
   return (
     <div className="flex">
@@ -92,7 +148,6 @@ export default function RentaDetail({ params }: { params: { slug: string } }) {
         <section id="specs" className="px-6 md:px-12 py-[104px] border-b border-neutral-200">
           <div className="max-w-[882px] mx-auto">
             <h2 className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-12">Especificaciones</h2>
-
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               <div>
                 <p className="text-sm font-semibold text-neutral-800 mb-6">Incluido</p>
@@ -120,61 +175,10 @@ export default function RentaDetail({ params }: { params: { slug: string } }) {
           </div>
         </section>
 
-        {/* Disponibilidad */}
-        <section id="disponibilidad" className="px-6 md:px-12 py-[104px] border-b border-neutral-200 bg-neutral-50">
-          <div className="max-w-[882px] mx-auto">
-            <h2 className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-12">Disponibilidad — Mayo 2026</h2>
-
-            {/* Calendar grid */}
-            <div className="grid grid-cols-7 gap-1 mb-4">
-              {days.map((d) => (
-                <div key={d} className="text-xs font-mono text-neutral-400 text-center py-1">{d}</div>
-              ))}
-              {calDays.map(({ d, available, booked }, i) => (
-                available && d > 0 && d <= 31 ? (
-                  <button
-                    key={i}
-                    onClick={() => handleDateClick(d)}
-                    className="aspect-square rounded-lg flex items-center justify-center text-xs bg-white border border-neutral-200 text-neutral-700 hover:border-neutral-900 hover:bg-neutral-50 transition-colors cursor-pointer"
-                  >
-                    {d}
-                  </button>
-                ) : (
-                  <div
-                    key={i}
-                    className={[
-                      'aspect-square rounded-lg flex items-center justify-center text-xs',
-                      d <= 0 || d > 31 ? 'bg-transparent' :
-                      booked ? 'bg-neutral-200 text-neutral-400 line-through' :
-                      'bg-neutral-100 text-neutral-300',
-                    ].join(' ')}
-                  >
-                    {d > 0 && d <= 31 ? d : ''}
-                  </div>
-                )
-              ))}
-            </div>
-
-            <div className="flex items-center gap-6 mt-4">
-              {[
-                { color: 'bg-white border border-neutral-200', label: 'Disponible' },
-                { color: 'bg-neutral-200', label: 'Reservado' },
-                { color: 'bg-neutral-100', label: 'No disponible' },
-              ].map((l) => (
-                <div key={l.label} className="flex items-center gap-2">
-                  <div className={`w-3 h-3 rounded-sm ${l.color}`} />
-                  <span className="text-xs text-neutral-500">{l.label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Similares */}
         <section id="similares" className="px-6 md:px-12 py-[120px]">
           <div className="max-w-[882px] mx-auto">
             <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-12">También disponible</p>
-
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
               {similar.map((s) => (
                 <Link key={s.slug} href={`/lofi/renta/${s.slug}`} className="group block">
@@ -193,84 +197,151 @@ export default function RentaDetail({ params }: { params: { slug: string } }) {
 
       </div>
 
-      {/* Panel de reserva — sticky en desktop, fijo abajo en mobile */}
-      <aside className="hidden lg:flex flex-col sticky top-0 self-start h-screen w-72 shrink-0 border-l border-neutral-200 bg-white">
-        <div className="flex flex-col gap-0 divide-y divide-neutral-200 overflow-y-auto">
+      {/* Panel de reserva — desktop sticky, full height, no scroll */}
+      <aside className="hidden lg:flex flex-col sticky top-0 h-screen w-[300px] shrink-0 border-l border-neutral-200 bg-white">
 
-          {/* Nombre */}
-          <div className="px-6 pt-8 pb-6">
-            <p className="text-sm font-black text-neutral-900 leading-tight mb-1">{item.name}</p>
-            <p className="text-xs font-mono text-neutral-500">{item.size}</p>
-          </div>
-
-          {/* Fecha */}
-          <div className="px-6 py-6">
-            <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-3">Fecha</p>
-            <div className="w-full border border-neutral-200 rounded-full px-4 py-2.5 text-sm text-neutral-400 bg-neutral-50">
-              Selecciona una fecha
-            </div>
-          </div>
-
-          {/* Duración */}
-          <div className="px-6 py-6">
-            <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-3">Duración</p>
-            <div className="flex gap-2">
-              {(['hora', 'dia'] as const).map((d) => (
-                <button
-                  key={d}
-                  onClick={() => setDuracion(d)}
-                  className={[
-                    'flex-1 text-xs px-3 py-2.5 rounded-full border transition-colors',
-                    duracion === d
-                      ? 'border-neutral-900 bg-neutral-900 text-white'
-                      : 'border-neutral-300 text-neutral-500 hover:border-neutral-600',
-                  ].join(' ')}
-                >
-                  Por {d}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Precio */}
-          <div className="px-6 py-6">
-            <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-3">Precio estimado</p>
-            <p className="text-2xl font-black text-neutral-900">
-              {duracion === 'hora' ? item.priceHour : item.priceDay}
-            </p>
-            <p className="text-xs text-neutral-500 mt-1">
-              por {duracion === 'hora' ? 'hora' : 'día completo (8h)'}
-            </p>
-          </div>
-
-          {/* CTA */}
-          <div className="px-6 py-6">
-            <Link
-              href="/lofi/solicitud"
-              className="block text-center text-sm font-medium px-5 py-3.5 rounded-full bg-neutral-900 text-white hover:bg-neutral-700 transition-colors mb-3"
-            >
-              Solicitar reserva →
-            </Link>
-            <p className="text-xs text-neutral-400 text-center">Respuesta en menos de 2 horas</p>
-          </div>
-
+        {/* Header */}
+        <div className="px-5 pt-6 pb-4 border-b border-neutral-100">
+          <p className="text-sm font-black text-neutral-900 leading-tight">{item.name}</p>
+          <p className="text-xs font-mono text-neutral-400 mt-0.5">{item.category} · {item.size}</p>
         </div>
+
+        {/* Duración */}
+        <div className="px-5 py-4 border-b border-neutral-100">
+          <p className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 mb-2.5">Duración</p>
+          <div className="flex gap-2">
+            {(['hora', 'dia'] as const).map((d) => (
+              <button
+                key={d}
+                onClick={() => setDuracion(d)}
+                className={[
+                  'flex-1 text-xs py-2 rounded-full border transition-colors',
+                  duracion === d
+                    ? 'border-neutral-900 bg-neutral-900 text-white'
+                    : 'border-neutral-200 text-neutral-500 hover:border-neutral-500',
+                ].join(' ')}
+              >
+                Por {d}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Mini daypicker — flex-1 para ocupar el espacio restante */}
+        <div className="flex-1 flex flex-col px-5 py-4 min-h-0">
+          <p className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 mb-3">Fecha</p>
+
+          {/* Month nav */}
+          <div className="flex items-center justify-between mb-3">
+            <button
+              onClick={prevMonth}
+              className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-neutral-100 transition-colors text-neutral-500 text-sm"
+            >
+              ‹
+            </button>
+            <p className="text-xs font-semibold text-neutral-800">
+              {MONTHS[calMonth]} {calYear}
+            </p>
+            <button
+              onClick={nextMonth}
+              className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-neutral-100 transition-colors text-neutral-500 text-sm"
+            >
+              ›
+            </button>
+          </div>
+
+          {/* Day headers */}
+          <div className="grid grid-cols-7 mb-1">
+            {WEEK_DAYS.map((d) => (
+              <div key={d} className="text-[10px] font-mono text-neutral-400 text-center py-1">{d}</div>
+            ))}
+          </div>
+
+          {/* Calendar grid — flex-1 distributes rows evenly */}
+          <div className="flex-1 flex flex-col gap-0.5">
+            {Array.from({ length: cells.length / 7 }, (_, row) => (
+              <div key={row} className="flex-1 grid grid-cols-7 gap-0.5">
+                {cells.slice(row * 7, row * 7 + 7).map((d, col) => {
+                  if (!d) return <div key={col} />
+                  const avail = isAvailable(d)
+                  const selected = selectedDay === d
+                  const booked = isBooked(d)
+                  const past = isPast(d)
+                  return (
+                    <button
+                      key={col}
+                      disabled={!avail}
+                      onClick={() => setSelectedDay(selected ? null : d)}
+                      className={[
+                        'w-full h-full rounded-md text-xs transition-colors flex items-center justify-center',
+                        selected
+                          ? 'bg-neutral-900 text-white font-semibold'
+                          : avail
+                            ? 'hover:bg-neutral-100 text-neutral-700'
+                            : booked
+                              ? 'text-neutral-300 line-through'
+                              : past
+                                ? 'text-neutral-200'
+                                : 'text-neutral-300',
+                      ].join(' ')}
+                    >
+                      {d}
+                    </button>
+                  )
+                })}
+              </div>
+            ))}
+          </div>
+
+          {/* Legend */}
+          <div className="flex items-center gap-4 mt-3 pt-3 border-t border-neutral-100">
+            <div className="flex items-center gap-1.5">
+              <div className="w-2 h-2 rounded-sm bg-neutral-900" />
+              <span className="text-[10px] text-neutral-400">Seleccionado</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <div className="w-2 h-2 rounded-sm bg-neutral-200" />
+              <span className="text-[10px] text-neutral-400">Reservado</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Precio + CTA — siempre en el fondo */}
+        <div className="px-5 py-4 border-t border-neutral-100">
+          <div className="flex items-baseline justify-between mb-4">
+            <p className="text-2xl font-black text-neutral-900">{price}</p>
+            <p className="text-xs text-neutral-400">{priceLabel}</p>
+          </div>
+          {selectedDay && (
+            <p className="text-xs text-neutral-500 mb-3">
+              {MONTHS[calMonth]} {selectedDay}, {calYear}
+            </p>
+          )}
+          <button
+            onClick={handleReservar}
+            className="w-full text-center text-sm font-medium py-3.5 rounded-full bg-neutral-900 text-white hover:bg-neutral-700 transition-colors mb-2"
+          >
+            {selectedDay ? 'Confirmar fecha →' : 'Solicitar reserva →'}
+          </button>
+          <p className="text-[10px] text-neutral-400 text-center">Respuesta en menos de 2 horas</p>
+        </div>
+
       </aside>
 
       {/* Mobile booking bar */}
       <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-neutral-200 px-6 py-4 flex items-center justify-between gap-4">
         <div>
           <p className="text-base font-black text-neutral-900">
-            {duracion === 'hora' ? item.priceHour : item.priceDay}
+            {price}
             <span className="text-xs font-normal text-neutral-500 ml-1">/ {duracion === 'hora' ? 'hora' : 'día'}</span>
           </p>
         </div>
-        <Link
-          href="/lofi/solicitud"
+        <button
+          onClick={handleReservar}
           className="shrink-0 text-sm font-medium px-6 py-3 rounded-full bg-neutral-900 text-white hover:bg-neutral-700 transition-colors"
         >
           Solicitar reserva →
-        </Link>
+        </button>
       </div>
 
     </div>
