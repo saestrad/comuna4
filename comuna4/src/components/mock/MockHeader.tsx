@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 const navLinks = [
-  { href: '/mock/nosotros', label: 'Nosotros' },
   { href: '/mock/trabajos', label: 'Trabajos' },
   { href: '/mock/servicios', label: 'Servicios' },
   { href: '/mock/renta', label: 'Renta' },
@@ -51,12 +50,6 @@ export function MockHeader() {
           ].join(' ')}
         >
           Solicitar →
-        </Link>
-        <Link
-          href="/mock/login"
-          className="text-xs font-mono text-neutral-400 hover:text-neutral-600 transition-colors"
-        >
-          Área interna
         </Link>
       </div>
     </header>
