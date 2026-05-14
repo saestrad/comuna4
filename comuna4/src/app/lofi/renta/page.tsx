@@ -117,6 +117,9 @@ export default function LofiRenta() {
       {/* Items */}
       <section className="px-6 md:px-12 py-[104px]">
         <div className="max-w-5xl mx-auto">
+          <p className="text-xs font-mono uppercase tracking-widest text-neutral-400 mb-8">
+            {active === 'Todos' ? 'Todo el equipo' : active} — {filtered.length} {filtered.length === 1 ? 'item' : 'items'}
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {filtered.map((item) => (
               <Link key={item.slug} href={`/lofi/renta/${item.slug}`} className="group block">

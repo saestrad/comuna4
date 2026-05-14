@@ -1,7 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 
 const services = ['Branding', 'Performance Media', 'Producción', 'Web', 'Renta de estudio/equipo', 'Otro']
 const budgets = ['Menos de $2,000', '$2,000 – $5,000', '$5,000 – $15,000', '$15,000 – $50,000', 'Más de $50,000', 'Prefiero discutirlo']
@@ -10,10 +11,18 @@ const steps = ['Servicio', 'Brief', 'Contacto', 'Revisar y enviar']
 const consentLabels = ['Acepto los términos y condiciones', 'Acepto la política de privacidad', 'Autorizo el uso de mis datos']
 
 export default function LofiSolicitud() {
+  const searchParams = useSearchParams()
   const [step, setStep] = useState(0)
   const [selectedService, setSelectedService] = useState('')
   const [selectedBudget, setSelectedBudget] = useState('')
   const [selectedChannel, setSelectedChannel] = useState('Email')
+
+  useEffect(() => {
+    const espacio = searchParams.get('espacio')
+    const fecha = searchParams.get('fecha')
+    if (espacio) setSelectedService('Renta de estudio/equipo')
+    if (fecha) setObjetivo(`Espacio: ${espacio ?? ''}\nFecha solicitada: ${fecha}`)
+  }, [searchParams])
   const [objetivo, setObjetivo] = useState('')
   const [audiencia, setAudiencia] = useState('')
   const [name, setName] = useState('')

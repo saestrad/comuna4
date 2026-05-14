@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 const item = {
@@ -40,7 +41,12 @@ const calDays = Array.from({ length: 35 }, (_, i) => {
 })
 
 export default function RentaDetail({ params }: { params: { slug: string } }) {
+  const router = useRouter()
   const [duracion, setDuracion] = useState<'hora' | 'dia'>('hora')
+  function handleDateClick(d: number) {
+    const fecha = `2026-05-${String(d).padStart(2, '0')}`
+    router.push(`/lofi/solicitud?espacio=${params.slug}&fecha=${fecha}`)
+  }
 
   return (
     <div className="flex">
@@ -125,18 +131,27 @@ export default function RentaDetail({ params }: { params: { slug: string } }) {
                 <div key={d} className="text-xs font-mono text-neutral-400 text-center py-1">{d}</div>
               ))}
               {calDays.map(({ d, available, booked }, i) => (
-                <div
-                  key={i}
-                  className={[
-                    'aspect-square rounded-lg flex items-center justify-center text-xs transition-colors',
-                    d <= 0 || d > 31 ? 'bg-transparent' :
-                    booked ? 'bg-neutral-200 text-neutral-400 line-through' :
-                    available ? 'bg-white border border-neutral-200 text-neutral-700 hover:border-neutral-900 cursor-pointer' :
-                    'bg-neutral-100 text-neutral-300',
-                  ].join(' ')}
-                >
-                  {d > 0 && d <= 31 ? d : ''}
-                </div>
+                available && d > 0 && d <= 31 ? (
+                  <button
+                    key={i}
+                    onClick={() => handleDateClick(d)}
+                    className="aspect-square rounded-lg flex items-center justify-center text-xs bg-white border border-neutral-200 text-neutral-700 hover:border-neutral-900 hover:bg-neutral-50 transition-colors cursor-pointer"
+                  >
+                    {d}
+                  </button>
+                ) : (
+                  <div
+                    key={i}
+                    className={[
+                      'aspect-square rounded-lg flex items-center justify-center text-xs',
+                      d <= 0 || d > 31 ? 'bg-transparent' :
+                      booked ? 'bg-neutral-200 text-neutral-400 line-through' :
+                      'bg-neutral-100 text-neutral-300',
+                    ].join(' ')}
+                  >
+                    {d > 0 && d <= 31 ? d : ''}
+                  </div>
+                )
               ))}
             </div>
 

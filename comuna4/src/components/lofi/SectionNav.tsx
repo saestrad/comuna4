@@ -33,7 +33,7 @@ export function SectionNav({ sections = defaultSections }: { sections?: Section[
   }, [sections])
 
   return (
-    <aside aria-label="Contenido de esta página" className="hidden lg:flex flex-col gap-3 sticky top-0 self-start pt-20 pb-8 pl-8 pr-6 w-40 shrink-0">
+    <aside aria-label="Contenido de esta página" className="hidden md:flex flex-col gap-3 sticky top-0 self-start pt-20 pb-8 pl-6 pr-4 w-32 lg:w-40 lg:pl-8 lg:pr-6 shrink-0">
       <p className="text-[10px] font-mono uppercase tracking-widest text-neutral-500 mb-1">
         Contenido
       </p>

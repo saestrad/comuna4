@@ -62,6 +62,9 @@ export default function LofiTrabajos() {
       {/* Projects grid */}
       <section className="px-6 md:px-12 py-[104px]">
         <div className="max-w-5xl mx-auto">
+          <p className="text-xs font-mono uppercase tracking-widest text-neutral-400 mb-8">
+            {active === 'Todos' ? 'Todos los proyectos' : active} — {filtered.length} {filtered.length === 1 ? 'proyecto' : 'proyectos'}
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {filtered.map((p) => (
               <Link key={p.slug} href={`/lofi/trabajos/${p.slug}`} className="group block">
