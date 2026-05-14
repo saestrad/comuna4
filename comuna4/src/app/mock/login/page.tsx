@@ -35,12 +35,9 @@ export default function LoginPage() {
           </div>
 
           <div className="space-y-3 mb-6">
-            <Link
-              href="/mock/dashboard"
-              className="block w-full text-center text-sm font-bold bg-neutral-900 text-white px-4 py-2.5 rounded hover:bg-neutral-700 transition-colors"
-            >
-              Ingresar [MOCK]
-            </Link>
+            <div className="w-full text-center text-sm font-bold bg-neutral-900 text-white px-4 py-2.5 rounded cursor-not-allowed opacity-60">
+              Ingresar [MOCK] — próximamente
+            </div>
             <div className="border border-dashed border-neutral-300 rounded px-4 py-2.5 text-center text-sm text-neutral-400">
               Continuar con Google
             </div>
