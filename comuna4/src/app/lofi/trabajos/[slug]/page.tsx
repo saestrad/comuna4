@@ -194,7 +194,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
               <span className="text-xs font-mono uppercase tracking-widest text-neutral-500">{project.year}</span>
             </div>
 
-            <h1 className="text-3xl md:text-5xl font-display font-black text-neutral-900 tracking-tight leading-tight mb-6 max-w-[20ch]">
+            <h1 className="text-3xl md:text-5xl font-display font-semibold text-neutral-900 tracking-tight leading-tight mb-6 max-w-[20ch]">
               {project.title}
             </h1>
 
@@ -249,14 +249,14 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           <div className="max-w-[882px] mx-auto">
             <h2 className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-16">Resultados</h2>
 
-            <p className="text-2xl md:text-4xl font-display font-black text-neutral-900 tracking-tight leading-tight mb-16 max-w-[24ch]">
+            <p className="text-2xl md:text-4xl font-display font-semibold text-neutral-900 tracking-tight leading-tight mb-16 max-w-[24ch]">
               {project.metric}
             </p>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-12">
               {project.results.map((r) => (
                 <div key={r.label}>
-                  <p className="text-2xl md:text-3xl font-display font-black text-neutral-900 tracking-tight mb-2">{r.metric}</p>
+                  <p className="text-2xl md:text-3xl font-display font-semibold text-neutral-900 tracking-tight mb-2">{r.metric}</p>
                   <p className="text-xs text-neutral-500 leading-snug">{r.label}</p>
                 </div>
               ))}
