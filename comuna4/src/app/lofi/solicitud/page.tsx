@@ -91,7 +91,7 @@ function SolicitudForm() {
           </p>
           <Link
             href="/lofi"
-            className="inline-block bg-c4-brand text-white text-sm font-medium px-7 py-3.5 rounded-full transition-colors hover:bg-c4-brand-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-c4-brand focus-visible:ring-offset-2"
+            className="inline-block bg-c4-brand text-white text-sm font-medium px-8 py-4 rounded-full transition-colors hover:bg-c4-brand-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-c4-brand focus-visible:ring-offset-2"
           >
             Volver al inicio →
           </Link>
