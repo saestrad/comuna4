@@ -76,9 +76,9 @@ export function MockPage({ title, description, sections = [], links = [], badge,
       {(() => {
         const count = sections.filter((s) => s.suggestion && !s.isNew).length
         return count > 0 ? (
-          <p className="text-xs mb-8" style={{ color: 'oklch(0.63 0.14 162)' }}>
+          <p className="text-xs mb-8 text-c4-brand">
             {count} {count === 1 ? 'sección tiene' : 'secciones tienen'} sugerencia de copy — presiona{' '}
-            <span className="font-mono border rounded px-1" style={{ borderColor: 'oklch(0.63 0.14 162)' }}>
+            <span className="font-mono border border-c4-brand rounded px-1">
               sugerencia
             </span>{' '}
             para verla.

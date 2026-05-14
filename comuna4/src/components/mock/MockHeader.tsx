@@ -4,21 +4,22 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 const navLinks = [
-  { href: '/trabajos', label: 'Trabajos' },
-  { href: '/servicios', label: 'Servicios' },
-  { href: '/renta', label: 'Renta' },
-  { href: '/blog', label: 'Blog' },
+  { href: '/mock/nosotros', label: 'Nosotros' },
+  { href: '/mock/trabajos', label: 'Trabajos' },
+  { href: '/mock/servicios', label: 'Servicios' },
+  { href: '/mock/renta', label: 'Renta' },
+  { href: '/mock/blog', label: 'Blog' },
 ]
 
 export function MockHeader() {
   const pathname = usePathname()
 
   const isActive = (href: string) =>
-    href === '/' ? pathname === '/' : pathname.startsWith(href)
+    href === '/mock' ? pathname === '/mock' : pathname.startsWith(href)
 
   return (
     <header className="border-b border-dashed border-neutral-300 bg-neutral-50 px-6 py-4 flex items-center gap-6">
-      <Link href="/" className="font-mono font-black text-base tracking-widest shrink-0" style={{ color: 'oklch(0.63 0.14 162)' }}>
+      <Link href="/mock" className="font-mono font-black text-base tracking-widest shrink-0 text-c4-brand">
         [C4]
       </Link>
 
@@ -41,7 +42,7 @@ export function MockHeader() {
 
       <div className="flex items-center gap-3 shrink-0">
         <Link
-          href="/solicitud"
+          href="/mock/solicitud"
           className={[
             'text-sm font-medium px-4 py-1.5 rounded transition-colors border',
             isActive('/solicitud')
@@ -52,13 +53,13 @@ export function MockHeader() {
           Solicitar →
         </Link>
         <Link
-          href="/sobre"
+          href="/mock/nosotros"
           className="text-xs font-mono text-neutral-400 hover:text-neutral-600 transition-colors"
         >
-          Sobre
+          Nosotros
         </Link>
         <Link
-          href="/login"
+          href="/mock/login"
           className="text-xs font-mono text-neutral-400 hover:text-neutral-600 transition-colors"
         >
           Área interna
