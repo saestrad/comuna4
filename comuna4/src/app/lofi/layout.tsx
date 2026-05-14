@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { LofiShell } from '@/components/lofi/LofiShell'
+import { ArrowRight } from 'lucide-react'
 
 const footerLinks = [
   { href: '/lofi/trabajos', label: 'Trabajos' },
@@ -38,9 +39,9 @@ export default function LofiLayout({ children }: { children: React.ReactNode }) 
             ))}
             <Link
               href="/lofi/solicitud"
-              className="text-xs font-medium text-neutral-900 hover:text-neutral-500 transition-colors"
+              className="inline-flex items-center gap-2 text-xs font-medium text-neutral-900 hover:text-neutral-500 transition-colors"
             >
-              Solicitar →
+              Solicitar <ArrowRight size={14} className="shrink-0" />
             </Link>
           </nav>
         </div>

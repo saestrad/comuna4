@@ -3,6 +3,7 @@
 import { useState, useEffect, Suspense } from 'react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
+import { ArrowRight, ArrowLeft } from 'lucide-react'
 
 const serviceGroups = [
   { label: 'Agencia', items: ['Branding', 'Performance Media', 'Web', 'Estrategia'] },
@@ -91,9 +92,9 @@ function SolicitudForm() {
           </p>
           <Link
             href="/lofi"
-            className="inline-block bg-accent text-accent-foreground text-sm font-medium px-8 py-4 rounded-full transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+            className="inline-flex items-center gap-2 bg-accent text-accent-foreground text-sm font-medium px-8 py-4 rounded-full transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
           >
-            Volver al inicio →
+            Volver al inicio <ArrowRight size={14} className="shrink-0" />
           </Link>
         </div>
       </div>
@@ -223,13 +224,13 @@ function SolicitudForm() {
                     type="button"
                     onClick={() => { setShowCustomBudget(true); setSelectedBudget(''); setErrors((prev) => ({ ...prev, budget: '' })) }}
                     className={[
-                      'text-xs text-center px-3 py-2.5 rounded-full border transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-1',
+                      'inline-flex items-center justify-center gap-2 text-xs text-center px-3 py-2.5 rounded-full border transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-1',
                       showCustomBudget
                         ? 'bg-primary text-primary-foreground border-primary'
                         : 'border-neutral-200 text-neutral-600 hover:border-neutral-400',
                     ].join(' ')}
                   >
-                    Cuéntanos →
+                    Cuéntanos <ArrowRight size={14} className="shrink-0" />
                   </button>
                 </div>
                 {showCustomBudget && (
@@ -422,26 +423,26 @@ function SolicitudForm() {
             <button
               type="button"
               onClick={() => setStep((s) => s - 1)}
-              className="text-sm text-neutral-500 hover:text-neutral-900 border border-neutral-200 px-4 py-2.5 rounded-full transition-colors"
+              className="inline-flex items-center gap-2 text-sm text-neutral-500 hover:text-neutral-900 border border-neutral-200 px-4 py-2.5 rounded-full transition-colors"
             >
-              ← Anterior
+              <ArrowLeft size={14} className="shrink-0" /> Anterior
             </button>
           )}
           {!isLast ? (
             <button
               type="button"
               onClick={advance}
-              className="ml-auto text-sm font-medium bg-accent text-accent-foreground px-6 py-2.5 rounded-full transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+              className="ml-auto inline-flex items-center gap-2 text-sm font-medium bg-accent text-accent-foreground px-6 py-2.5 rounded-full transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
             >
-              Siguiente →
+              Siguiente <ArrowRight size={14} className="shrink-0" />
             </button>
           ) : (
             <button
               type="button"
               onClick={submit}
-              className="ml-auto text-sm font-medium bg-accent text-accent-foreground px-6 py-2.5 rounded-full transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+              className="ml-auto inline-flex items-center gap-2 text-sm font-medium bg-accent text-accent-foreground px-6 py-2.5 rounded-full transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
             >
-              Enviar solicitud →
+              Enviar solicitud <ArrowRight size={14} className="shrink-0" />
             </button>
           )}
         </div>

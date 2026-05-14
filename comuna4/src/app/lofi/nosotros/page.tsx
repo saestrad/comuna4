@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { ArrowRight } from 'lucide-react'
 
 const leadership = [
   { name: 'José Chiclana', role: 'Founder & CEO' },
@@ -134,8 +135,8 @@ export default function LofiSobre() {
             </p>
           </div>
           <div className="flex items-center gap-4 shrink-0">
-            <Link href="/lofi/solicitud" className="inline-block bg-accent text-accent-foreground text-sm font-medium px-8 py-4 rounded-full transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2">
-              Solicitar →
+            <Link href="/lofi/solicitud" className="inline-flex items-center gap-2 bg-accent text-accent-foreground text-sm font-medium px-8 py-4 rounded-full transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2">
+              Solicitar <ArrowRight size={14} className="shrink-0" />
             </Link>
             <Link href="/lofi/trabajos" className="text-sm text-neutral-500 hover:text-neutral-900 transition-colors underline underline-offset-4">
               Ver trabajos

@@ -14,10 +14,7 @@ export default function BlogPage() {
       <div className="border-b border-dashed border-neutral-300 px-6 md:px-12 py-5 font-mono bg-neutral-50">
         <div className="max-w-3xl mx-auto">
           <div className="flex items-center gap-3 flex-wrap">
-            <span
-              className="text-xs uppercase tracking-widest w-24 shrink-0 transition-colors"
-              style={category !== 'Todos' ? { color: 'oklch(0.63 0.14 162)' } : { color: 'oklch(0.556 0 0)' }}
-            >
+            <span className={['text-xs uppercase tracking-widest w-24 shrink-0 transition-colors', category !== 'Todos' ? 'text-accent' : 'text-muted-foreground'].join(' ')}>
               Categoría
             </span>
             <div className="flex gap-2 flex-wrap">
@@ -28,7 +25,7 @@ export default function BlogPage() {
                   className={[
                     'text-xs px-3 py-1 rounded border transition-colors',
                     category === c
-                      ? 'border-neutral-900 bg-neutral-900 text-white'
+                      ? 'bg-primary text-primary-foreground border-primary'
                       : 'border-dashed border-neutral-400 text-neutral-500 hover:border-neutral-600 hover:text-neutral-800',
                   ].join(' ')}
                 >

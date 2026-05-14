@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { use, useState } from 'react'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
 
 const item = {
   name: 'Ciclorama Profesional',
@@ -118,9 +119,9 @@ export default function RentaDetail({ params }: { params: Promise<{ slug: string
           <div className="max-w-[882px] mx-auto">
             <Link
               href="/lofi/renta"
-              className="inline-block text-xs font-mono text-neutral-400 hover:text-neutral-700 transition-colors mb-12"
+              className="inline-flex items-center gap-2 text-xs font-mono text-neutral-400 hover:text-neutral-700 transition-colors mb-12"
             >
-              ← Todos los espacios y equipos
+              <ArrowLeft size={14} className="shrink-0" /> Todos los espacios y equipos
             </Link>
 
             <div className="flex items-center gap-3 mb-8">
@@ -244,9 +245,9 @@ export default function RentaDetail({ params }: { params: Promise<{ slug: string
             <div className="flex flex-col gap-2 mt-auto">
               <button
                 onClick={handleProceder}
-                className="w-full text-sm font-medium py-3.5 rounded-full bg-accent text-accent-foreground hover:opacity-90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+                className="w-full inline-flex items-center justify-center gap-2 text-sm font-medium py-3.5 rounded-full bg-accent text-accent-foreground hover:opacity-90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
               >
-                Confirmar y solicitar →
+                Confirmar y solicitar <ArrowRight size={14} className="shrink-0" />
               </button>
               <button
                 onClick={() => setConfirming(false)}
@@ -379,9 +380,9 @@ export default function RentaDetail({ params }: { params: Promise<{ slug: string
           )}
           <button
             onClick={handleConfirmar}
-            className="w-full text-center text-sm font-medium py-3.5 rounded-full bg-accent text-accent-foreground hover:opacity-90 transition-colors mb-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+            className="w-full inline-flex items-center justify-center gap-2 text-sm font-medium py-3.5 rounded-full bg-accent text-accent-foreground hover:opacity-90 transition-colors mb-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
           >
-            {selectedDay ? 'Confirmar fecha →' : 'Solicitar reserva →'}
+            {selectedDay ? 'Confirmar fecha' : 'Solicitar reserva'} <ArrowRight size={14} className="shrink-0" />
           </button>
           <p className="text-[10px] text-neutral-400 text-center">Respuesta en menos de 2 horas</p>
         </div>
@@ -399,9 +400,9 @@ export default function RentaDetail({ params }: { params: Promise<{ slug: string
         </div>
         <button
           onClick={confirming ? handleProceder : handleConfirmar}
-          className="shrink-0 text-sm font-medium px-6 py-3 rounded-full bg-accent text-accent-foreground hover:opacity-90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+          className="shrink-0 inline-flex items-center gap-2 text-sm font-medium px-6 py-3 rounded-full bg-accent text-accent-foreground hover:opacity-90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
         >
-          {confirming ? 'Confirmar y solicitar →' : 'Solicitar reserva →'}
+          {confirming ? 'Confirmar y solicitar' : 'Solicitar reserva'} <ArrowRight size={14} className="shrink-0" />
         </button>
       </div>
 

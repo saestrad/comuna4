@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { ArrowRight } from 'lucide-react'
 
 const categories = ['Todos', 'Estudios', 'Cámaras', 'Iluminación', 'Audio']
 
@@ -146,9 +147,9 @@ export default function LofiRenta() {
           </div>
           <Link
             href="/lofi/solicitud"
-            className="shrink-0 inline-block bg-accent text-accent-foreground text-sm font-medium px-8 py-4 rounded-full transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+            className="shrink-0 inline-flex items-center gap-2 bg-accent text-accent-foreground text-sm font-medium px-8 py-4 rounded-full transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
           >
-            Reservar →
+            Reservar <ArrowRight size={14} className="shrink-0" />
           </Link>
         </div>
       </section>

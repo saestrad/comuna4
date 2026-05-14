@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
+import { Menu, X, ArrowRight } from 'lucide-react'
 
 const navLinks = [
   { href: '/lofi', label: 'Inicio' },
@@ -45,7 +46,7 @@ export function LofiShell({ children }: { children: React.ReactNode }) {
             aria-label="Cerrar menú"
             className="text-sm text-neutral-600 hover:text-neutral-900 transition-colors flex items-center gap-1.5"
           >
-            Cerrar <span aria-hidden className="text-lg leading-none">×</span>
+            Cerrar <X size={18} aria-hidden />
           </button>
         ) : (
           <button
@@ -54,19 +55,19 @@ export function LofiShell({ children }: { children: React.ReactNode }) {
             className="flex items-center gap-2 text-sm text-neutral-600 hover:text-neutral-900 transition-colors"
           >
             <span>Menú</span>
-            <svg width="18" height="12" viewBox="0 0 18 12" fill="none" aria-hidden>
-              <rect y="0"    width="18" height="1.5" rx="0.75" fill="currentColor" />
-              <rect y="5.25" width="18" height="1.5" rx="0.75" fill="currentColor" />
-              <rect y="10.5" width="18" height="1.5" rx="0.75" fill="currentColor" />
-            </svg>
+            <Menu size={18} aria-hidden />
           </button>
         )}
       </header>
 
       {/* ── Contenido de la página — se desplaza a la izquierda ── */}
       <div
-        className="transition-transform duration-300 ease-in-out"
-        style={{ transform: open ? `translateX(-${MENU_W}px)` : 'translateX(0)' }}
+        className="relative transition-all duration-300 ease-in-out"
+        style={{
+          transform: open ? `translateX(-${MENU_W}px)` : 'translateX(0)',
+          borderRadius: open ? '20px' : '0',
+          overflow: 'hidden',
+        }}
       >
         {children}
       </div>
@@ -102,9 +103,9 @@ export function LofiShell({ children }: { children: React.ReactNode }) {
         <div className="px-10 py-8 border-t border-neutral-100">
           <Link
             href="/lofi/solicitud"
-            className="block text-center text-sm font-medium px-5 py-3.5 rounded-full bg-accent text-accent-foreground hover:opacity-90 transition-colors mb-5"
+            className="flex items-center justify-center gap-2 text-sm font-medium px-5 py-3.5 rounded-full bg-accent text-accent-foreground hover:opacity-90 transition-colors mb-5"
           >
-            Solicitar →
+            Solicitar <ArrowRight size={14} className="shrink-0" />
           </Link>
           <p className="text-xs text-neutral-400 font-mono">info@comuna4.com</p>
         </div>

@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { SectionNav } from '@/components/lofi/SectionNav'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
 
 const sections = [
   { id: 'servicio', label: 'Servicio' },
@@ -45,9 +46,9 @@ export default async function ServicioDetail({ params }: { params: Promise<{ slu
           <div className="max-w-[882px] mx-auto">
             <Link
               href="/lofi/servicios"
-              className="inline-block text-xs font-mono text-neutral-400 hover:text-neutral-700 transition-colors mb-12"
+              className="inline-flex items-center gap-2 text-xs font-mono text-neutral-400 hover:text-neutral-700 transition-colors mb-12"
             >
-              ← Todos los servicios
+              <ArrowLeft size={14} className="shrink-0" /> Todos los servicios
             </Link>
 
             <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-6">{service.name}</p>
@@ -125,9 +126,9 @@ export default async function ServicioDetail({ params }: { params: Promise<{ slu
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
               <Link
                 href="/lofi/solicitud"
-                className="inline-block bg-accent text-accent-foreground text-sm font-medium px-8 py-4 rounded-full transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+                className="inline-flex items-center gap-2 bg-accent text-accent-foreground text-sm font-medium px-8 py-4 rounded-full transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
               >
-                Solicitar producción →
+                Solicitar producción <ArrowRight size={14} className="shrink-0" />
               </Link>
               <Link
                 href="/lofi/servicios"

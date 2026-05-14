@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { SectionNav } from '@/components/lofi/SectionNav'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
 
 const sections = [
   { id: 'articulo',   label: 'Artículo' },
@@ -44,9 +45,9 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
           <div className="max-w-[882px] mx-auto">
             <Link
               href="/lofi/blog"
-              className="inline-block text-xs font-mono text-neutral-400 hover:text-neutral-700 transition-colors mb-12"
+              className="inline-flex items-center gap-2 text-xs font-mono text-neutral-400 hover:text-neutral-700 transition-colors mb-12"
             >
-              ← Todos los artículos
+              <ArrowLeft size={14} className="shrink-0" /> Todos los artículos
             </Link>
 
             <div className="flex items-center gap-3 mb-8">
@@ -157,9 +158,9 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
               </div>
               <Link
                 href="/lofi/solicitud"
-                className="shrink-0 inline-block bg-accent text-accent-foreground text-sm font-medium px-8 py-4 rounded-full transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+                className="shrink-0 inline-flex items-center gap-2 bg-accent text-accent-foreground text-sm font-medium px-8 py-4 rounded-full transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
               >
-                Solicitar →
+                Solicitar <ArrowRight size={14} className="shrink-0" />
               </Link>
             </div>
           </div>

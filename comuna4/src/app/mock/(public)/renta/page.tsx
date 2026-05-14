@@ -15,7 +15,7 @@ export default function RentaPage() {
       <div className="border-b border-dashed border-neutral-300 px-6 md:px-12 py-5 font-mono bg-neutral-50">
         <div className="max-w-3xl mx-auto space-y-3">
           <div className="flex items-center gap-3 flex-wrap">
-            <span className="text-xs uppercase tracking-widest w-20 shrink-0 transition-colors" style={{ color: 'oklch(0.63 0.14 162)' }}>Categoría</span>
+            <span className="text-xs uppercase tracking-widest w-20 shrink-0 text-accent">Categoría</span>
             <div className="flex gap-2">
               {categories.map((c) => (
                 <button
@@ -24,7 +24,7 @@ export default function RentaPage() {
                   className={[
                     'text-xs px-3 py-1 rounded border transition-colors',
                     category === c
-                      ? 'border-neutral-900 bg-neutral-900 text-white'
+                      ? 'bg-primary text-primary-foreground border-primary'
                       : 'border-dashed border-neutral-400 text-neutral-500 hover:border-neutral-600 hover:text-neutral-800',
                   ].join(' ')}
                 >
@@ -34,7 +34,7 @@ export default function RentaPage() {
             </div>
           </div>
           <div className="flex items-center gap-3 flex-wrap">
-            <span className={['text-xs uppercase tracking-widest w-20 shrink-0 transition-colors', filter !== 'Todos' ? '' : 'text-neutral-400'].join(' ')} style={filter !== 'Todos' ? { color: 'oklch(0.63 0.14 162)' } : {}}>Filtrar</span>
+            <span className={['text-xs uppercase tracking-widest w-20 shrink-0 transition-colors', filter !== 'Todos' ? 'text-accent' : 'text-muted-foreground'].join(' ')}>Filtrar</span>
             <div className="flex gap-2 flex-wrap">
               {filters.map((f) => (
                 <button
@@ -43,7 +43,7 @@ export default function RentaPage() {
                   className={[
                     'text-xs px-3 py-1 rounded border transition-colors',
                     filter === f
-                      ? 'border-neutral-900 bg-neutral-900 text-white'
+                      ? 'bg-primary text-primary-foreground border-primary'
                       : 'border-dashed border-neutral-400 text-neutral-500 hover:border-neutral-600 hover:text-neutral-800',
                   ].join(' ')}
                 >

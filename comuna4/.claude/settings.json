@@ -4,7 +4,7 @@
       "command": "npx",
       "args": ["-y", "@figma/mcp-server-figma"],
       "env": {
-        "FIGMA_API_TOKEN": "REEMPLAZAR — ver .env.local"
+        "FIGMA_API_TOKEN": "${FIGMA_API_TOKEN}"
       }
     }
   }

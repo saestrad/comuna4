@@ -16,7 +16,7 @@ export default function TrabajosPage() {
       <div className="border-b border-dashed border-neutral-300 px-6 md:px-12 py-5 font-mono bg-neutral-50">
         <div className="max-w-3xl mx-auto space-y-3">
           <div className="flex items-center gap-3 flex-wrap">
-            <span className={['text-xs uppercase tracking-widest w-20 shrink-0 transition-colors', discipline !== 'Todos' ? '' : 'text-neutral-400'].join(' ')} style={discipline !== 'Todos' ? { color: 'oklch(0.63 0.14 162)' } : {}}>Disciplina</span>
+            <span className={['text-xs uppercase tracking-widest w-20 shrink-0 transition-colors', discipline !== 'Todos' ? 'text-accent' : 'text-muted-foreground'].join(' ')}>Disciplina</span>
             <div className="flex gap-2 flex-wrap">
               {disciplines.map((d) => (
                 <button
@@ -25,7 +25,7 @@ export default function TrabajosPage() {
                   className={[
                     'text-xs px-3 py-1 rounded border transition-colors',
                     discipline === d
-                      ? 'border-neutral-900 bg-neutral-900 text-white'
+                      ? 'bg-primary text-primary-foreground border-primary'
                       : 'border-dashed border-neutral-400 text-neutral-500 hover:border-neutral-600 hover:text-neutral-800',
                   ].join(' ')}
                 >
@@ -35,7 +35,7 @@ export default function TrabajosPage() {
             </div>
           </div>
           <div className="flex items-center gap-3 flex-wrap">
-            <span className={['text-xs uppercase tracking-widest w-20 shrink-0 transition-colors', sector !== 'Todos' ? '' : 'text-neutral-400'].join(' ')} style={sector !== 'Todos' ? { color: 'oklch(0.63 0.14 162)' } : {}}>Sector</span>
+            <span className={['text-xs uppercase tracking-widest w-20 shrink-0 transition-colors', sector !== 'Todos' ? 'text-accent' : 'text-muted-foreground'].join(' ')}>Sector</span>
             <div className="flex gap-2 flex-wrap">
               {sectors.map((s) => (
                 <button
@@ -44,7 +44,7 @@ export default function TrabajosPage() {
                   className={[
                     'text-xs px-3 py-1 rounded border transition-colors',
                     sector === s
-                      ? 'border-neutral-900 bg-neutral-900 text-white'
+                      ? 'bg-primary text-primary-foreground border-primary'
                       : 'border-dashed border-neutral-400 text-neutral-500 hover:border-neutral-600 hover:text-neutral-800',
                   ].join(' ')}
                 >

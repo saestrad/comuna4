@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { SectionNav } from '@/components/lofi/SectionNav'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
 
 const sections = [
   { id: 'resumen',    label: 'Resumen' },
@@ -181,9 +182,9 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           <div className="max-w-[882px] mx-auto">
             <Link
               href="/lofi/trabajos"
-              className="inline-block text-xs font-mono text-neutral-400 hover:text-neutral-700 transition-colors mb-12"
+              className="inline-flex items-center gap-2 text-xs font-mono text-neutral-400 hover:text-neutral-700 transition-colors mb-12"
             >
-              ← Todos los proyectos
+              <ArrowLeft size={14} className="shrink-0" /> Todos los proyectos
             </Link>
 
             <div className="flex items-center gap-3 mb-8">
@@ -277,7 +278,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                 <p className="text-xs font-mono uppercase tracking-widest text-neutral-400 mb-3">{project.next.category}</p>
                 <p className="text-2xl font-semibold text-neutral-900 tracking-tight leading-tight">{project.next.title}</p>
               </div>
-              <span className="text-neutral-400 group-hover:text-neutral-900 transition-colors text-2xl shrink-0">→</span>
+              <ArrowRight size={24} className="shrink-0 text-neutral-400 group-hover:text-neutral-900 transition-colors" />
             </Link>
           </div>
         </section>

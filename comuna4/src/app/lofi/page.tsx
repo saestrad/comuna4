@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { ArrowRight } from 'lucide-react'
 
 const ticker = ['Producción de Contenido', 'Estrategia Creativa', 'Compra de Medios', 'Influencer Collabs', 'Renta de Espacios', 'Branding', 'Performance Digital']
 
@@ -37,9 +38,9 @@ export default function LofiHome() {
           <div className="flex items-center gap-4">
             <Link
               href="/lofi/solicitud"
-              className="inline-block bg-accent text-accent-foreground text-sm font-medium px-8 py-4 rounded-full transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+              className="inline-flex items-center gap-2 bg-accent text-accent-foreground text-sm font-medium px-8 py-4 rounded-full transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
             >
-              Solicitar →
+              Solicitar <ArrowRight size={14} className="shrink-0" />
             </Link>
             <Link
               href="/lofi/trabajos"
@@ -75,8 +76,8 @@ export default function LofiHome() {
             <h2 className="text-xs font-mono uppercase tracking-widest text-neutral-500">
               Proyectos recientes
             </h2>
-            <Link href="/lofi/trabajos" className="text-xs text-neutral-500 hover:text-neutral-700 transition-colors">
-              Ver todos →
+            <Link href="/lofi/trabajos" className="inline-flex items-center gap-2 text-xs text-neutral-500 hover:text-neutral-700 transition-colors">
+              Ver todos <ArrowRight size={14} className="shrink-0" />
             </Link>
           </div>
 
@@ -147,8 +148,8 @@ export default function LofiHome() {
               </div>
             ))}
           </div>
-          <Link href="/lofi/renta" className="text-sm text-neutral-900 hover:text-neutral-500 transition-colors underline underline-offset-4">
-            Ver disponibilidad y equipo →
+          <Link href="/lofi/renta" className="inline-flex items-center gap-2 text-sm text-neutral-900 hover:text-neutral-500 transition-colors underline underline-offset-4">
+            Ver disponibilidad y equipo <ArrowRight size={14} className="shrink-0" />
           </Link>
         </div>
       </section>
@@ -166,9 +167,9 @@ export default function LofiHome() {
           </div>
           <Link
             href="/lofi/solicitud"
-            className="shrink-0 inline-block bg-accent text-accent-foreground text-sm font-medium px-8 py-4 rounded-full transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+            className="shrink-0 inline-flex items-center gap-2 bg-accent text-accent-foreground text-sm font-medium px-8 py-4 rounded-full transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
           >
-            Solicitar →
+            Solicitar <ArrowRight size={14} className="shrink-0" />
           </Link>
         </div>
       </section>

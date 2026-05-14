@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { ArrowRight } from 'lucide-react'
 
 const services = [
   {
@@ -74,8 +75,8 @@ export default function LofiServicios() {
                     </li>
                   ))}
                 </ul>
-                <Link href={`/lofi/servicios/${s.slug}`} className="mt-auto text-xs font-medium text-neutral-900 hover:text-neutral-500 transition-colors">
-                  Ver detalle →
+                <Link href={`/lofi/servicios/${s.slug}`} className="mt-auto inline-flex items-center gap-2 text-xs font-medium text-neutral-900 hover:text-neutral-500 transition-colors">
+                  Ver detalle <ArrowRight size={14} className="shrink-0" />
                 </Link>
               </div>
             ))}
@@ -111,9 +112,9 @@ export default function LofiServicios() {
           </div>
           <Link
             href="/lofi/solicitud"
-            className="shrink-0 inline-block bg-accent text-accent-foreground text-sm font-medium px-8 py-4 rounded-full transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+            className="shrink-0 inline-flex items-center gap-2 bg-accent text-accent-foreground text-sm font-medium px-8 py-4 rounded-full transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
           >
-            Solicitar →
+            Solicitar <ArrowRight size={14} className="shrink-0" />
           </Link>
         </div>
       </section>
