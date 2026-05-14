@@ -1,0 +1,9 @@
+# Documentos externos — nunca al repo
+externos/
+
+# Claude Code — secrets locales
+.claude/settings.local.json
+
+# OS
+.DS_Store
+Thumbs.db
