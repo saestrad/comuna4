@@ -53,6 +53,7 @@ export default function RentaDetail({ params }: { params: { slug: string } }) {
   const [selectedDay, setSelectedDay] = useState<number | null>(null)
   const [calYear, setCalYear] = useState(2026)
   const [calMonth, setCalMonth] = useState(4) // Mayo = 4
+  const [confirming, setConfirming] = useState(false)
 
   const daysInMonth = getDaysInMonth(calYear, calMonth)
   const firstWeekday = getFirstWeekday(calYear, calMonth)
@@ -83,14 +84,17 @@ export default function RentaDetail({ params }: { params: { slug: string } }) {
     setSelectedDay(null)
   }
 
-  function handleReservar() {
-    const fecha = selectedDay
-      ? `${calYear}-${String(calMonth + 1).padStart(2, '0')}-${String(selectedDay).padStart(2, '0')}`
-      : undefined
-    const url = fecha
-      ? `/lofi/solicitud?espacio=${params.slug}&fecha=${fecha}`
-      : `/lofi/solicitud?espacio=${params.slug}`
-    router.push(url)
+  function handleConfirmar() {
+    if (selectedDay) {
+      setConfirming(true)
+    } else {
+      router.push(`/lofi/solicitud?espacio=${params.slug}`)
+    }
+  }
+
+  function handleProceder() {
+    const fecha = `${calYear}-${String(calMonth + 1).padStart(2, '0')}-${String(selectedDay).padStart(2, '0')}`
+    router.push(`/lofi/solicitud?espacio=${params.slug}&fecha=${fecha}`)
   }
 
   const price = duracion === 'hora' ? item.priceHour : item.priceDay
@@ -205,6 +209,56 @@ export default function RentaDetail({ params }: { params: { slug: string } }) {
           <p className="text-sm font-black text-neutral-900 leading-tight">{item.name}</p>
           <p className="text-xs font-mono text-neutral-400 mt-0.5">{item.category} · {item.size}</p>
         </div>
+
+        {/* Confirmation overlay */}
+        {confirming && selectedDay && (
+          <div className="flex-1 flex flex-col px-5 py-6 gap-5">
+            <div>
+              <p className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 mb-1">Fecha seleccionada</p>
+              <p className="text-2xl font-black text-neutral-900 leading-tight">
+                {selectedDay} de {MONTHS[calMonth]}
+              </p>
+              <p className="text-xs font-mono text-neutral-400 mt-0.5">{calYear}</p>
+            </div>
+
+            <div className="flex flex-col gap-3 py-4 border-y border-neutral-100">
+              <div className="flex items-center justify-between">
+                <span className="text-xs text-neutral-500">Espacio</span>
+                <span className="text-xs font-semibold text-neutral-800">{item.name}</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-xs text-neutral-500">Duración</span>
+                <span className="text-xs font-semibold text-neutral-800">Por {duracion}</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-xs text-neutral-500">Precio estimado</span>
+                <span className="text-xs font-semibold text-neutral-800">{price} <span className="font-normal text-neutral-400">/ {duracion === 'hora' ? 'hora' : 'día'}</span></span>
+              </div>
+            </div>
+
+            <p className="text-[10px] text-neutral-400 leading-relaxed">
+              Al continuar inicias la solicitud de reserva. Te confirmamos disponibilidad en menos de 2 horas.
+            </p>
+
+            <div className="flex flex-col gap-2 mt-auto">
+              <button
+                onClick={handleProceder}
+                className="w-full text-sm font-medium py-3.5 rounded-full bg-neutral-900 text-white hover:bg-neutral-700 transition-colors"
+              >
+                Confirmar y solicitar →
+              </button>
+              <button
+                onClick={() => setConfirming(false)}
+                className="w-full text-sm py-2.5 rounded-full border border-neutral-200 text-neutral-500 hover:border-neutral-400 hover:text-neutral-700 transition-colors"
+              >
+                Cambiar fecha
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Calendar + booking (hidden when confirming) */}
+        {!confirming && (<>
 
         {/* Duración */}
         <div className="px-5 py-4 border-b border-neutral-100">
@@ -323,13 +377,14 @@ export default function RentaDetail({ params }: { params: { slug: string } }) {
             </p>
           )}
           <button
-            onClick={handleReservar}
+            onClick={handleConfirmar}
             className="w-full text-center text-sm font-medium py-3.5 rounded-full bg-neutral-900 text-white hover:bg-neutral-700 transition-colors mb-2"
           >
             {selectedDay ? 'Confirmar fecha →' : 'Solicitar reserva →'}
           </button>
           <p className="text-[10px] text-neutral-400 text-center">Respuesta en menos de 2 horas</p>
         </div>
+        </>)}
 
       </aside>
 
@@ -342,10 +397,10 @@ export default function RentaDetail({ params }: { params: { slug: string } }) {
           </p>
         </div>
         <button
-          onClick={handleReservar}
+          onClick={confirming ? handleProceder : handleConfirmar}
           className="shrink-0 text-sm font-medium px-6 py-3 rounded-full bg-neutral-900 text-white hover:bg-neutral-700 transition-colors"
         >
-          Solicitar reserva →
+          {confirming ? 'Confirmar y solicitar →' : 'Solicitar reserva →'}
         </button>
       </div>
 
