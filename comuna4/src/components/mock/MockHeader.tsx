@@ -53,12 +53,6 @@ export function MockHeader() {
           Solicitar →
         </Link>
         <Link
-          href="/mock/nosotros"
-          className="text-xs font-mono text-neutral-400 hover:text-neutral-600 transition-colors"
-        >
-          Nosotros
-        </Link>
-        <Link
           href="/mock/login"
           className="text-xs font-mono text-neutral-400 hover:text-neutral-600 transition-colors"
         >
