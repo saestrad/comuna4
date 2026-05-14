@@ -139,10 +139,10 @@ export default function RentaDetail({ params }: { params: Promise<{ slug: string
 
             {/* Galería */}
             <div className="grid grid-cols-4 gap-3">
-              <div className="col-span-4 md:col-span-3 aspect-[4/3] bg-neutral-100 rounded-lg border border-neutral-200" />
+              <div className="col-span-4 md:col-span-3 aspect-[4/3] lofi-img rounded-lg border border-neutral-200" />
               <div className="hidden md:flex flex-col gap-3">
                 {[1, 2, 3].map((i) => (
-                  <div key={i} className="flex-1 bg-neutral-100 rounded-lg border border-neutral-200" />
+                  <div key={i} className="flex-1 lofi-img rounded-lg border border-neutral-200" />
                 ))}
               </div>
             </div>
@@ -187,7 +187,7 @@ export default function RentaDetail({ params }: { params: Promise<{ slug: string
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
               {similar.map((s) => (
                 <Link key={s.slug} href={`/lofi/renta/${s.slug}`} className="group block">
-                  <div className="aspect-[4/3] bg-neutral-100 rounded-lg border border-neutral-200 mb-4" />
+                  <div className="aspect-[4/3] lofi-img rounded-lg border border-neutral-200 mb-4" />
                   <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-1.5">
                     {s.category} · {s.size}
                   </p>

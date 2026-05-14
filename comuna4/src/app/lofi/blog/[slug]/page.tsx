@@ -69,7 +69,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
 
         {/* Cover image */}
         <section className="border-b border-neutral-200">
-          <div className="aspect-[16/7] bg-neutral-100" />
+          <div className="aspect-[16/7] lofi-img" />
         </section>
 
         {/* Cuerpo */}
@@ -90,7 +90,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
             </blockquote>
 
             {/* Inline image */}
-            <div className="aspect-[16/9] bg-neutral-100 rounded-lg border border-neutral-200 mb-6" />
+            <div className="aspect-[16/9] lofi-img rounded-lg border border-neutral-200 mb-6" />
             <p className="text-xs text-neutral-400 font-mono">
               Análisis de impresiones orgánicas enero–abril 2026. Fuente: Search Console de 12 clientes.
             </p>
@@ -137,7 +137,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-16">
               {related.map((a) => (
                 <Link key={a.slug} href={`/lofi/blog/${a.slug}`} className="group block">
-                  <div className="aspect-[16/9] bg-neutral-100 rounded-lg border border-neutral-200 mb-4" />
+                  <div className="aspect-[16/9] lofi-img rounded-lg border border-neutral-200 mb-4" />
                   <div className="flex items-center gap-2 mb-2">
                     <span className="text-xs font-mono uppercase tracking-widest text-neutral-500">{a.category}</span>
                     <span className="text-neutral-300">·</span>

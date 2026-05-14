@@ -72,7 +72,7 @@ export default async function ServicioDetail({ params }: { params: Promise<{ slu
 
         {/* Visual */}
         <section className="border-b border-neutral-200">
-          <div className="aspect-[16/7] bg-neutral-100" />
+          <div className="aspect-[16/7] lofi-img" />
         </section>
 
         {/* Proceso */}
@@ -100,7 +100,7 @@ export default async function ServicioDetail({ params }: { params: Promise<{ slu
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
               {cases.map((c) => (
                 <Link key={c.slug} href={`/lofi/trabajos/${c.slug}`} className="group block">
-                  <div className="aspect-[4/3] bg-neutral-100 rounded-lg border border-neutral-200 mb-4" />
+                  <div className="aspect-[4/3] lofi-img rounded-lg border border-neutral-200 mb-4" />
                   <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-1.5">{c.category}</p>
                   <p className="text-sm font-semibold text-neutral-800 leading-snug mb-1.5 group-hover:text-neutral-600 transition-colors">
                     {c.title}

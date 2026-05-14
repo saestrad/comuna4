@@ -78,7 +78,7 @@ export default function LofiHome() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {projects.map((p) => (
               <Link href="/lofi/trabajos" key={p.title} className="group block">
-                <div className="aspect-[4/3] bg-neutral-100 rounded-lg border border-neutral-200 mb-5" />
+                <div className="aspect-[4/3] lofi-img rounded-lg border border-neutral-200 mb-5" />
                 <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-2">{p.category}</p>
                 <p className="text-sm font-semibold text-neutral-800 leading-snug mb-1.5">{p.title}</p>
                 <p className="text-xs text-neutral-500">{p.metric}</p>
@@ -121,7 +121,7 @@ export default function LofiHome() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-neutral-200 mb-10">
             {studios.map((s) => (
               <div key={s.name} className="bg-white p-8">
-                <div className="aspect-[4/3] bg-neutral-100 rounded-lg border border-neutral-200 mb-5" />
+                <div className="aspect-[4/3] lofi-img rounded-lg border border-neutral-200 mb-5" />
                 <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-1">{s.size}</p>
                 <p className="text-sm font-semibold text-neutral-800 mb-2">{s.name}</p>
                 <p className="text-xs text-neutral-500 leading-relaxed">{s.desc}</p>

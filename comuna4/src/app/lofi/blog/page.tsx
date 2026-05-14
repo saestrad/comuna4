@@ -68,7 +68,7 @@ export default function LofiBlog() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {filtered.map((a) => (
               <Link key={a.slug} href={`/lofi/blog/${a.slug}`} className="group block">
-                <div className="aspect-[16/9] bg-neutral-100 rounded-lg border border-neutral-200 mb-4" />
+                <div className="aspect-[16/9] lofi-img rounded-lg border border-neutral-200 mb-4" />
                 <div className="flex items-center gap-3 mb-2">
                   <span className="text-xs font-mono uppercase tracking-widest text-neutral-500">{a.category}</span>
                   <span className="text-xs text-neutral-300">·</span>

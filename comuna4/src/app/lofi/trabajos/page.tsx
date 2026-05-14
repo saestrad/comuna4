@@ -68,7 +68,7 @@ export default function LofiTrabajos() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {filtered.map((p) => (
               <Link key={p.slug} href={`/lofi/trabajos/${p.slug}`} className="group block">
-                <div className="aspect-[4/3] bg-neutral-100 rounded-lg border border-neutral-200 mb-4" />
+                <div className="aspect-[4/3] lofi-img rounded-lg border border-neutral-200 mb-4" />
                 <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-1.5">
                   {p.category} · {p.sector}
                 </p>

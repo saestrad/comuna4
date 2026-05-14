@@ -214,7 +214,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
         {/* Hero visual */}
         <section className="border-b border-neutral-200">
-          <div className="aspect-[16/7] bg-neutral-100" />
+          <div className="aspect-[16/7] lofi-img" />
         </section>
 
         {/* Proceso */}
@@ -238,7 +238,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-16">
               {[1, 2, 3].map((i) => (
-                <div key={i} className="aspect-[4/3] bg-neutral-100 rounded-lg" />
+                <div key={i} className="aspect-[4/3] lofi-img rounded-lg border border-neutral-200" />
               ))}
             </div>
           </div>

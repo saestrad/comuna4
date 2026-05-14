@@ -50,7 +50,7 @@ export default function LofiSobre() {
               Somos Comuna 4. Un hub de producción y publicidad en Puerto Rico diseñado para fortalecer marcas y proyectar la creatividad de la isla al mundo.
             </p>
           </div>
-          <div className="aspect-[4/3] bg-neutral-100 rounded-lg border border-neutral-200" />
+          <div className="aspect-[4/3] lofi-img rounded-lg border border-neutral-200" />
         </div>
       </section>
 
@@ -94,7 +94,7 @@ export default function LofiSobre() {
           <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
             {leadership.map((p) => (
               <div key={p.name}>
-                <div className="aspect-square bg-neutral-100 rounded-lg border border-neutral-200 mb-3" />
+                <div className="aspect-square lofi-img rounded-lg border border-neutral-200 mb-3" />
                 <p className="text-sm font-semibold text-neutral-800 leading-snug mb-1">{p.name}</p>
                 <p className="text-xs text-neutral-500 leading-snug">{p.role}</p>
               </div>
