@@ -4,8 +4,11 @@ import { useState, useEffect, Suspense } from 'react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 
-const services = ['Branding', 'Performance Media', 'Producción', 'Web', 'Renta de estudio/equipo', 'Otro']
-const budgets = ['Menos de $2,000', '$2,000 – $5,000', '$5,000 – $15,000', '$15,000 – $50,000', 'Más de $50,000', 'Prefiero discutirlo']
+const serviceGroups = [
+  { label: 'Agencia', items: ['Branding', 'Performance Media', 'Web', 'Estrategia'] },
+  { label: 'Producción & Espacio', items: ['Producción audiovisual', 'Renta de estudio/equipo'] },
+]
+const budgets = ['Menos de $2,000', '$2,000 – $5,000', '$5,000 – $15,000', '$15,000 – $50,000', 'Más de $50,000']
 const channels = ['Email', 'WhatsApp', 'Llamada']
 const steps = ['Servicio', 'Brief', 'Contacto', 'Revisar y enviar']
 const consentLabels = ['Acepto los términos y condiciones', 'Acepto la política de privacidad', 'Autorizo el uso de mis datos']
@@ -23,6 +26,8 @@ function SolicitudForm() {
   const [step, setStep] = useState(0)
   const [selectedService, setSelectedService] = useState('')
   const [selectedBudget, setSelectedBudget] = useState('')
+  const [customBudget, setCustomBudget] = useState('')
+  const [showCustomBudget, setShowCustomBudget] = useState(false)
   const [selectedChannel, setSelectedChannel] = useState('Email')
 
   useEffect(() => {
@@ -126,22 +131,29 @@ function SolicitudForm() {
             <p className="text-sm text-neutral-500 mb-8 leading-relaxed">
               Selecciona el servicio. Puedes volver y cambiar antes de enviar.
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              {services.map((s) => (
-                <button
-                  key={s}
-                  type="button"
-                  aria-pressed={selectedService === s}
-                  onClick={() => { setSelectedService(s); setErrors({}) }}
-                  className={[
-                    'text-sm text-left px-4 py-3 rounded-full border transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-1',
-                    selectedService === s
-                      ? 'border-neutral-900 bg-neutral-900 text-white'
-                      : 'border-neutral-200 text-neutral-700 hover:border-neutral-400',
-                  ].join(' ')}
-                >
-                  {s}
-                </button>
+            <div className="flex flex-col gap-6">
+              {serviceGroups.map((group) => (
+                <div key={group.label}>
+                  <p className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 mb-2.5">{group.label}</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {group.items.map((s) => (
+                      <button
+                        key={s}
+                        type="button"
+                        aria-pressed={selectedService === s}
+                        onClick={() => { setSelectedService(s); setErrors({}) }}
+                        className={[
+                          'text-sm text-left px-4 py-3 rounded-full border transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-1',
+                          selectedService === s
+                            ? 'border-neutral-900 bg-neutral-900 text-white'
+                            : 'border-neutral-200 text-neutral-700 hover:border-neutral-400',
+                        ].join(' ')}
+                      >
+                        {s}
+                      </button>
+                    ))}
+                  </div>
+                </div>
               ))}
             </div>
             {errors.service && (
@@ -196,10 +208,10 @@ function SolicitudForm() {
                       key={b}
                       type="button"
                       aria-pressed={selectedBudget === b}
-                      onClick={() => { setSelectedBudget(b); setErrors((prev) => ({ ...prev, budget: '' })) }}
+                      onClick={() => { setSelectedBudget(b); setShowCustomBudget(false); setErrors((prev) => ({ ...prev, budget: '' })) }}
                       className={[
                         'text-xs text-left px-3 py-2.5 rounded-full border transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-1',
-                        selectedBudget === b
+                        selectedBudget === b && !showCustomBudget
                           ? 'border-neutral-900 bg-neutral-900 text-white'
                           : 'border-neutral-200 text-neutral-600 hover:border-neutral-400',
                       ].join(' ')}
@@ -207,7 +219,29 @@ function SolicitudForm() {
                       {b}
                     </button>
                   ))}
+                  <button
+                    type="button"
+                    onClick={() => { setShowCustomBudget(true); setSelectedBudget(''); setErrors((prev) => ({ ...prev, budget: '' })) }}
+                    className={[
+                      'text-xs text-left px-3 py-2.5 rounded-full border transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-1',
+                      showCustomBudget
+                        ? 'border-neutral-900 bg-neutral-900 text-white'
+                        : 'border-neutral-200 text-neutral-600 hover:border-neutral-400',
+                    ].join(' ')}
+                  >
+                    Cuéntanos →
+                  </button>
                 </div>
+                {showCustomBudget && (
+                  <textarea
+                    rows={2}
+                    value={customBudget}
+                    onChange={(e) => { setCustomBudget(e.target.value); setSelectedBudget(e.target.value) }}
+                    placeholder="Describe tu presupuesto o situación"
+                    className="mt-3 w-full text-sm border border-neutral-200 rounded-lg px-4 py-3 placeholder:text-neutral-300 focus:outline-none focus:border-neutral-500 resize-none"
+                    autoFocus
+                  />
+                )}
                 {errors.budget && (
                   <p className="text-xs text-red-600 mt-3">{errors.budget}</p>
                 )}
@@ -234,7 +268,8 @@ function SolicitudForm() {
                   id="name"
                   type="text"
                   value={name}
-                  onChange={(e) => { setName(e.target.value); setErrors((prev) => ({ ...prev, name: '' })) }}
+                  onChange={(e) => { setName(e.target.value); if (errors.name) setErrors((prev) => ({ ...prev, name: '' })) }}
+                  onBlur={() => { if (!name.trim()) setErrors((prev) => ({ ...prev, name: 'Ingresa tu nombre.' })) }}
                   placeholder="Tu nombre"
                   className={[
                     'w-full text-sm border rounded-lg px-4 py-3 placeholder:text-neutral-300 focus:outline-none focus:border-neutral-500',
@@ -253,7 +288,11 @@ function SolicitudForm() {
                   id="email"
                   type="email"
                   value={email}
-                  onChange={(e) => { setEmail(e.target.value); setErrors((prev) => ({ ...prev, email: '' })) }}
+                  onChange={(e) => { setEmail(e.target.value); if (errors.email) setErrors((prev) => ({ ...prev, email: '' })) }}
+                  onBlur={() => {
+                    if (!email.trim()) setErrors((prev) => ({ ...prev, email: 'Ingresa tu email.' }))
+                    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) setErrors((prev) => ({ ...prev, email: 'Ingresa un email válido.' }))
+                  }}
                   placeholder="tu@empresa.com"
                   className={[
                     'w-full text-sm border rounded-lg px-4 py-3 placeholder:text-neutral-300 focus:outline-none focus:border-neutral-500',

@@ -272,6 +272,7 @@ export default function RentaDetail({ params }: { params: { slug: string } }) {
                       key={col}
                       disabled={!avail}
                       onClick={() => setSelectedDay(selected ? null : d)}
+                      title={booked ? 'Reservado' : isWeekend(d) ? 'Fin de semana' : past ? 'Fecha pasada' : undefined}
                       className={[
                         'w-full h-full rounded-md text-xs transition-colors flex items-center justify-center',
                         selected
@@ -294,14 +295,18 @@ export default function RentaDetail({ params }: { params: { slug: string } }) {
           </div>
 
           {/* Legend */}
-          <div className="flex items-center gap-4 mt-3 pt-3 border-t border-neutral-100">
+          <div className="flex items-center gap-3 flex-wrap mt-3 pt-3 border-t border-neutral-100">
             <div className="flex items-center gap-1.5">
               <div className="w-2 h-2 rounded-sm bg-neutral-900" />
               <span className="text-[10px] text-neutral-400">Seleccionado</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <div className="w-2 h-2 rounded-sm bg-neutral-200" />
+              <div className="w-2 h-2 rounded-sm bg-neutral-200 line-through" />
               <span className="text-[10px] text-neutral-400">Reservado</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <div className="w-2 h-2 rounded-sm bg-neutral-100" />
+              <span className="text-[10px] text-neutral-400">No disponible</span>
             </div>
           </div>
         </div>

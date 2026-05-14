@@ -49,7 +49,15 @@ export default function LofiHome() {
 
       {/* Ticker */}
       <section className="border-b border-neutral-200 py-5 overflow-hidden">
-        <div className="flex gap-10 px-6 md:px-12 font-mono text-xs uppercase tracking-widest text-neutral-500 whitespace-nowrap">
+        <style>{`
+          @keyframes ticker-scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+          }
+          .ticker-track { animation: ticker-scroll 24s linear infinite; }
+          .ticker-track:hover { animation-play-state: paused; }
+        `}</style>
+        <div className="ticker-track flex gap-10 font-mono text-xs uppercase tracking-widest text-neutral-500 whitespace-nowrap w-max">
           {[...ticker, ...ticker].map((s, i) => (
             <span key={i}>{s} ·</span>
           ))}
