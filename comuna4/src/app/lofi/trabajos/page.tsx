@@ -45,7 +45,7 @@ export default function LofiTrabajos() {
       </section>
 
       {/* Filtros — una sola barra */}
-      <div className="border-b border-neutral-200 px-6 md:px-12 py-4 bg-neutral-50 sticky top-[57px] z-30">
+      <div className="border-b border-neutral-200 px-6 md:px-12 py-4 bg-white sticky top-0 z-30">
         <div className="max-w-5xl mx-auto flex items-center gap-3 flex-wrap">
           <select
             value={discipline}
