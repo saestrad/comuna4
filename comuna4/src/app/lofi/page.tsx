@@ -82,11 +82,11 @@ function HubSection() {
   const startX = useRef(0)
   const startScroll = useRef(0)
   const paused = useRef(false)
-  const pauseTimer = useRef<ReturnType<typeof setTimeout>>()
-  const rafRef = useRef<number>()
+  const pauseTimer = useRef<ReturnType<typeof setTimeout>>(undefined)
+  const rafRef = useRef<number>(undefined)
 
   useEffect(() => {
-    const el = scrollRef.current
+    const el = scrollRef.current!
     if (!el) return
     let prev = performance.now()
     const SPEED = 0.085
@@ -99,7 +99,7 @@ function HubSection() {
       if (dt > 100) return
       el.scrollLeft += SPEED * dt
       const half = el.scrollWidth / 2
-      if (el!.scrollLeft >= half) el!.scrollLeft -= half
+      if (el.scrollLeft >= half) el.scrollLeft -= half
     }
 
     rafRef.current = requestAnimationFrame(tick)
