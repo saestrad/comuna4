@@ -106,8 +106,8 @@ export default function LofiRenta() {
                 <motion.div key={item.slug} layout variants={cardVariants} initial="hidden" animate="visible" exit="exit">
                   <Link href={`/lofi/renta/${item.slug}`} className="group block">
                     <div className="aspect-[4/3] lofi-img rounded-2xl border border-neutral-200 mb-6" />
-                    <h3 className="text-base font-semibold text-neutral-900 leading-snug mb-2 group-hover:text-neutral-500 transition-colors">{item.name}</h3>
-                    <p className="text-sm text-neutral-400 leading-relaxed line-clamp-2">{item.desc}</p>
+                    <h3 className="text-lg font-semibold text-neutral-900 leading-snug mb-2 group-hover:text-neutral-500 transition-colors">{item.category} — {item.name}</h3>
+                    <p className="text-sm text-neutral-400">{item.size}</p>
                   </Link>
                 </motion.div>
               ))}
