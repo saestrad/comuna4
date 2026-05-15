@@ -52,7 +52,7 @@ export default function LofiTrabajos() {
         </div>
       </section>
 
-      <FilterChips options={disciplines} active={discipline} onChange={setDiscipline} label="" className="bg-white sticky top-[60px] z-30" />
+      <FilterChips options={disciplines} active={discipline} onChange={setDiscipline} label={null} className="bg-white sticky top-[60px] z-30" />
 
       {/* Grid */}
       <section className="px-6 md:px-12 py-[104px]">

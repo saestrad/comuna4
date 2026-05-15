@@ -381,6 +381,11 @@
   text-rendering: optimizeLegibility;
 }
 
+/* Ticker animation */
+@keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.ticker-track { animation: ticker-scroll 24s linear infinite; will-change: transform; }
+.ticker-track:hover { animation-play-state: paused; }
+
 /* Lofi image placeholder — X de esquina a esquina */
 .lofi-img {
   background-color: var(--c4-surface-variant);

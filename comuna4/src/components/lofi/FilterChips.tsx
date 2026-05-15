@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 
 interface FilterChipsProps {
-  label?: string
+  label?: string | null
   options: string[]
   active: string
   onChange: (value: string) => void
