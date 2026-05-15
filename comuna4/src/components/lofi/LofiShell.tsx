@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
-import { Menu, X, ArrowRight } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const navLinks = [
@@ -144,12 +144,6 @@ export function LofiShell({ children }: { children: React.ReactNode }) {
 
         {/* Pie */}
         <div className="px-10 py-8 border-t border-neutral-100">
-          <Link
-            href="/lofi/solicitud"
-            className="flex items-center justify-center gap-2 text-sm font-medium px-5 py-3.5 rounded-full bg-accent text-accent-foreground hover:opacity-90 transition-colors mb-5"
-          >
-            Solicitar <ArrowRight size={14} className="shrink-0" />
-          </Link>
           <p className="text-xs text-neutral-400 font-mono">info@comuna4.com</p>
         </div>
       </motion.div>
