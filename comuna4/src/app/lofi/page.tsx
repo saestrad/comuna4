@@ -89,7 +89,7 @@ function HubSection() {
     const el = scrollRef.current!
     if (!el) return
     let prev = performance.now()
-    const SPEED = 0.085
+    const SPEED = 8 * 0.0045 // velocidad 0–100: cambia el 8
 
     function tick(now: number) {
       rafRef.current = requestAnimationFrame(tick)
@@ -106,7 +106,8 @@ function HubSection() {
     return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current) }
   }, [])
 
-  const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+  const onPointerDown = (e: React.PointerEvent<HTMLElement>) => {
+    e.preventDefault()
     dragging.current = true
     didDrag.current = false
     paused.current = true
@@ -116,7 +117,7 @@ function HubSection() {
     clearTimeout(pauseTimer.current)
   }
 
-  const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+  const onPointerMove = (e: React.PointerEvent<HTMLElement>) => {
     if (!dragging.current) return
     const el = scrollRef.current!
     const dx = startX.current - e.clientX
@@ -133,7 +134,14 @@ function HubSection() {
   }
 
   return (
-    <section className="border-b border-neutral-200 bg-neutral-50 py-[104px]">
+    <section
+      className="border-b border-neutral-200 bg-neutral-50 py-[104px] cursor-grab active:cursor-grabbing select-none"
+      style={{ touchAction: 'none' }}
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={onPointerUp}
+      onPointerCancel={onPointerUp}
+    >
       <div className="px-6 md:px-12 mb-16">
         <div className="max-w-5xl mx-auto">
           <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-4">El Hub</p>
@@ -155,12 +163,7 @@ function HubSection() {
 
       <div
         ref={scrollRef}
-        className="overflow-hidden cursor-grab active:cursor-grabbing select-none"
-        style={{ touchAction: 'none' }}
-        onPointerDown={onPointerDown}
-        onPointerMove={onPointerMove}
-        onPointerUp={onPointerUp}
-        onPointerCancel={onPointerUp}
+        className="overflow-hidden"
       >
         <div className="flex gap-10 w-max px-6 md:px-12">
           {[...studios, ...studios].map((s, i) => (
@@ -309,11 +312,11 @@ export default function LofiHome() {
               { num: '04', name: 'Influencers', desc: 'El talento adecuado para amplificar tu mensaje.' },
             ].map((s, i) => (
               <motion.div key={s.name} variants={fadeUp} onMouseEnter={() => setActiveService(i)}>
-                <Link href="/lofi/servicios" className="group flex items-center gap-6 md:gap-10 py-5 hover:pl-1.5 transition-all duration-200 -mx-1.5 px-1.5">
-                  <span className="font-mono text-xs text-neutral-300 w-6 shrink-0 tabular-nums">{s.num}</span>
-                  <span className="flex-1 text-xl md:text-2xl font-display font-semibold text-neutral-900 tracking-tight">{s.name}</span>
+                <Link href="/lofi/servicios" className="group flex items-center gap-6 md:gap-10 py-8 hover:pl-1.5 transition-all duration-200 -mx-1.5 px-1.5">
+                  <span className="font-mono text-sm text-neutral-300 w-8 shrink-0 tabular-nums">{s.num}</span>
+                  <span className="flex-1 text-3xl md:text-4xl font-display font-semibold text-neutral-900 tracking-tight">{s.name}</span>
                   <span className="hidden md:block text-sm text-neutral-400 max-w-[30ch] text-right leading-snug">{s.desc}</span>
-                  <ArrowRight size={16} className="text-neutral-300 group-hover:text-neutral-900 group-hover:translate-x-0.5 transition-all shrink-0" />
+                  <ArrowRight size={20} className="text-neutral-300 group-hover:text-neutral-900 group-hover:translate-x-0.5 transition-all shrink-0" />
                 </Link>
               </motion.div>
             ))}
