@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cardVariants } from '@/lib/motion'
+import { FilterChips } from '@/components/lofi/FilterChips'
 
 const categories = ['Todos', 'Estudios', 'Cámaras', 'Iluminación', 'Audio']
 
@@ -70,27 +71,7 @@ export default function LofiRenta() {
         </div>
       </section>
 
-      {/* Filter */}
-      <div className="border-b border-neutral-200 py-5 bg-neutral-50">
-        <div className="flex items-center gap-3 overflow-x-auto scrollbar-none px-6 md:px-12">
-          <span className="text-xs font-mono uppercase tracking-widest text-neutral-500 shrink-0">Categoría</span>
-          {categories.map((c) => (
-            <motion.button
-              key={c}
-              onClick={() => setActive(c)}
-              whileTap={{ scale: 0.95 }}
-              className={[
-                'text-xs px-4 py-2.5 rounded-full border transition-colors shrink-0',
-                active === c
-                  ? 'bg-neutral-900 text-white border-neutral-900'
-                  : 'border-neutral-300 text-neutral-500 hover:border-neutral-600 hover:text-neutral-800',
-              ].join(' ')}
-            >
-              {c}
-            </motion.button>
-          ))}
-        </div>
-      </div>
+      <FilterChips options={categories} active={active} onChange={setActive} />
 
       {/* Items */}
       <section className="px-6 md:px-12 py-[104px]">

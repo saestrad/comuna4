@@ -41,11 +41,11 @@ export function LofiShell({ children }: { children: React.ReactNode }) {
     href === '/lofi' ? pathname === '/lofi' : pathname.startsWith(href)
 
   return (
-    <div className="overflow-x-clip">
+    <div className="overflow-x-hidden">
 
       {/* ── Header fijo — nunca se mueve ── */}
       <header className="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 h-[60px] flex items-center justify-between bg-white/95 backdrop-blur-sm border-b border-neutral-100">
-        <Link href="/lofi" className="font-mono font-black text-base tracking-widest text-neutral-900">
+        <Link href="/lofi" onClick={() => window.scrollTo({ top: 0 })} className="font-mono font-black text-base tracking-widest text-neutral-900">
           [C4]
         </Link>
 

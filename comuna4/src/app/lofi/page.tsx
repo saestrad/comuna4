@@ -2,9 +2,10 @@
 
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
-import { motion, useInView, useMotionValue, useSpring } from 'framer-motion'
+import { motion, useMotionValue, useSpring } from 'framer-motion'
 import { useRef, useEffect, useState } from 'react'
 import { stagger, fadeUp } from '@/lib/motion'
+import { InViewSection } from '@/components/lofi/InViewSection'
 
 const ticker = ['Producción de Contenido', 'Estrategia Creativa', 'Compra de Medios', 'Influencer Collabs', 'Renta de Espacios', 'Branding', 'Performance Digital']
 
@@ -88,7 +89,7 @@ function HubSection() {
     const el = scrollRef.current
     if (!el) return
     let prev = performance.now()
-    const SPEED = 0.09 // px per ms — 20% of base
+    const SPEED = 0.085
 
     function tick(now: number) {
       rafRef.current = requestAnimationFrame(tick)
@@ -155,12 +156,13 @@ function HubSection() {
       <div
         ref={scrollRef}
         className="overflow-hidden cursor-grab active:cursor-grabbing select-none"
+        style={{ touchAction: 'none' }}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
         onPointerCancel={onPointerUp}
       >
-        <div className="flex gap-10 w-max">
+        <div className="flex gap-10 w-max px-6 md:px-12">
           {[...studios, ...studios].map((s, i) => (
             <Link
               key={i}
@@ -179,16 +181,6 @@ function HubSection() {
   )
 }
 
-function InViewSection({ children, className }: { children: React.ReactNode; className?: string }) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-80px' })
-  return (
-    <motion.div ref={ref} variants={stagger} initial="hidden" animate={isInView ? 'visible' : 'hidden'} className={className}>
-      {children}
-    </motion.div>
-  )
-}
-
 const SERVICE_ROTATIONS = [-12, 8, -9, 14]
 
 function ServiceCursorCard({ activeService }: { activeService: number | null }) {
@@ -197,25 +189,25 @@ function ServiceCursorCard({ activeService }: { activeService: number | null }) 
   const springX = useSpring(cursorX, { stiffness: 180, damping: 16 })
   const springY = useSpring(cursorY, { stiffness: 180, damping: 16 })
   const rotation = useSpring(0, { stiffness: 700, damping: 18 })
-  const scale = useMotionValue(0.9)
-  const springScale = useSpring(scale, { stiffness: 600, damping: 14 })
+  const springScale = useSpring(0.9, { stiffness: 600, damping: 14 })
 
   useEffect(() => {
+    if (activeService === null) return
     const onMove = (e: MouseEvent) => { cursorX.set(e.clientX); cursorY.set(e.clientY) }
     window.addEventListener('mousemove', onMove)
     return () => window.removeEventListener('mousemove', onMove)
-  }, [cursorX, cursorY])
+  }, [activeService, cursorX, cursorY])
 
   useEffect(() => {
     if (activeService !== null) {
       rotation.set(SERVICE_ROTATIONS[activeService])
-      scale.set(1.18)
-      const t = setTimeout(() => scale.set(1), 80)
+      springScale.set(1.18)
+      const t = setTimeout(() => springScale.set(1), 80)
       return () => clearTimeout(t)
     } else {
-      scale.set(0.9)
+      springScale.set(0.9)
     }
-  }, [activeService, rotation, scale])
+  }, [activeService, rotation, springScale])
 
   return (
     <motion.div

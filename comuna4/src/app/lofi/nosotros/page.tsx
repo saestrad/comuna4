@@ -2,9 +2,9 @@
 
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
-import { motion, useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { motion } from 'framer-motion'
 import { stagger, fadeUp } from '@/lib/motion'
+import { InViewSection } from '@/components/lofi/InViewSection'
 
 const leadership = [
   { name: 'José Chiclana', role: 'Founder & CEO' },
@@ -27,16 +27,6 @@ const differentiators = [
   { label: 'Espacios propios in-house', body: 'Tres estudios equipados dentro del mismo hub. Producción sin logística externa, sin costos de terceros, sin días perdidos coordinando locaciones.' },
   { label: 'Red de creadores e influencers', body: 'Acceso a un cast amplio de talento local y regional, seleccionado por afinidad de marca y métricas reales, no por número de seguidores.' },
 ]
-
-function InViewSection({ children, className }: { children: React.ReactNode; className?: string }) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-80px' })
-  return (
-    <motion.div ref={ref} variants={stagger} initial="hidden" animate={isInView ? 'visible' : 'hidden'} className={className}>
-      {children}
-    </motion.div>
-  )
-}
 
 export default function LofiSobre() {
   return (

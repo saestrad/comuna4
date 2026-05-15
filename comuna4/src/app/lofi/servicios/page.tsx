@@ -2,9 +2,9 @@
 
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
-import { motion, useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { motion } from 'framer-motion'
 import { stagger, fadeUp } from '@/lib/motion'
+import { InViewSection } from '@/components/lofi/InViewSection'
 
 const services = [
   { name: 'Producción de Contenido', tagline: 'Producimos con propósito.', description: 'Desde comerciales hasta contenido digital. Cada pieza tiene un objetivo claro y una distribución planificada.', deliverables: ['Comerciales y spots', 'Contenido para redes sociales', 'Fotografía de producto y lifestyle', 'Video vertical y horizontal'], slug: 'produccion' },
@@ -19,16 +19,6 @@ const models = [
   { name: 'Proyecto puntual', desc: 'Scope cerrado, entrega definitiva. Lanzamientos, rediseños o campañas de temporada.' },
   { name: 'Innovation sprint', desc: 'Prototipado rápido. 2–4 semanas, equipo enfocado, entregable concreto.' },
 ]
-
-function InViewSection({ children, className }: { children: React.ReactNode; className?: string }) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-80px' })
-  return (
-    <motion.div ref={ref} variants={stagger} initial="hidden" animate={isInView ? 'visible' : 'hidden'} className={className}>
-      {children}
-    </motion.div>
-  )
-}
 
 export default function LofiServicios() {
   return (

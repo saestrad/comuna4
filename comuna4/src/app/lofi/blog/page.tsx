@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { FilterChips } from '@/components/lofi/FilterChips'
 
 const categories = ['Todos', 'Branding', 'Performance', 'Producción', 'Industria', 'Cultura C4']
 
@@ -34,28 +35,7 @@ export default function LofiBlog() {
         </div>
       </section>
 
-      {/* Filter */}
-      <div className="border-b border-neutral-200 py-5 bg-neutral-50">
-        <div className="flex items-center gap-3 overflow-x-auto scrollbar-none px-6 md:px-12">
-          <span className="text-xs font-mono uppercase tracking-widest text-neutral-500 shrink-0">
-            Categoría
-          </span>
-          {categories.map((c) => (
-            <button
-              key={c}
-              onClick={() => setActive(c)}
-              className={[
-                'text-xs px-3 py-2.5 rounded-full border transition-colors shrink-0',
-                active === c
-                  ? 'bg-neutral-900 text-white border-neutral-900'
-                  : 'border-neutral-300 text-neutral-500 hover:border-neutral-600 hover:text-neutral-800',
-              ].join(' ')}
-            >
-              {c}
-            </button>
-          ))}
-        </div>
-      </div>
+      <FilterChips options={categories} active={active} onChange={setActive} />
 
       {/* Articles */}
       <section className="px-6 md:px-12 py-[104px]">

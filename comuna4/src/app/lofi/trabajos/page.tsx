@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
+import { FilterChips } from '@/components/lofi/FilterChips'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cardVariants } from '@/lib/motion'
 
@@ -51,26 +52,7 @@ export default function LofiTrabajos() {
         </div>
       </section>
 
-      {/* Filtros */}
-      <div className="border-b border-neutral-200 px-6 md:px-12 py-5 bg-white sticky top-0 z-30">
-        <div className="max-w-5xl mx-auto flex items-center gap-2 flex-wrap">
-          {disciplines.map((d) => (
-            <motion.button
-              key={d}
-              onClick={() => setDiscipline(d)}
-              whileTap={{ scale: 0.95 }}
-              className={[
-                'text-xs px-4 py-2.5 rounded-full border transition-colors',
-                discipline === d
-                  ? 'bg-neutral-900 text-white border-neutral-900'
-                  : 'border-neutral-300 text-neutral-500 hover:border-neutral-600 hover:text-neutral-800',
-              ].join(' ')}
-            >
-              {d}
-            </motion.button>
-          ))}
-        </div>
-      </div>
+      <FilterChips options={disciplines} active={discipline} onChange={setDiscipline} label="" className="bg-white sticky top-[60px] z-30" />
 
       {/* Grid */}
       <section className="px-6 md:px-12 py-[104px]">
