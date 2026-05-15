@@ -2,8 +2,8 @@
 
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
-import { motion, useInView } from 'framer-motion'
-import { useRef, useEffect } from 'react'
+import { motion, useInView, useMotionValue, useSpring } from 'framer-motion'
+import { useRef, useEffect, useState } from 'react'
 import { stagger, fadeUp } from '@/lib/motion'
 
 const ticker = ['Producción de Contenido', 'Estrategia Creativa', 'Compra de Medios', 'Influencer Collabs', 'Renta de Espacios', 'Branding', 'Performance Digital']
@@ -189,9 +189,53 @@ function InViewSection({ children, className }: { children: React.ReactNode; cla
   )
 }
 
+const SERVICE_ROTATIONS = [-12, 8, -9, 14]
+
+function ServiceCursorCard({ activeService }: { activeService: number | null }) {
+  const cursorX = useMotionValue(-400)
+  const cursorY = useMotionValue(-400)
+  const springX = useSpring(cursorX, { stiffness: 180, damping: 16 })
+  const springY = useSpring(cursorY, { stiffness: 180, damping: 16 })
+  const rotation = useSpring(0, { stiffness: 700, damping: 18 })
+  const scale = useMotionValue(0.9)
+  const springScale = useSpring(scale, { stiffness: 600, damping: 14 })
+
+  useEffect(() => {
+    const onMove = (e: MouseEvent) => { cursorX.set(e.clientX); cursorY.set(e.clientY) }
+    window.addEventListener('mousemove', onMove)
+    return () => window.removeEventListener('mousemove', onMove)
+  }, [cursorX, cursorY])
+
+  useEffect(() => {
+    if (activeService !== null) {
+      rotation.set(SERVICE_ROTATIONS[activeService])
+      scale.set(1.18)
+      const t = setTimeout(() => scale.set(1), 80)
+      return () => clearTimeout(t)
+    } else {
+      scale.set(0.9)
+    }
+  }, [activeService, rotation, scale])
+
+  return (
+    <motion.div
+      className="hidden md:block fixed top-0 left-0 z-50 pointer-events-none w-44 aspect-[5/7]"
+      style={{ x: springX, y: springY, translateX: '-50%', translateY: '-110%', rotate: rotation, scale: springScale }}
+      animate={{ opacity: activeService !== null ? 1 : 0 }}
+      transition={{ duration: 0.15 }}
+    >
+      <div className="w-full h-full lofi-img rounded-xl border border-neutral-200" />
+    </motion.div>
+  )
+}
+
 export default function LofiHome() {
+  const [activeService, setActiveService] = useState<number | null>(null)
+
   return (
     <div>
+
+      <ServiceCursorCard activeService={activeService} />
 
       {/* Hero + Ticker — juntos ocupan exactamente 100vh */}
       <div className="min-h-screen pt-[60px] flex flex-col">
@@ -259,7 +303,10 @@ export default function LofiHome() {
       </section>
 
       {/* Servicios */}
-      <section className="px-6 md:px-12 py-16 md:py-24 border-b border-neutral-200">
+      <section
+        className="px-6 md:px-12 py-16 md:py-24 border-b border-neutral-200"
+        onMouseLeave={() => setActiveService(null)}
+      >
         <div className="max-w-5xl mx-auto">
           <div className="flex items-baseline justify-between mb-10">
             <h2 className="text-xs font-mono uppercase tracking-widest text-neutral-400">Lo que hacemos</h2>
@@ -273,8 +320,8 @@ export default function LofiHome() {
               { num: '02', name: 'Estrategia', desc: 'Ideas que conectan con tu audiencia y convierten.' },
               { num: '03', name: 'Medios', desc: 'Meta, Google y TikTok. Visibilidad real, no estimada.' },
               { num: '04', name: 'Influencers', desc: 'El talento adecuado para amplificar tu mensaje.' },
-            ].map((s) => (
-              <motion.div key={s.name} variants={fadeUp}>
+            ].map((s, i) => (
+              <motion.div key={s.name} variants={fadeUp} onMouseEnter={() => setActiveService(i)}>
                 <Link href="/lofi/servicios" className="group flex items-center gap-6 md:gap-10 py-5 hover:pl-1.5 transition-all duration-200 -mx-1.5 px-1.5">
                   <span className="font-mono text-xs text-neutral-300 w-6 shrink-0 tabular-nums">{s.num}</span>
                   <span className="flex-1 text-xl md:text-2xl font-display font-semibold text-neutral-900 tracking-tight">{s.name}</span>
