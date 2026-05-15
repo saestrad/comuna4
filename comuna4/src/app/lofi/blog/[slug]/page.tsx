@@ -1,7 +1,8 @@
 import Link from 'next/link'
 import { SectionNav } from '@/components/lofi/SectionNav'
 import { LofiCard } from '@/components/lofi/LofiCard'
-import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { BackLink } from '@/components/lofi/BackLink'
+import { ArrowRight } from 'lucide-react'
 
 const sections = [
   { id: 'articulo',   label: 'Artículo' },
@@ -44,12 +45,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         {/* Hero */}
         <section id="articulo" className="px-6 md:px-12 pt-[104px] pb-[104px] border-b border-neutral-200">
           <div className="max-w-[882px] mx-auto">
-            <Link
-              href="/lofi/blog"
-              className="inline-flex items-center gap-2 text-xs font-mono text-neutral-400 hover:text-neutral-700 transition-colors mb-12"
-            >
-              <ArrowLeft size={14} className="shrink-0" /> Todos los artículos
-            </Link>
+            <BackLink href="/lofi/blog" label="Todos los artículos" />
 
             <div className="flex items-center gap-3 mb-8">
               <span className="text-xs font-mono uppercase tracking-widest text-neutral-500">{article.category}</span>
@@ -59,7 +55,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
               <span className="text-xs font-mono uppercase tracking-widest text-neutral-500">{article.readTime} de lectura</span>
             </div>
 
-            <h1 className="text-3xl md:text-5xl font-display font-semibold text-neutral-900 tracking-tight leading-tight mb-6 max-w-[22ch]">
+            <h1 className="text-[clamp(1.875rem,4.5vw,3rem)] font-display font-semibold text-neutral-900 tracking-tight leading-tight mb-6 max-w-[22ch]">
               {article.title}
             </h1>
 
@@ -104,7 +100,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
           <div className="max-w-[882px] mx-auto">
             <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-16">Datos</p>
 
-            <p className="text-6xl md:text-8xl font-display font-semibold text-neutral-900 tracking-tight leading-none mb-4">
+            <p className="text-[clamp(3.75rem,8vw,6rem)] font-display font-semibold text-neutral-900 tracking-tight leading-none mb-4">
               {article.insight.stat}
             </p>
             <p className="text-base text-neutral-700 font-semibold mb-6 max-w-[38ch]">

@@ -41,7 +41,7 @@ export default function LofiRenta() {
             transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-6">Renta</p>
-            <h1 className="text-4xl md:text-6xl font-display font-semibold text-neutral-900 tracking-tight leading-none mb-6 max-w-[16ch]">
+            <h1 className="text-[clamp(2.25rem,5.5vw,3.75rem)] font-display font-semibold text-neutral-900 tracking-tight leading-none mb-6 max-w-[16ch]">
               Tu idea necesita un espacio. Nosotros lo tenemos.
             </h1>
             <p className="text-base text-neutral-500 leading-relaxed">

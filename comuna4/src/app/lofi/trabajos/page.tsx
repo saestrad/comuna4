@@ -38,7 +38,7 @@ export default function LofiTrabajos() {
           </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.07 }}
-            className="text-4xl md:text-6xl font-display font-semibold text-neutral-900 tracking-tight leading-none mb-6 max-w-[16ch]"
+            className="text-[clamp(2.25rem,5.5vw,3.75rem)] font-display font-semibold text-neutral-900 tracking-tight leading-none mb-6 max-w-[16ch]"
           >
             Proyectos reales, resultados reales.
           </motion.h1>
@@ -100,7 +100,7 @@ export default function LofiTrabajos() {
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="py-24 text-center">
               <p className="text-sm text-neutral-400 mb-3">Sin proyectos para esta combinación.</p>
               <button
-                onClick={() => { setDiscipline('Todos'); setSector('Todos') }}
+                onClick={() => setDiscipline('Todos')}
                 className="text-sm text-neutral-900 underline underline-offset-4 hover:text-neutral-500 transition-colors"
               >
                 Ver todos los proyectos

@@ -47,7 +47,7 @@ export default function LofiSobre() {
         <motion.div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-end" variants={stagger} initial="hidden" animate="visible">
           <motion.div variants={fadeUp}>
             <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-6">Nosotros</p>
-            <h1 className="text-4xl md:text-6xl font-display font-semibold text-neutral-900 tracking-tight leading-none mb-6">
+            <h1 className="text-[clamp(2.25rem,5.5vw,3.75rem)] font-display font-semibold text-neutral-900 tracking-tight leading-none mb-6">
               Más que una agencia, un motor de cambio.
             </h1>
             <p className="text-base text-neutral-500 leading-relaxed">
@@ -126,7 +126,7 @@ export default function LofiSobre() {
       <section className="px-6 md:px-12 py-[120px]">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row md:items-end md:justify-between gap-8">
           <div>
-            <h2 className="text-3xl md:text-4xl font-display font-semibold text-neutral-900 tracking-tight leading-none mb-3">¿Trabajamos juntos?</h2>
+            <h2 className="text-[clamp(1.875rem,3.5vw,2.25rem)] font-display font-semibold text-neutral-900 tracking-tight leading-none mb-3">¿Trabajamos juntos?</h2>
             <p className="text-sm text-neutral-500 leading-relaxed max-w-[38ch]">Sin compromisos. Cuéntanos el proyecto y vemos si hay fit.</p>
           </div>
           <div className="flex items-center gap-4 shrink-0">

@@ -15,25 +15,27 @@ export function SectionNav({ sections = defaultSections }: { sections?: Section[
   const [active, setActive] = useState(sections[0]?.id ?? '')
 
   useEffect(() => {
-    const observers: IntersectionObserver[] = []
+    const elements = sections
+      .map(({ id }) => document.getElementById(id))
+      .filter(Boolean) as HTMLElement[]
 
-    for (const { id } of sections) {
-      const el = document.getElementById(id)
-      if (!el) continue
+    if (!elements.length) return
 
-      const obs = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) setActive(id) },
-        { rootMargin: '-30% 0px -60% 0px' }
-      )
-      obs.observe(el)
-      observers.push(obs)
-    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) setActive(entry.target.id)
+        }
+      },
+      { rootMargin: '-30% 0px -60% 0px' }
+    )
 
-    return () => observers.forEach(o => o.disconnect())
+    elements.forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
   }, [sections])
 
   return (
-    <aside aria-label="Contenido de esta página" className="hidden md:flex flex-col gap-3 sticky top-0 h-screen pt-20 pb-8 pl-6 pr-4 w-32 lg:w-40 lg:pl-8 lg:pr-6 shrink-0">
+    <aside aria-label="Contenido de esta página" className="hidden md:flex flex-col gap-3 sticky top-16 h-[calc(100vh-64px)] pt-10 pb-8 pl-6 pr-4 w-32 lg:w-40 lg:pl-8 lg:pr-6 shrink-0">
       <p className="text-[10px] font-mono uppercase tracking-widest text-neutral-500 mb-1">
         Contenido
       </p>

@@ -1,7 +1,8 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { SectionNav } from '@/components/lofi/SectionNav'
-import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { BackLink } from '@/components/lofi/BackLink'
+import { ArrowRight } from 'lucide-react'
 
 const sections = [
   { id: 'resumen',    label: 'Resumen' },
@@ -187,12 +188,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         {/* Resumen */}
         <section id="resumen" className="px-6 md:px-12 pt-[104px] pb-[104px] border-b border-neutral-200">
           <div className="max-w-[882px] mx-auto">
-            <Link
-              href="/lofi/trabajos"
-              className="inline-flex items-center gap-2 text-xs font-mono text-neutral-400 hover:text-neutral-700 transition-colors mb-12"
-            >
-              <ArrowLeft size={14} className="shrink-0" /> Todos los proyectos
-            </Link>
+            <BackLink href="/lofi/trabajos" label="Todos los proyectos" />
 
             <div className="flex items-center gap-3 mb-8">
               <span className="text-xs font-mono uppercase tracking-widest text-neutral-500">{project.category}</span>
@@ -202,7 +198,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
               <span className="text-xs font-mono uppercase tracking-widest text-neutral-500">{project.year}</span>
             </div>
 
-            <h1 className="text-3xl md:text-5xl font-display font-semibold text-neutral-900 tracking-tight leading-tight mb-6 max-w-[20ch]">
+            <h1 className="text-[clamp(1.875rem,4.5vw,3rem)] font-display font-semibold text-neutral-900 tracking-tight leading-tight mb-6 max-w-[20ch]">
               {project.title}
             </h1>
 
@@ -257,14 +253,14 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           <div className="max-w-[882px] mx-auto">
             <h2 className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-16">Resultados</h2>
 
-            <p className="text-2xl md:text-4xl font-display font-semibold text-neutral-900 tracking-tight leading-tight mb-16 max-w-[24ch]">
+            <p className="text-[clamp(1.5rem,3.5vw,2.25rem)] font-display font-semibold text-neutral-900 tracking-tight leading-tight mb-16 max-w-[24ch]">
               {project.metric}
             </p>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 sm:gap-12">
               {project.results.map((r) => (
                 <div key={r.label}>
-                  <p className="text-2xl md:text-3xl font-display font-semibold text-neutral-900 tracking-tight mb-2">{r.metric}</p>
+                  <p className="text-[clamp(1.5rem,2.5vw,1.875rem)] font-display font-semibold text-neutral-900 tracking-tight mb-2">{r.metric}</p>
                   <p className="text-xs text-neutral-500 leading-snug">{r.label}</p>
                 </div>
               ))}

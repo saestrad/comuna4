@@ -3,8 +3,9 @@
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { use, useState } from 'react'
-import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { LofiCard } from '@/components/lofi/LofiCard'
+import { BackLink } from '@/components/lofi/BackLink'
 
 const item = {
   name: 'Ciclorama Profesional',
@@ -54,12 +55,7 @@ export default function RentaDetail({ params }: { params: Promise<{ slug: string
         {/* Detalle */}
         <section id="detalle" className="px-6 md:px-12 pt-[104px] pb-[104px] border-b border-neutral-200">
           <div className="max-w-[882px] mx-auto">
-            <Link
-              href="/lofi/renta"
-              className="inline-flex items-center gap-2 text-xs font-mono text-neutral-400 hover:text-neutral-700 transition-colors mb-12"
-            >
-              <ArrowLeft size={14} className="shrink-0" /> Todos los espacios y equipos
-            </Link>
+            <BackLink href="/lofi/renta" label="Todos los espacios y equipos" />
 
             <div className="flex items-center gap-3 mb-8">
               <span className="text-xs font-mono uppercase tracking-widest text-neutral-500">{item.category}</span>
@@ -67,7 +63,7 @@ export default function RentaDetail({ params }: { params: Promise<{ slug: string
               <span className="text-xs font-mono uppercase tracking-widest text-neutral-500">{item.size}</span>
             </div>
 
-            <h1 className="text-3xl md:text-5xl font-display font-semibold text-neutral-900 tracking-tight leading-tight mb-6">
+            <h1 className="text-[clamp(1.875rem,4.5vw,3rem)] font-display font-semibold text-neutral-900 tracking-tight leading-tight mb-6">
               {item.name}
             </h1>
 
