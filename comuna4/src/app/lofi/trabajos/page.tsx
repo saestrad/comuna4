@@ -45,7 +45,7 @@ export default function LofiTrabajos() {
     <motion.div layout variants={scaleVariants} initial="hidden" animate="visible" exit="exit">
       <Link
         href={`/lofi/trabajos/${p.slug}`}
-        className={`group relative lofi-img rounded-2xl overflow-hidden block ${tall ? 'aspect-[4/3]' : 'aspect-[16/8]'}`}
+        className={`group relative lofi-img rounded-2xl overflow-hidden block ${tall ? 'aspect-[16/9] sm:aspect-[4/3]' : 'aspect-[16/9] sm:aspect-[16/8]'}`}
       >
         <div className="absolute inset-0 bg-neutral-900/20 group-hover:bg-neutral-900/40 transition-colors duration-300" />
         <div className="absolute bottom-4 left-4">
@@ -157,7 +157,7 @@ export default function LofiTrabajos() {
                 }
                 const pair = row as typeof filtered[number][]
                 return (
-                  <motion.div key={pair.map(p => p.slug).join('-')} layout className="grid grid-cols-2 gap-4">
+                  <motion.div key={pair.map(p => p.slug).join('-')} layout className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {pair.map((p) => <Card key={p.slug} p={p} tall />)}
                   </motion.div>
                 )
