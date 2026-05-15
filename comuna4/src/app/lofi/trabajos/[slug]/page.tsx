@@ -244,7 +244,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
               ))}
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-16">
+            <div className="hidden sm:grid sm:grid-cols-3 gap-4 mt-16">
               {[1, 2, 3].map((i) => (
                 <div key={i} className="aspect-[4/3] lofi-img rounded-lg border border-neutral-200" />
               ))}
@@ -261,7 +261,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
               {project.metric}
             </p>
 
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-12">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 sm:gap-12">
               {project.results.map((r) => (
                 <div key={r.label}>
                   <p className="text-2xl md:text-3xl font-display font-semibold text-neutral-900 tracking-tight mb-2">{r.metric}</p>
@@ -279,7 +279,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
             <Link
               href={`/lofi/trabajos/${project.next.slug}`}
-              className="group flex items-end justify-between gap-6 border border-neutral-200 rounded-xl p-8 hover:bg-neutral-50 transition-colors"
+              className="group flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 sm:gap-6 border border-neutral-200 rounded-xl p-8 hover:bg-neutral-50 transition-colors"
             >
               <div>
                 <p className="text-xs font-mono uppercase tracking-widest text-neutral-400 mb-3">{project.next.category}</p>

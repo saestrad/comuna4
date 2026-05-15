@@ -18,9 +18,9 @@ const projects = [
 ]
 
 const studios = [
-  { name: 'Ciclorama Profesional', size: "25' × 25'", desc: 'Producciones publicitarias, fotografía de producto y contenido. Fondo infinito blanco.' },
-  { name: 'Estudio de Cocina', size: "25' × 25'", desc: 'Contenido gastronómico variado con calidad de cine.' },
-  { name: 'Estudio Multiusos', size: "25' × 25'", desc: 'Entrevistas, campañas digitales y cualquier formato.' },
+  { name: 'Ciclorama Profesional', size: "25' × 25'", desc: 'Producciones publicitarias, fotografía de producto y contenido. Fondo infinito blanco.', slug: 'ciclorama-profesional' },
+  { name: 'Estudio de Cocina', size: "25' × 25'", desc: 'Contenido gastronómico variado con calidad de cine.', slug: 'estudio-cocina' },
+  { name: 'Estudio Multiusos', size: "25' × 25'", desc: 'Entrevistas, campañas digitales y cualquier formato.', slug: 'estudio-multiusos' },
 ]
 
 function InViewSection({ children, className }: { children: React.ReactNode; className?: string }) {
@@ -133,11 +133,13 @@ export default function LofiHome() {
           </p>
           <InViewSection className="grid grid-cols-1 md:grid-cols-3 gap-px bg-neutral-200 mb-10">
             {studios.map((s) => (
-              <motion.div key={s.name} variants={fadeUp} className="bg-white p-8">
-                <div className="aspect-[4/3] lofi-img rounded-lg border border-neutral-200 mb-5" />
-                <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-1">{s.size}</p>
-                <p className="text-sm font-semibold text-neutral-800 mb-2">{s.name}</p>
-                <p className="text-xs text-neutral-500 leading-relaxed">{s.desc}</p>
+              <motion.div key={s.name} variants={fadeUp}>
+                <Link href={`/lofi/renta/${s.slug}`} className="group bg-white p-8 block hover:bg-neutral-50 transition-colors">
+                  <div className="aspect-[4/3] lofi-img rounded-lg border border-neutral-200 mb-5" />
+                  <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-1">{s.size}</p>
+                  <p className="text-sm font-semibold text-neutral-800 mb-2 group-hover:text-neutral-500 transition-colors">{s.name}</p>
+                  <p className="text-xs text-neutral-500 leading-relaxed">{s.desc}</p>
+                </Link>
               </motion.div>
             ))}
           </InViewSection>

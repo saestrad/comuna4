@@ -15,11 +15,19 @@ const navLinks = [
   { href: '/lofi/blog', label: 'Blog' },
 ]
 
-const MENU_W = 380
+const MENU_W_MAX = 380
 
 export function LofiShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
+  const [menuW, setMenuW] = useState(MENU_W_MAX)
+
+  useEffect(() => {
+    const update = () => setMenuW(Math.min(MENU_W_MAX, window.innerWidth - 40))
+    update()
+    window.addEventListener('resize', update)
+    return () => window.removeEventListener('resize', update)
+  }, [])
 
   useEffect(() => { setOpen(false) }, [pathname])
 
@@ -76,7 +84,7 @@ export function LofiShell({ children }: { children: React.ReactNode }) {
       {/* ── Contenido de la página — se desplaza a la izquierda ── */}
       <motion.div
         animate={{
-          x: open ? -MENU_W : 0,
+          x: open ? -menuW : 0,
           borderRadius: open ? 20 : 0,
         }}
         transition={{ type: 'spring', stiffness: 300, damping: 35 }}
@@ -105,10 +113,10 @@ export function LofiShell({ children }: { children: React.ReactNode }) {
       <motion.div
         aria-hidden={!open}
         initial={false}
-        animate={{ x: open ? 0 : MENU_W }}
+        animate={{ x: open ? 0 : menuW }}
         transition={{ type: 'spring', stiffness: 300, damping: 35 }}
         className="fixed top-0 right-0 h-full z-40 bg-white flex flex-col"
-        style={{ width: `${MENU_W}px` }}
+        style={{ width: `${menuW}px` }}
       >
         {/* Links */}
         <nav className="flex flex-col px-10 pt-[80px] pb-10 gap-0.5 flex-1 overflow-y-auto">

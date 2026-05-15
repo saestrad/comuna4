@@ -81,7 +81,7 @@ export default function LofiRenta() {
                 onClick={() => setActive(c)}
                 whileTap={{ scale: 0.95 }}
                 className={[
-                  'text-xs px-3 py-2.5 rounded-full border transition-colors',
+                  'text-xs px-4 py-3 rounded-full border transition-colors',
                   active === c
                     ? 'bg-primary text-primary-foreground border-primary'
                     : 'border-neutral-300 text-neutral-500 hover:border-neutral-600 hover:text-neutral-800',

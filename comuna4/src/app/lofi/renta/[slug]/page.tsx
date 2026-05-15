@@ -112,7 +112,7 @@ export default function RentaDetail({ params }: { params: Promise<{ slug: string
 
   return (
     <div className="flex">
-      <div className="flex-1 min-w-0">
+      <div className="flex-1 min-w-0 pb-24 lg:pb-0">
 
         {/* Detalle */}
         <section id="detalle" className="px-6 md:px-12 pt-[104px] pb-[104px] border-b border-neutral-200">
