@@ -3,7 +3,10 @@
 import { useState, useEffect, Suspense } from 'react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
-import { ArrowRight, ArrowLeft } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
+import { FormStepper } from '@/components/lofi/FormStepper'
+import { FormNav } from '@/components/lofi/FormNav'
+import { OptionButton } from '@/components/lofi/OptionButton'
 
 const serviceGroups = [
   { label: 'Agencia', items: ['Branding', 'Performance Media', 'Web', 'Estrategia'] },
@@ -105,23 +108,7 @@ function SolicitudForm() {
     <div className="min-h-screen bg-white">
       <div className="max-w-2xl mx-auto px-6 md:px-12 py-[104px]">
 
-        {/* Progress */}
-        <div className="mb-10">
-          <div className="flex gap-1.5 mb-3">
-            {steps.map((_, i) => (
-              <div
-                key={i}
-                className={[
-                  'flex-1 h-1 rounded-full transition-colors',
-                  i <= step ? 'bg-neutral-900' : 'bg-neutral-200',
-                ].join(' ')}
-              />
-            ))}
-          </div>
-          <p className="text-xs text-neutral-500 font-mono">
-            Paso {step + 1} de {steps.length} — {steps[step]}
-          </p>
-        </div>
+        <FormStepper steps={steps} current={step} />
 
         {/* Step 0: Service */}
         {step === 0 && (
@@ -138,20 +125,12 @@ function SolicitudForm() {
                   <p className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 mb-2.5">{group.label}</p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {group.items.map((s) => (
-                      <button
+                      <OptionButton
                         key={s}
-                        type="button"
-                        aria-pressed={selectedService === s}
+                        label={s}
+                        selected={selectedService === s}
                         onClick={() => { setSelectedService(s); setErrors({}) }}
-                        className={[
-                          'text-sm text-center px-4 py-3 rounded-full border transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-1',
-                          selectedService === s
-                            ? 'bg-primary text-primary-foreground border-primary'
-                            : 'border-neutral-200 text-neutral-700 hover:border-neutral-400',
-                        ].join(' ')}
-                      >
-                        {s}
-                      </button>
+                      />
                     ))}
                   </div>
                 </div>
@@ -205,20 +184,13 @@ function SolicitudForm() {
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {budgets.map((b) => (
-                    <button
+                    <OptionButton
                       key={b}
-                      type="button"
-                      aria-pressed={selectedBudget === b}
+                      label={b}
+                      size="sm"
+                      selected={selectedBudget === b && !showCustomBudget}
                       onClick={() => { setSelectedBudget(b); setShowCustomBudget(false); setErrors((prev) => ({ ...prev, budget: '' })) }}
-                      className={[
-                        'text-xs text-center px-3 py-2.5 rounded-full border transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-1',
-                        selectedBudget === b && !showCustomBudget
-                          ? 'bg-primary text-primary-foreground border-primary'
-                          : 'border-neutral-200 text-neutral-600 hover:border-neutral-400',
-                      ].join(' ')}
-                    >
-                      {b}
-                    </button>
+                    />
                   ))}
                   <button
                     type="button"
@@ -323,20 +295,13 @@ function SolicitudForm() {
                 </label>
                 <div className="flex gap-2">
                   {channels.map((c) => (
-                    <button
+                    <OptionButton
                       key={c}
-                      type="button"
-                      aria-pressed={selectedChannel === c}
+                      label={c}
+                      size="sm"
+                      selected={selectedChannel === c}
                       onClick={() => setSelectedChannel(c)}
-                      className={[
-                        'text-xs px-4 py-2.5 rounded-full border transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-1',
-                        selectedChannel === c
-                          ? 'bg-primary text-primary-foreground border-primary'
-                          : 'border-neutral-200 text-neutral-600 hover:border-neutral-400',
-                      ].join(' ')}
-                    >
-                      {c}
-                    </button>
+                    />
                   ))}
                 </div>
               </div>
@@ -414,38 +379,13 @@ function SolicitudForm() {
           </div>
         )}
 
-        {/* Navigation */}
-        <div className="flex items-center gap-3 pt-8 border-t border-neutral-200 mt-8">
-          <Link href="/lofi" className="text-xs text-neutral-400 hover:text-neutral-600 transition-colors mr-2">
-            Cancelar
-          </Link>
-          {step > 0 && (
-            <button
-              type="button"
-              onClick={() => setStep((s) => s - 1)}
-              className="inline-flex items-center gap-2 text-sm text-neutral-500 hover:text-neutral-900 border border-neutral-200 px-4 py-2.5 rounded-full transition-colors"
-            >
-              <ArrowLeft size={14} className="shrink-0" /> Anterior
-            </button>
-          )}
-          {!isLast ? (
-            <button
-              type="button"
-              onClick={advance}
-              className="ml-auto inline-flex items-center gap-2 text-sm font-medium bg-accent text-accent-foreground px-6 py-2.5 rounded-full transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
-            >
-              Siguiente <ArrowRight size={14} className="shrink-0" />
-            </button>
-          ) : (
-            <button
-              type="button"
-              onClick={submit}
-              className="ml-auto inline-flex items-center gap-2 text-sm font-medium bg-accent text-accent-foreground px-6 py-2.5 rounded-full transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
-            >
-              Enviar solicitud <ArrowRight size={14} className="shrink-0" />
-            </button>
-          )}
-        </div>
+        <FormNav
+          step={step}
+          isLast={isLast}
+          cancelHref="/lofi"
+          onBack={() => setStep((s) => s - 1)}
+          onNext={isLast ? submit : advance}
+        />
 
       </div>
     </div>

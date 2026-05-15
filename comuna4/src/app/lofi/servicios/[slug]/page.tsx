@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { SectionNav } from '@/components/lofi/SectionNav'
+import { LofiCard } from '@/components/lofi/LofiCard'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 
 const sections = [
@@ -98,16 +99,14 @@ export default async function ServicioDetail({ params }: { params: Promise<{ slu
           <div className="max-w-[882px] mx-auto">
             <h2 className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-12">Proyectos relacionados</h2>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-16">
               {cases.map((c) => (
-                <Link key={c.slug} href={`/lofi/trabajos/${c.slug}`} className="group block">
-                  <div className="aspect-[4/3] lofi-img rounded-lg border border-neutral-200 mb-4" />
-                  <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-1.5">{c.category}</p>
-                  <p className="text-sm font-semibold text-neutral-800 leading-snug mb-1.5 group-hover:text-neutral-600 transition-colors">
-                    {c.title}
-                  </p>
-                  <p className="text-xs text-neutral-500">{c.metric}</p>
-                </Link>
+                <LofiCard
+                  key={c.slug}
+                  href={`/lofi/trabajos/${c.slug}`}
+                  title={`${c.category} — ${c.title}`}
+                  subtitle={c.metric}
+                />
               ))}
             </div>
           </div>

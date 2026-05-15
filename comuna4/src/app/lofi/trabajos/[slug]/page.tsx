@@ -246,7 +246,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
             <div className="hidden sm:grid sm:grid-cols-3 gap-4 mt-16">
               {[1, 2, 3].map((i) => (
-                <div key={i} className="aspect-[4/3] lofi-img rounded-lg border border-neutral-200" />
+                <div key={i} className="aspect-[4/3] lofi-img rounded-2xl border border-neutral-200" />
               ))}
             </div>
           </div>

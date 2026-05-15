@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { use, useState } from 'react'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { LofiCard } from '@/components/lofi/LofiCard'
 
 const item = {
   name: 'Ciclorama Profesional',
@@ -33,86 +34,22 @@ const similar = [
   { name: 'Sony FX3 Full-Frame Cinema', size: 'Con baterías y tarjetas', category: 'Cámaras', slug: 'sony-fx3' },
 ]
 
-const WEEK_DAYS = ['L', 'M', 'X', 'J', 'V', 'S', 'D']
-const MONTHS = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
-
-const BOOKED = new Set([7, 8, 14, 21, 22])
-const WEEKENDS = new Set([4, 5, 11, 12, 18, 19, 25, 26])
-
-function getDaysInMonth(year: number, month: number) {
-  return new Date(year, month + 1, 0).getDate()
-}
-
-function getFirstWeekday(year: number, month: number) {
-  const day = new Date(year, month, 1).getDay()
-  return day === 0 ? 6 : day - 1
-}
 
 export default function RentaDetail({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params)
   const router = useRouter()
   const [duracion, setDuracion] = useState<'hora' | 'dia'>('hora')
-  const [selectedDay, setSelectedDay] = useState<number | null>(null)
-  const [calYear, setCalYear] = useState(2026)
-  const [calMonth, setCalMonth] = useState(4) // Mayo = 4
-  const [confirming, setConfirming] = useState(false)
-
-  const daysInMonth = getDaysInMonth(calYear, calMonth)
-  const firstWeekday = getFirstWeekday(calYear, calMonth)
-  const today = new Date()
-
-  function isBooked(d: number) {
-    return calMonth === 4 && calYear === 2026 && BOOKED.has(d)
-  }
-  function isWeekend(d: number) {
-    return calMonth === 4 && calYear === 2026 && WEEKENDS.has(d)
-  }
-  function isPast(d: number) {
-    const date = new Date(calYear, calMonth, d)
-    return date < new Date(today.getFullYear(), today.getMonth(), today.getDate())
-  }
-  function isAvailable(d: number) {
-    return !isBooked(d) && !isWeekend(d) && !isPast(d)
-  }
-
-  function prevMonth() {
-    if (calMonth === 0) { setCalMonth(11); setCalYear(y => y - 1) }
-    else setCalMonth(m => m - 1)
-    setSelectedDay(null)
-  }
-  function nextMonth() {
-    if (calMonth === 11) { setCalMonth(0); setCalYear(y => y + 1) }
-    else setCalMonth(m => m + 1)
-    setSelectedDay(null)
-  }
-
-  function handleConfirmar() {
-    if (selectedDay) {
-      setConfirming(true)
-    } else {
-      router.push(`/lofi/solicitud?espacio=${slug}`)
-    }
-  }
-
-  function handleProceder() {
-    const fecha = `${calYear}-${String(calMonth + 1).padStart(2, '0')}-${String(selectedDay).padStart(2, '0')}`
-    router.push(`/lofi/solicitud?espacio=${slug}&fecha=${fecha}`)
-  }
 
   const price = duracion === 'hora' ? item.priceHour : item.priceDay
   const priceLabel = duracion === 'hora' ? 'por hora' : 'por día completo (8h)'
 
-  // Build calendar cells: empty prefix + days
-  const cells: (number | null)[] = [
-    ...Array(firstWeekday).fill(null),
-    ...Array.from({ length: daysInMonth }, (_, i) => i + 1),
-  ]
-  // Pad to complete last row
-  while (cells.length % 7 !== 0) cells.push(null)
+  function handleConfirmar() {
+    router.push(`/lofi/renta/solicitud?espacio=${slug}&duracion=${duracion}`)
+  }
 
   return (
-    <div className="flex">
-      <div className="flex-1 min-w-0 pb-24 lg:pb-0">
+    <div>
+      <div className="pb-24 lg:pb-0">
 
         {/* Detalle */}
         <section id="detalle" className="px-6 md:px-12 pt-[104px] pb-[104px] border-b border-neutral-200">
@@ -140,11 +77,37 @@ export default function RentaDetail({ params }: { params: Promise<{ slug: string
 
             {/* Galería */}
             <div className="grid grid-cols-4 gap-3">
-              <div className="col-span-4 md:col-span-3 aspect-[4/3] lofi-img rounded-lg border border-neutral-200" />
+              <div className="col-span-4 md:col-span-3 aspect-[4/3] lofi-img rounded-2xl border border-neutral-200" />
               <div className="hidden md:flex flex-col gap-3">
                 {[1, 2, 3].map((i) => (
-                  <div key={i} className="flex-1 lofi-img rounded-lg border border-neutral-200" />
+                  <div key={i} className="flex-1 lofi-img rounded-2xl border border-neutral-200" />
                 ))}
+              </div>
+            </div>
+
+            {/* CTA de reserva */}
+            <div className="mt-10 rounded-2xl border border-neutral-200 bg-neutral-50 p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+              <div className="flex flex-col gap-3">
+                <div className="flex items-baseline gap-2">
+                  <span className="text-3xl font-display font-semibold text-neutral-900">{price}</span>
+                  <span className="text-sm text-neutral-400">{priceLabel}</span>
+                </div>
+                <div className="flex gap-1.5">
+                  {(['hora', 'dia'] as const).map((d) => (
+                    <button key={d} onClick={() => setDuracion(d)}
+                      className={['text-xs px-3 py-1.5 rounded-full border transition-colors',
+                        duracion === d ? 'bg-neutral-900 text-white border-neutral-900' : 'border-neutral-200 bg-white text-neutral-400 hover:border-neutral-400 hover:text-neutral-700'].join(' ')}>
+                      Por {d}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div className="flex flex-col items-start sm:items-end gap-2 shrink-0">
+                <button onClick={handleConfirmar}
+                  className="inline-flex items-center gap-2 text-sm font-medium px-7 py-3.5 rounded-full bg-accent text-accent-foreground hover:opacity-90 transition-colors">
+                  Solicitar reserva <ArrowRight size={14} className="shrink-0" />
+                </button>
+                <p className="text-xs text-neutral-400">Respuesta en menos de 2 h</p>
               </div>
             </div>
           </div>
@@ -185,210 +148,20 @@ export default function RentaDetail({ params }: { params: Promise<{ slug: string
         <section id="similares" className="px-6 md:px-12 py-[120px]">
           <div className="max-w-[882px] mx-auto">
             <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-12">También disponible</p>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-16">
               {similar.map((s) => (
-                <Link key={s.slug} href={`/lofi/renta/${s.slug}`} className="group block">
-                  <div className="aspect-[4/3] lofi-img rounded-lg border border-neutral-200 mb-4" />
-                  <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-1.5">
-                    {s.category} · {s.size}
-                  </p>
-                  <p className="text-sm font-semibold text-neutral-800 group-hover:text-neutral-600 transition-colors">
-                    {s.name}
-                  </p>
-                </Link>
+                <LofiCard
+                  key={s.slug}
+                  href={`/lofi/renta/${s.slug}`}
+                  title={`${s.category} — ${s.name}`}
+                  subtitle={s.size}
+                />
               ))}
             </div>
           </div>
         </section>
 
       </div>
-
-      {/* Panel de reserva — desktop sticky, flota con margen para respirar */}
-      <aside className="hidden lg:flex flex-col sticky top-6 self-start w-[300px] shrink-0 mr-6 mt-[80px] rounded-2xl border border-neutral-200 bg-white shadow-sm overflow-hidden" style={{ maxHeight: 'calc(100vh - 104px)' }}>
-
-        {/* Header */}
-        <div className="px-5 pt-6 pb-4 border-b border-neutral-100">
-          <p className="text-sm font-semibold text-neutral-900 leading-tight">{item.name}</p>
-          <p className="text-xs font-mono text-neutral-400 mt-0.5">{item.category} · {item.size}</p>
-        </div>
-
-        {/* Confirmation overlay */}
-        {confirming && selectedDay && (
-          <div className="flex-1 flex flex-col px-5 py-6 gap-5">
-            <div>
-              <p className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 mb-1">Fecha seleccionada</p>
-              <p className="text-2xl font-black text-neutral-900 leading-tight">
-                {selectedDay} de {MONTHS[calMonth]}
-              </p>
-              <p className="text-xs font-mono text-neutral-400 mt-0.5">{calYear}</p>
-            </div>
-
-            <div className="flex flex-col gap-3 py-4 border-y border-neutral-100">
-              <div className="flex items-center justify-between">
-                <span className="text-xs text-neutral-500">Espacio</span>
-                <span className="text-xs font-semibold text-neutral-800">{item.name}</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-xs text-neutral-500">Duración</span>
-                <span className="text-xs font-semibold text-neutral-800">Por {duracion}</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-xs text-neutral-500">Precio estimado</span>
-                <span className="text-xs font-semibold text-neutral-800">{price} <span className="font-normal text-neutral-400">/ {duracion === 'hora' ? 'hora' : 'día'}</span></span>
-              </div>
-            </div>
-
-            <p className="text-[10px] text-neutral-400 leading-relaxed">
-              Al continuar inicias la solicitud de reserva. Te confirmamos disponibilidad en menos de 2 horas.
-            </p>
-
-            <div className="flex flex-col gap-2 mt-auto">
-              <button
-                onClick={handleProceder}
-                className="w-full inline-flex items-center justify-center gap-2 text-sm font-medium py-3.5 rounded-full bg-accent text-accent-foreground hover:opacity-90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
-              >
-                Confirmar y solicitar <ArrowRight size={14} className="shrink-0" />
-              </button>
-              <button
-                onClick={() => setConfirming(false)}
-                className="w-full text-sm py-2.5 rounded-full border border-neutral-200 text-neutral-500 hover:border-neutral-400 hover:text-neutral-700 transition-colors"
-              >
-                Cambiar fecha
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Calendar + booking (hidden when confirming) */}
-        {!confirming && (<>
-
-        {/* Duración */}
-        <div className="px-5 py-4 border-b border-neutral-100">
-          <p className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 mb-2.5">Duración</p>
-          <div className="flex gap-2">
-            {(['hora', 'dia'] as const).map((d) => (
-              <button
-                key={d}
-                onClick={() => setDuracion(d)}
-                className={[
-                  'flex-1 text-xs py-2 rounded-full border transition-colors',
-                  duracion === d
-                    ? 'bg-primary text-primary-foreground border-primary'
-                    : 'border-neutral-200 text-neutral-500 hover:border-neutral-500',
-                ].join(' ')}
-              >
-                Por {d}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Mini daypicker — flex-1 para ocupar el espacio restante */}
-        <div className="flex-1 flex flex-col px-5 py-4 min-h-0">
-          <p className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 mb-3">Fecha</p>
-
-          {/* Month nav */}
-          <div className="flex items-center justify-between mb-3">
-            <button
-              onClick={prevMonth}
-              className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-neutral-100 transition-colors text-neutral-500 text-sm"
-            >
-              ‹
-            </button>
-            <p className="text-xs font-semibold text-neutral-800">
-              {MONTHS[calMonth]} {calYear}
-            </p>
-            <button
-              onClick={nextMonth}
-              className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-neutral-100 transition-colors text-neutral-500 text-sm"
-            >
-              ›
-            </button>
-          </div>
-
-          {/* Day headers */}
-          <div className="grid grid-cols-7 mb-1">
-            {WEEK_DAYS.map((d) => (
-              <div key={d} className="text-[10px] font-mono text-neutral-400 text-center py-1">{d}</div>
-            ))}
-          </div>
-
-          {/* Calendar grid — flex-1 distributes rows evenly */}
-          <div className="flex-1 flex flex-col gap-0.5">
-            {Array.from({ length: cells.length / 7 }, (_, row) => (
-              <div key={row} className="flex-1 grid grid-cols-7 gap-0.5">
-                {cells.slice(row * 7, row * 7 + 7).map((d, col) => {
-                  if (!d) return <div key={col} />
-                  const avail = isAvailable(d)
-                  const selected = selectedDay === d
-                  const booked = isBooked(d)
-                  const past = isPast(d)
-                  return (
-                    <button
-                      key={col}
-                      disabled={!avail}
-                      onClick={() => setSelectedDay(selected ? null : d)}
-                      title={booked ? 'Reservado' : isWeekend(d) ? 'Fin de semana' : past ? 'Fecha pasada' : undefined}
-                      className={[
-                        'w-full h-full rounded-md text-xs transition-colors flex items-center justify-center',
-                        selected
-                          ? 'bg-accent text-accent-foreground font-semibold'
-                          : avail
-                            ? 'hover:bg-neutral-100 text-neutral-700'
-                            : booked
-                              ? 'text-neutral-300 line-through'
-                              : past
-                                ? 'text-neutral-200'
-                                : 'text-neutral-300',
-                      ].join(' ')}
-                    >
-                      {d}
-                    </button>
-                  )
-                })}
-              </div>
-            ))}
-          </div>
-
-          {/* Legend */}
-          <div className="flex items-center gap-3 flex-wrap mt-3 pt-3 border-t border-neutral-100">
-            <div className="flex items-center gap-1.5">
-              <div className="w-2 h-2 rounded-sm bg-accent" />
-              <span className="text-[10px] text-neutral-400">Seleccionado</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <div className="w-2 h-2 rounded-sm bg-neutral-200 line-through" />
-              <span className="text-[10px] text-neutral-400">Reservado</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <div className="w-2 h-2 rounded-sm bg-neutral-100" />
-              <span className="text-[10px] text-neutral-400">No disponible</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Precio + CTA — siempre en el fondo */}
-        <div className="px-5 py-4 border-t border-neutral-100">
-          <div className="flex items-baseline justify-between mb-4">
-            <p className="text-2xl font-black text-neutral-900">{price}</p>
-            <p className="text-xs text-neutral-400">{priceLabel}</p>
-          </div>
-          {selectedDay && (
-            <p className="text-xs text-neutral-500 mb-3">
-              {MONTHS[calMonth]} {selectedDay}, {calYear}
-            </p>
-          )}
-          <button
-            onClick={handleConfirmar}
-            className="w-full inline-flex items-center justify-center gap-2 text-sm font-medium py-3.5 rounded-full bg-accent text-accent-foreground hover:opacity-90 transition-colors mb-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
-          >
-            {selectedDay ? 'Confirmar fecha' : 'Solicitar reserva'} <ArrowRight size={14} className="shrink-0" />
-          </button>
-          <p className="text-[10px] text-neutral-400 text-center">Respuesta en menos de 2 horas</p>
-        </div>
-        </>)}
-
-      </aside>
 
       {/* Mobile booking bar */}
       <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-neutral-200 px-6 py-4 flex items-center justify-between gap-4">
@@ -399,10 +172,10 @@ export default function RentaDetail({ params }: { params: Promise<{ slug: string
           </p>
         </div>
         <button
-          onClick={confirming ? handleProceder : handleConfirmar}
+          onClick={handleConfirmar}
           className="shrink-0 inline-flex items-center gap-2 text-sm font-medium px-6 py-3 rounded-full bg-accent text-accent-foreground hover:opacity-90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
         >
-          {confirming ? 'Confirmar y solicitar' : 'Solicitar reserva'} <ArrowRight size={14} className="shrink-0" />
+          Solicitar reserva <ArrowRight size={14} className="shrink-0" />
         </button>
       </div>
 

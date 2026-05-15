@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { SectionNav } from '@/components/lofi/SectionNav'
+import { LofiCard } from '@/components/lofi/LofiCard'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 
 const sections = [
@@ -91,7 +92,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
             </blockquote>
 
             {/* Inline image */}
-            <div className="aspect-[16/9] lofi-img rounded-lg border border-neutral-200 mb-6" />
+            <div className="aspect-[16/9] lofi-img rounded-2xl border border-neutral-200 mb-6" />
             <p className="text-xs text-neutral-400 font-mono">
               Análisis de impresiones orgánicas enero–abril 2026. Fuente: Search Console de 12 clientes.
             </p>
@@ -135,19 +136,14 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
               Más artículos
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-16 mb-16">
               {related.map((a) => (
-                <Link key={a.slug} href={`/lofi/blog/${a.slug}`} className="group block">
-                  <div className="aspect-[16/9] lofi-img rounded-lg border border-neutral-200 mb-4" />
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-xs font-mono uppercase tracking-widest text-neutral-500">{a.category}</span>
-                    <span className="text-neutral-300">·</span>
-                    <span className="text-xs text-neutral-500">{a.readTime}</span>
-                  </div>
-                  <p className="text-sm font-semibold text-neutral-800 leading-snug group-hover:text-neutral-600 transition-colors">
-                    {a.title}
-                  </p>
-                </Link>
+                <LofiCard
+                  key={a.slug}
+                  href={`/lofi/blog/${a.slug}`}
+                  title={a.title}
+                  subtitle={`${a.category} · ${a.readTime}`}
+                />
               ))}
             </div>
 
