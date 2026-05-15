@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { cardVariants } from '@/lib/motion'
 
 const categories = ['Todos', 'Estudios', 'Cámaras', 'Iluminación', 'Audio']
 
@@ -15,49 +17,14 @@ const amenities = [
 ]
 
 const items = [
-  {
-    name: 'Ciclorama Profesional',
-    category: 'Estudios',
-    size: "25' × 25'",
-    desc: 'Perfecto para producciones publicitarias, fotografía de productos y creación de contenido. Fondo infinito blanco.',
-    slug: 'ciclorama-profesional',
-  },
-  {
-    name: 'Estudio de Cocina',
-    category: 'Estudios',
-    size: "25' × 25'",
-    desc: 'Diseñado de forma modular para crear contenido gastronómico variado con calidad de cine.',
-    slug: 'estudio-cocina',
-  },
-  {
-    name: 'Estudio Multiusos',
-    category: 'Estudios',
-    size: "25' × 25'",
-    desc: 'Desde entrevistas hasta campañas digitales. Un espacio flexible para crear contenido en cualquier formato.',
-    slug: 'estudio-multiusos',
-  },
-  {
-    name: 'Sony FX3 Full-Frame Cinema',
-    category: 'Cámaras',
-    size: 'Con baterías y tarjetas',
-    desc: 'Cámara de cine full-frame compacta. Ideal para producciones de alto nivel con presupuesto eficiente.',
-    slug: 'sony-fx3',
-  },
-  {
-    name: 'Kit de iluminación LED — 3 puntos',
-    category: 'Iluminación',
-    size: 'Incluye soportes y difusores',
-    desc: 'Setup de 3 puntos con LEDs de temperatura ajustable. Para entrevistas, productos y lifestyle.',
-    slug: 'kit-led-3-puntos',
-  },
-  {
-    name: 'Rode NTG5 + grabadora portátil',
-    category: 'Audio',
-    size: 'Ideal para entrevistas y voz',
-    desc: 'Micrófono de cañón de referencia con grabadora portátil de alta resolución.',
-    slug: 'rode-ntg5',
-  },
+  { name: 'Ciclorama Profesional', category: 'Estudios', size: "25' × 25'", desc: 'Perfecto para producciones publicitarias, fotografía de productos y creación de contenido. Fondo infinito blanco.', slug: 'ciclorama-profesional' },
+  { name: 'Estudio de Cocina', category: 'Estudios', size: "25' × 25'", desc: 'Diseñado de forma modular para crear contenido gastronómico variado con calidad de cine.', slug: 'estudio-cocina' },
+  { name: 'Estudio Multiusos', category: 'Estudios', size: "25' × 25'", desc: 'Desde entrevistas hasta campañas digitales. Un espacio flexible para crear contenido en cualquier formato.', slug: 'estudio-multiusos' },
+  { name: 'Sony FX3 Full-Frame Cinema', category: 'Cámaras', size: 'Con baterías y tarjetas', desc: 'Cámara de cine full-frame compacta. Ideal para producciones de alto nivel con presupuesto eficiente.', slug: 'sony-fx3' },
+  { name: 'Kit de iluminación LED — 3 puntos', category: 'Iluminación', size: 'Incluye soportes y difusores', desc: 'Setup de 3 puntos con LEDs de temperatura ajustable. Para entrevistas, productos y lifestyle.', slug: 'kit-led-3-puntos' },
+  { name: 'Rode NTG5 + grabadora portátil', category: 'Audio', size: 'Ideal para entrevistas y voz', desc: 'Micrófono de cañón de referencia con grabadora portátil de alta resolución.', slug: 'rode-ntg5' },
 ]
+
 
 export default function LofiRenta() {
   const [active, setActive] = useState('Todos')
@@ -69,7 +36,10 @@ export default function LofiRenta() {
       {/* Hero */}
       <section className="px-6 md:px-12 pt-[104px] pb-[104px] border-b border-neutral-200">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-end">
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
+          >
             <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-6">Renta</p>
             <h1 className="text-4xl md:text-6xl font-display font-semibold text-neutral-900 tracking-tight leading-none mb-6 max-w-[16ch]">
               Tu idea necesita un espacio. Nosotros lo tenemos.
@@ -77,18 +47,26 @@ export default function LofiRenta() {
             <p className="text-base text-neutral-500 leading-relaxed">
               Infraestructura pensada para el crecimiento de la industria creativa en Puerto Rico.
             </p>
-          </div>
-          <div>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+          >
             <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-4">Incluido en todos los espacios</p>
             <ul className="flex flex-col gap-2">
-              {amenities.map((a) => (
-                <li key={a} className="text-sm text-neutral-600 flex items-start gap-2">
+              {amenities.map((a, i) => (
+                <motion.li
+                  key={a}
+                  initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.15 + i * 0.05, duration: 0.3 }}
+                  className="text-sm text-neutral-600 flex items-start gap-2"
+                >
                   <span className="text-neutral-300 shrink-0 mt-0.5">—</span>
                   {a}
-                </li>
+                </motion.li>
               ))}
             </ul>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -98,9 +76,10 @@ export default function LofiRenta() {
           <span className="text-xs font-mono uppercase tracking-widest text-neutral-500 w-20 shrink-0">Categoría</span>
           <div className="flex gap-2 flex-wrap">
             {categories.map((c) => (
-              <button
+              <motion.button
                 key={c}
                 onClick={() => setActive(c)}
+                whileTap={{ scale: 0.95 }}
                 className={[
                   'text-xs px-3 py-2.5 rounded-full border transition-colors',
                   active === c
@@ -109,7 +88,7 @@ export default function LofiRenta() {
                 ].join(' ')}
               >
                 {c}
-              </button>
+              </motion.button>
             ))}
           </div>
         </div>
@@ -121,20 +100,20 @@ export default function LofiRenta() {
           <p className="text-xs font-mono uppercase tracking-widest text-neutral-400 mb-8">
             {active === 'Todos' ? 'Todo el equipo' : active} — {filtered.length} {filtered.length === 1 ? 'item' : 'items'}
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {filtered.map((item) => (
-              <Link key={item.slug} href={`/lofi/renta/${item.slug}`} className="group block">
-                <div className="aspect-[4/3] lofi-img rounded-lg border border-neutral-200 mb-4" />
-                <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-1.5">
-                  {item.category} · {item.size}
-                </p>
-                <p className="text-sm font-semibold text-neutral-800 leading-snug mb-2 group-hover:text-neutral-600 transition-colors">
-                  {item.name}
-                </p>
-                <p className="text-xs text-neutral-500 leading-relaxed line-clamp-2">{item.desc}</p>
-              </Link>
-            ))}
-          </div>
+          <motion.div layout className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <AnimatePresence mode="popLayout">
+              {filtered.map((item) => (
+                <motion.div key={item.slug} layout variants={cardVariants} initial="hidden" animate="visible" exit="exit">
+                  <Link href={`/lofi/renta/${item.slug}`} className="group block">
+                    <div className="aspect-[4/3] lofi-img rounded-lg border border-neutral-200 mb-4" />
+                    <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-1.5">{item.category} · {item.size}</p>
+                    <p className="text-sm font-semibold text-neutral-800 leading-snug mb-2 group-hover:text-neutral-600 transition-colors">{item.name}</p>
+                    <p className="text-xs text-neutral-500 leading-relaxed line-clamp-2">{item.desc}</p>
+                  </Link>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
         </div>
       </section>
 

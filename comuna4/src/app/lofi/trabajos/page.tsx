@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { scaleVariants } from '@/lib/motion'
 
 const disciplines = ['Todos', 'Branding', 'Performance', 'Producción', 'Web']
 const sectors = ['Todos', 'Moda', 'Gastronomía', 'Tecnología', 'B2B', 'E-commerce']
@@ -16,6 +18,7 @@ const projects = [
   { client: 'Consultoría BG', title: 'Sitio web para consultoría de negocios', category: 'Web', sector: 'B2B', slug: 'consultoria-web' },
 ]
 
+
 export default function LofiTrabajos() {
   const [discipline, setDiscipline] = useState('Todos')
   const [sector, setSector] = useState('Todos')
@@ -28,23 +31,68 @@ export default function LofiTrabajos() {
 
   const hasFilter = discipline !== 'Todos' || sector !== 'Todos'
 
+  const pattern = [1, 2, 1, 1, 2]
+  const rows: (typeof filtered[number] | typeof filtered[number][])[] = []
+  let idx = 0, pi = 0
+  while (idx < filtered.length) {
+    const count = pattern[pi % pattern.length]
+    if (count === 1) { rows.push(filtered[idx]); idx++ }
+    else { const pair = filtered.slice(idx, idx + 2); if (pair.length > 0) rows.push(pair); idx += 2 }
+    pi++
+  }
+
+  const Card = ({ p, tall }: { p: typeof filtered[0]; tall?: boolean }) => (
+    <motion.div layout variants={scaleVariants} initial="hidden" animate="visible" exit="exit">
+      <Link
+        href={`/lofi/trabajos/${p.slug}`}
+        className={`group relative lofi-img rounded-2xl overflow-hidden block ${tall ? 'aspect-[4/3]' : 'aspect-[16/8]'}`}
+      >
+        <div className="absolute inset-0 bg-neutral-900/20 group-hover:bg-neutral-900/40 transition-colors duration-300" />
+        <div className="absolute bottom-4 left-4">
+          <motion.div
+            className="flex items-center gap-2.5 bg-white/95 backdrop-blur-sm rounded-full pl-1 pr-4 py-1 shadow-sm"
+            whileHover={{ scale: 1.03 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+          >
+            <div className="w-7 h-7 rounded-full lofi-img border border-neutral-200 shrink-0" />
+            <div>
+              <p className="text-xs font-semibold text-neutral-900 leading-none">{p.client}</p>
+              <p className="text-[10px] text-neutral-400 leading-none mt-0.5">{p.category}</p>
+            </div>
+          </motion.div>
+        </div>
+      </Link>
+    </motion.div>
+  )
+
   return (
     <div>
 
       {/* Hero */}
       <section className="px-6 md:px-12 pt-[104px] pb-16 border-b border-neutral-200">
         <div className="max-w-5xl mx-auto">
-          <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-6">Trabajos</p>
-          <h1 className="text-4xl md:text-6xl font-display font-semibold text-neutral-900 tracking-tight leading-none mb-6 max-w-[16ch]">
+          <motion.p
+            initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}
+            className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-6"
+          >
+            Trabajos
+          </motion.p>
+          <motion.h1
+            initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.07 }}
+            className="text-4xl md:text-6xl font-display font-semibold text-neutral-900 tracking-tight leading-none mb-6 max-w-[16ch]"
+          >
             Proyectos reales, resultados reales.
-          </h1>
-          <p className="text-base text-neutral-500 leading-relaxed max-w-[44ch]">
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.14 }}
+            className="text-base text-neutral-500 leading-relaxed max-w-[44ch]"
+          >
             No mostramos renders. Mostramos lo que construimos y los números que siguieron.
-          </p>
+          </motion.p>
         </div>
       </section>
 
-      {/* Filtros — una sola barra */}
+      {/* Filtros */}
       <div className="border-b border-neutral-200 px-6 md:px-12 py-4 bg-white sticky top-0 z-30">
         <div className="max-w-5xl mx-auto flex items-center gap-3 flex-wrap">
           <select
@@ -77,18 +125,22 @@ export default function LofiTrabajos() {
             ))}
           </select>
 
-          {hasFilter && (
-            <button
-              onClick={() => { setDiscipline('Todos'); setSector('Todos') }}
-              className="text-xs text-neutral-400 hover:text-neutral-700 transition-colors underline underline-offset-2 ml-1"
-            >
-              Limpiar
-            </button>
-          )}
+          <AnimatePresence>
+            {hasFilter && (
+              <motion.button
+                initial={{ opacity: 0, x: -6 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -6 }}
+                transition={{ duration: 0.2 }}
+                onClick={() => { setDiscipline('Todos'); setSector('Todos') }}
+                className="text-xs text-neutral-400 hover:text-neutral-700 transition-colors underline underline-offset-2 ml-1"
+              >
+                Limpiar
+              </motion.button>
+            )}
+          </AnimatePresence>
         </div>
       </div>
 
-      {/* Projects grid */}
+      {/* Grid */}
       <section className="px-6 md:px-12 py-[104px]">
         <div className="max-w-5xl mx-auto">
           <p className="text-xs font-mono uppercase tracking-widest text-neutral-400 mb-10">
@@ -96,50 +148,25 @@ export default function LofiTrabajos() {
             {hasFilter && <span className="ml-2 text-neutral-400">— filtrado</span>}
           </p>
 
-          <div className="flex flex-col gap-4">
-            {(() => {
-              const pattern = [1, 2, 1, 1, 2]
-              const rows: (typeof filtered[number] | typeof filtered[number][])[] = []
-              let idx = 0, pi = 0
-              while (idx < filtered.length) {
-                const count = pattern[pi % pattern.length]
-                if (count === 1) { rows.push(filtered[idx]); idx++ }
-                else { const pair = filtered.slice(idx, idx + 2); if (pair.length > 0) rows.push(pair); idx += 2 }
-                pi++
-              }
-
-              const Card = ({ p, tall }: { p: typeof filtered[0]; tall?: boolean }) => (
-                <Link
-                  href={`/lofi/trabajos/${p.slug}`}
-                  className={`group relative lofi-img rounded-2xl overflow-hidden block ${tall ? 'aspect-[4/3]' : 'aspect-[16/8]'}`}
-                >
-                  <div className="absolute inset-0 bg-neutral-900/20 group-hover:bg-neutral-900/40 transition-colors duration-300" />
-                  <div className="absolute bottom-4 left-4">
-                    <div className="flex items-center gap-2.5 bg-white/95 backdrop-blur-sm rounded-full pl-1 pr-4 py-1 shadow-sm">
-                      <div className="w-7 h-7 rounded-full lofi-img border border-neutral-200 shrink-0" />
-                      <div>
-                        <p className="text-xs font-semibold text-neutral-900 leading-none">{p.client}</p>
-                        <p className="text-[10px] text-neutral-400 leading-none mt-0.5">{p.category}</p>
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              )
-
-              return rows.map((row, i) => {
-                if (!Array.isArray(row)) return <Card key={i} p={row as typeof filtered[0]} />
+          <motion.div layout className="flex flex-col gap-4">
+            <AnimatePresence mode="popLayout">
+              {rows.map((row, i) => {
+                if (!Array.isArray(row)) {
+                  const p = row as typeof filtered[0]
+                  return <Card key={p.slug} p={p} />
+                }
                 const pair = row as typeof filtered[number][]
                 return (
-                  <div key={i} className="grid grid-cols-2 gap-4">
+                  <motion.div key={pair.map(p => p.slug).join('-')} layout className="grid grid-cols-2 gap-4">
                     {pair.map((p) => <Card key={p.slug} p={p} tall />)}
-                  </div>
+                  </motion.div>
                 )
-              })
-            })()}
-          </div>
+              })}
+            </AnimatePresence>
+          </motion.div>
 
           {filtered.length === 0 && (
-            <div className="py-24 text-center">
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="py-24 text-center">
               <p className="text-sm text-neutral-400 mb-3">Sin proyectos para esta combinación.</p>
               <button
                 onClick={() => { setDiscipline('Todos'); setSector('Todos') }}
@@ -147,7 +174,7 @@ export default function LofiTrabajos() {
               >
                 Ver todos los proyectos
               </button>
-            </div>
+            </motion.div>
           )}
         </div>
       </section>

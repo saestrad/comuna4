@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { Menu, X, ArrowRight } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
 
 const navLinks = [
   { href: '/lofi', label: 'Inicio' },
@@ -40,71 +41,96 @@ export function LofiShell({ children }: { children: React.ReactNode }) {
           [C4]
         </Link>
 
-        {open ? (
-          <button
-            onClick={() => setOpen(false)}
-            aria-label="Cerrar menú"
-            className="text-sm text-neutral-600 hover:text-neutral-900 transition-colors flex items-center gap-1.5"
-          >
-            Cerrar <X size={18} aria-hidden />
-          </button>
-        ) : (
-          <button
-            onClick={() => setOpen(true)}
-            aria-label="Abrir menú"
-            className="flex items-center gap-2 text-sm text-neutral-600 hover:text-neutral-900 transition-colors"
-          >
-            <span>Menú</span>
-            <Menu size={18} aria-hidden />
-          </button>
-        )}
+        <AnimatePresence mode="wait">
+          {open ? (
+            <motion.button
+              key="close"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.15 }}
+              onClick={() => setOpen(false)}
+              aria-label="Cerrar menú"
+              className="text-sm text-neutral-600 hover:text-neutral-900 transition-colors flex items-center gap-1.5"
+            >
+              Cerrar <X size={18} aria-hidden />
+            </motion.button>
+          ) : (
+            <motion.button
+              key="open"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.15 }}
+              onClick={() => setOpen(true)}
+              aria-label="Abrir menú"
+              className="flex items-center gap-2 text-sm text-neutral-600 hover:text-neutral-900 transition-colors"
+            >
+              <span>Menú</span>
+              <Menu size={18} aria-hidden />
+            </motion.button>
+          )}
+        </AnimatePresence>
       </header>
 
       {/* ── Contenido de la página — se desplaza a la izquierda ── */}
-      <div
-        className="relative transition-all duration-300 ease-in-out"
-        style={{
-          transform: open ? `translateX(-${MENU_W}px)` : 'translateX(0)',
-          borderRadius: open ? '20px' : '0',
-          overflow: open ? 'hidden' : 'visible',
+      <motion.div
+        animate={{
+          x: open ? -MENU_W : 0,
+          borderRadius: open ? 20 : 0,
         }}
+        transition={{ type: 'spring', stiffness: 300, damping: 35 }}
+        style={{ overflow: open ? 'hidden' : 'visible' }}
       >
         {children}
-      </div>
+      </motion.div>
 
       {/* ── Backdrop invisible para cerrar con click/tap fuera del panel ── */}
-      {open && (
-        <div
-          className="fixed inset-0 z-30"
-          onClick={() => setOpen(false)}
-          aria-hidden
-        />
-      )}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            key="backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-30"
+            onClick={() => setOpen(false)}
+            aria-hidden
+          />
+        )}
+      </AnimatePresence>
 
       {/* ── Panel del menú — entra desde la derecha ── */}
-      <div
+      <motion.div
         aria-hidden={!open}
-        className="fixed top-0 right-0 h-full z-40 bg-white flex flex-col transition-transform duration-300 ease-in-out"
-        style={{
-          width: `${MENU_W}px`,
-          transform: open ? 'translateX(0)' : `translateX(${MENU_W}px)`,
-        }}
+        initial={false}
+        animate={{ x: open ? 0 : MENU_W }}
+        transition={{ type: 'spring', stiffness: 300, damping: 35 }}
+        className="fixed top-0 right-0 h-full z-40 bg-white flex flex-col"
+        style={{ width: `${MENU_W}px` }}
       >
         {/* Links */}
         <nav className="flex flex-col px-10 pt-[80px] pb-10 gap-0.5 flex-1 overflow-y-auto">
-          {navLinks.map((link) => (
-            <Link
+          {navLinks.map((link, i) => (
+            <motion.div
               key={link.href}
-              href={link.href}
-              className={[
-                'text-3xl font-display font-semibold tracking-tight py-2 transition-colors',
-                isActive(link.href)
-                  ? 'text-neutral-900'
-                  : 'text-neutral-300 hover:text-neutral-700',
-              ].join(' ')}
+              initial={false}
+              animate={{ opacity: open ? 1 : 0, x: open ? 0 : 16 }}
+              transition={{ delay: open ? i * 0.04 : 0, duration: 0.25, ease: 'easeOut' }}
             >
-              {link.label}
-            </Link>
+              <Link
+                href={link.href}
+                className={[
+                  'text-3xl font-display font-semibold tracking-tight py-2 transition-colors block',
+                  isActive(link.href)
+                    ? 'text-neutral-900'
+                    : 'text-neutral-300 hover:text-neutral-700',
+                ].join(' ')}
+              >
+                {link.label}
+              </Link>
+            </motion.div>
           ))}
         </nav>
 
@@ -118,7 +144,7 @@ export function LofiShell({ children }: { children: React.ReactNode }) {
           </Link>
           <p className="text-xs text-neutral-400 font-mono">info@comuna4.com</p>
         </div>
-      </div>
+      </motion.div>
     </div>
   )
 }
