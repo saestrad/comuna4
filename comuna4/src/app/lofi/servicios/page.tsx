@@ -66,8 +66,8 @@ export default function LofiServicios() {
                     </li>
                   ))}
                 </ul>
-                <Link href={`/lofi/servicios/${s.slug}`} className="mt-auto inline-flex items-center gap-2 text-xs font-medium text-neutral-900 hover:text-neutral-500 transition-colors">
-                  Ver detalle <ArrowRight size={14} className="shrink-0" />
+                <Link href={`/lofi/servicios/${s.slug}`} className="mt-auto inline-flex items-center gap-2 text-xs font-medium px-4 py-2 rounded-full border border-neutral-300 text-neutral-600 hover:border-neutral-600 hover:text-neutral-900 transition-colors self-start">
+                  Ver detalle <ArrowRight size={12} className="shrink-0" />
                 </Link>
               </motion.div>
             ))}

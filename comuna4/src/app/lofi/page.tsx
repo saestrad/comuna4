@@ -32,7 +32,7 @@ function BentoShowcase() {
   })
 
   const Cell = ({ n, label }: { n: number; label: string }) => (
-    <div className="rounded-2xl bg-neutral-100 flex flex-col items-center justify-center gap-1 w-full h-full">
+    <div className="lofi-img rounded-2xl border border-neutral-200 flex flex-col items-center justify-center gap-1 w-full h-full">
       <span className="text-neutral-400 font-mono text-sm">{n}</span>
       <span className="text-neutral-400 font-mono text-xs">{label}</span>
     </div>
@@ -45,9 +45,9 @@ function BentoShowcase() {
 
       {/* Mobile: columna única — celdas 1, 7, 2 */}
       <div className="md:hidden flex flex-col gap-6">
-        <div className="rounded-2xl bg-neutral-100 aspect-[4/3] flex flex-col items-center justify-center gap-1"><span className="text-neutral-400 font-mono text-sm">1</span><span className="text-neutral-400 font-mono text-xs">Componente</span></div>
-        <div className="rounded-2xl bg-neutral-100 aspect-[9/19] flex flex-col items-center justify-center gap-1"><span className="text-neutral-400 font-mono text-sm">7</span><span className="text-neutral-400 font-mono text-xs">Mobile</span></div>
-        <div className="rounded-2xl bg-neutral-100 aspect-[4/3] flex flex-col items-center justify-center gap-1"><span className="text-neutral-400 font-mono text-sm">2</span><span className="text-neutral-400 font-mono text-xs">Componente</span></div>
+        <div className="lofi-img rounded-2xl border border-neutral-200 aspect-[4/3] flex flex-col items-center justify-center gap-1"><span className="text-neutral-400 font-mono text-sm">1</span><span className="text-neutral-400 font-mono text-xs">Componente</span></div>
+        <div className="lofi-img rounded-2xl border border-neutral-200 aspect-[9/19] flex flex-col items-center justify-center gap-1"><span className="text-neutral-400 font-mono text-sm">7</span><span className="text-neutral-400 font-mono text-xs">Mobile</span></div>
+        <div className="lofi-img rounded-2xl border border-neutral-200 aspect-[4/3] flex flex-col items-center justify-center gap-1"><span className="text-neutral-400 font-mono text-sm">2</span><span className="text-neutral-400 font-mono text-xs">Componente</span></div>
       </div>
 
       {/* Desktop: 3 cols, cada celda entra desde una dirección */}
@@ -145,8 +145,8 @@ function HubSection() {
                 Más que una agencia — un espacio físico en San Juan, Puerto Rico. Tres estudios equipados para cualquier producción.
               </p>
             </div>
-            <Link href="/lofi/renta" className="shrink-0 inline-flex items-center gap-2 text-sm text-neutral-900 hover:text-neutral-500 transition-colors underline underline-offset-4 whitespace-nowrap">
-              Ver todo <ArrowRight size={14} className="shrink-0" />
+            <Link href="/lofi/renta" className="shrink-0 inline-flex items-center gap-2 text-xs font-medium px-4 py-2 rounded-full border border-neutral-300 text-neutral-600 hover:border-neutral-600 hover:text-neutral-900 transition-colors whitespace-nowrap">
+              Ver todo <ArrowRight size={12} className="shrink-0" />
             </Link>
           </div>
         </div>
@@ -193,50 +193,55 @@ export default function LofiHome() {
   return (
     <div>
 
-      {/* Hero */}
-      <section className="lofi-img px-6 md:px-12 pt-[160px] pb-24 border-b border-neutral-200">
-        <motion.div className="max-w-5xl mx-auto" variants={stagger} initial="hidden" animate="visible">
-          <motion.p variants={fadeUp} className="text-xs font-mono uppercase tracking-widest text-neutral-400 mb-8">
-            Agencia creativa — Puerto Rico
-          </motion.p>
-          <motion.h1 variants={fadeUp} className="text-[clamp(2.25rem,5.5vw,4rem)] font-display font-semibold text-neutral-900 tracking-tight leading-none mb-12 max-w-[13ch]">
-            Tu marca, construida para durar.
-          </motion.h1>
-          <motion.div variants={fadeUp} className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
-            <p className="text-lg text-neutral-500 leading-relaxed max-w-[38ch]">
-              Meta, Google y TikTok con datos reales. Foto, video y activaciones. Rápido, con nivel.
-            </p>
-            <div className="flex items-center gap-4 shrink-0">
-              <Link href="/lofi/solicitud" className="inline-flex items-center gap-2 bg-accent text-accent-foreground text-sm font-medium px-8 py-4 rounded-full transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2">
-                Solicitar <ArrowRight size={14} className="shrink-0" />
-              </Link>
-              <Link href="/lofi/trabajos" className="inline-block text-sm font-medium px-8 py-4 rounded-full border border-neutral-300 text-neutral-700 transition-colors hover:border-neutral-600 hover:text-neutral-900">
-                Ver trabajos
-              </Link>
-            </div>
-          </motion.div>
-        </motion.div>
-      </section>
+      {/* Hero + Ticker — juntos ocupan exactamente 100vh */}
+      <div className="min-h-screen pt-[60px] flex flex-col">
 
-      {/* Ticker */}
-      <section className="border-b border-neutral-200 py-5 overflow-hidden">
-        <style>{`
-          @keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-          .ticker-track { animation: ticker-scroll 24s linear infinite; will-change: transform; }
-          .ticker-track:hover { animation-play-state: paused; }
-        `}</style>
-        <div className="ticker-track flex gap-10 font-mono text-xs uppercase tracking-widest text-neutral-500 whitespace-nowrap w-max">
-          {[...ticker, ...ticker].map((s, i) => <span key={i}>{s} ·</span>)}
-        </div>
-      </section>
+        {/* Hero */}
+        <section className="lofi-img flex-1 flex flex-col px-6 md:px-12 py-10 border-b border-neutral-200">
+          <motion.div className="max-w-5xl mx-auto w-full flex flex-col flex-1" variants={stagger} initial="hidden" animate="visible">
+            <motion.p variants={fadeUp} className="text-xs font-mono uppercase tracking-widest text-neutral-400 mb-8">
+              Agencia creativa — Puerto Rico
+            </motion.p>
+            <motion.h1 variants={fadeUp} className="text-[clamp(2.25rem,5.5vw,4rem)] font-display font-semibold text-neutral-900 tracking-tight leading-none max-w-[13ch]">
+              Tu marca, construida para durar.
+            </motion.h1>
+            <motion.div variants={fadeUp} className="mt-auto flex flex-col md:flex-row md:items-end md:justify-between gap-8">
+              <p className="text-lg text-neutral-500 leading-relaxed max-w-[38ch]">
+                Meta, Google y TikTok con datos reales. Foto, video y activaciones. Rápido, con nivel.
+              </p>
+              <div className="flex items-center gap-4 shrink-0">
+                <Link href="/lofi/solicitud" className="inline-flex items-center gap-2 bg-accent text-accent-foreground text-sm font-medium px-8 py-4 rounded-full transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2">
+                  Solicitar <ArrowRight size={14} className="shrink-0" />
+                </Link>
+                <Link href="/lofi/trabajos" className="inline-block text-sm font-medium px-8 py-4 rounded-full border border-neutral-300 text-neutral-700 transition-colors hover:border-neutral-600 hover:text-neutral-900">
+                  Ver trabajos
+                </Link>
+              </div>
+            </motion.div>
+          </motion.div>
+        </section>
+
+        {/* Ticker */}
+        <section className="border-b border-neutral-200 py-5 overflow-hidden shrink-0">
+          <style>{`
+            @keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+            .ticker-track { animation: ticker-scroll 24s linear infinite; will-change: transform; }
+            .ticker-track:hover { animation-play-state: paused; }
+          `}</style>
+          <div className="ticker-track flex gap-10 font-mono text-xs uppercase tracking-widest text-neutral-500 whitespace-nowrap w-max">
+            {[...ticker, ...ticker].map((s, i) => <span key={i}>{s} ·</span>)}
+          </div>
+        </section>
+
+      </div>
 
       {/* Proyectos */}
       <section className="px-6 md:px-12 py-20 md:py-28 border-b border-neutral-200">
         <div className="max-w-5xl mx-auto">
           <div className="flex items-baseline justify-between mb-16">
             <h2 className="text-xs font-mono uppercase tracking-widest text-neutral-500">Proyectos recientes</h2>
-            <Link href="/lofi/trabajos" className="inline-flex items-center gap-2 text-xs text-neutral-500 hover:text-neutral-700 transition-colors">
-              Ver todos <ArrowRight size={14} className="shrink-0" />
+            <Link href="/lofi/trabajos" className="inline-flex items-center gap-2 text-xs font-medium px-4 py-2 rounded-full border border-neutral-300 text-neutral-600 hover:border-neutral-600 hover:text-neutral-900 transition-colors">
+              Ver todos <ArrowRight size={12} className="shrink-0" />
             </Link>
           </div>
           <InViewSection className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-16">
@@ -258,7 +263,7 @@ export default function LofiHome() {
         <div className="max-w-5xl mx-auto">
           <div className="flex items-baseline justify-between mb-10">
             <h2 className="text-xs font-mono uppercase tracking-widest text-neutral-400">Lo que hacemos</h2>
-            <Link href="/lofi/servicios" className="inline-flex items-center gap-1.5 text-xs text-neutral-500 hover:text-neutral-900 transition-colors">
+            <Link href="/lofi/servicios" className="inline-flex items-center gap-1.5 text-xs font-medium px-4 py-2 rounded-full border border-neutral-300 text-neutral-600 hover:border-neutral-600 hover:text-neutral-900 transition-colors">
               Ver servicios <ArrowRight size={12} className="shrink-0" />
             </Link>
           </div>

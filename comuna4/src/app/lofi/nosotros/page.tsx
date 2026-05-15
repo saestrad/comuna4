@@ -133,8 +133,8 @@ export default function LofiSobre() {
             <Link href="/lofi/solicitud" className="inline-flex items-center gap-2 bg-accent text-accent-foreground text-sm font-medium px-8 py-4 rounded-full transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2">
               Solicitar <ArrowRight size={14} className="shrink-0" />
             </Link>
-            <Link href="/lofi/trabajos" className="text-sm text-neutral-500 hover:text-neutral-900 transition-colors underline underline-offset-4">
-              Ver trabajos
+            <Link href="/lofi/trabajos" className="inline-flex items-center gap-2 text-xs font-medium px-4 py-2 rounded-full border border-neutral-300 text-neutral-600 hover:border-neutral-600 hover:text-neutral-900 transition-colors">
+              Ver trabajos <ArrowRight size={12} className="shrink-0" />
             </Link>
           </div>
         </div>
