@@ -13,10 +13,11 @@ interface FilterChipsProps {
 export function FilterChips({ label = 'Categoría', options, active, onChange, className = 'bg-neutral-50' }: FilterChipsProps) {
   return (
     <div className={`border-b border-neutral-200 py-5 ${className}`}>
-      <div className="flex items-center gap-3 overflow-x-auto scrollbar-none px-6 md:px-12">
+      <div className="flex items-center gap-3 px-6 md:px-12">
         {label && (
           <span className="text-xs font-mono uppercase tracking-widest text-neutral-500 shrink-0 leading-none">{label}</span>
         )}
+        <div className="flex items-center gap-3 overflow-x-auto scrollbar-none">
         {options.map((opt) => (
           <motion.button
             key={opt}
@@ -32,6 +33,7 @@ export function FilterChips({ label = 'Categoría', options, active, onChange, c
             {opt}
           </motion.button>
         ))}
+        </div>
       </div>
     </div>
   )
