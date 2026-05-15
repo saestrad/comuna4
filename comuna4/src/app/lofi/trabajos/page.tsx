@@ -28,7 +28,7 @@ export default function LofiTrabajos() {
     <div>
 
       {/* Hero */}
-      <section className="px-6 md:px-12 pt-[104px] pb-16 border-b border-neutral-200">
+      <section className="px-6 md:px-12 pt-[140px] pb-16 border-b border-neutral-200">
         <div className="max-w-5xl mx-auto">
           <motion.p
             initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}
@@ -38,7 +38,7 @@ export default function LofiTrabajos() {
           </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.07 }}
-            className="text-[clamp(2.25rem,5.5vw,3.75rem)] font-display font-semibold text-neutral-900 tracking-tight leading-none mb-6 max-w-[16ch]"
+            className="text-[clamp(2rem,4.5vw,3.25rem)] font-display font-semibold text-neutral-900 tracking-tight leading-none mb-6 max-w-[16ch]"
           >
             Proyectos reales, resultados reales.
           </motion.h1>

@@ -35,27 +35,25 @@ export default function LofiBlog() {
       </section>
 
       {/* Filter */}
-      <div className="border-b border-neutral-200 px-6 md:px-12 py-5 bg-neutral-50">
-        <div className="max-w-5xl mx-auto flex items-center gap-2 flex-wrap">
-          <span className="text-xs font-mono uppercase tracking-widest text-neutral-500 w-24 shrink-0">
+      <div className="border-b border-neutral-200 py-5 bg-neutral-50">
+        <div className="flex items-center gap-3 overflow-x-auto scrollbar-none px-6 md:px-12">
+          <span className="text-xs font-mono uppercase tracking-widest text-neutral-500 shrink-0">
             Categoría
           </span>
-          <div className="flex gap-2 flex-wrap">
-            {categories.map((c) => (
-              <button
-                key={c}
-                onClick={() => setActive(c)}
-                className={[
-                  'text-xs px-3 py-2.5 rounded-full border transition-colors',
-                  active === c
-                    ? 'bg-primary text-primary-foreground border-primary'
-                    : 'border-neutral-300 text-neutral-500 hover:border-neutral-600 hover:text-neutral-800',
-                ].join(' ')}
-              >
-                {c}
-              </button>
-            ))}
-          </div>
+          {categories.map((c) => (
+            <button
+              key={c}
+              onClick={() => setActive(c)}
+              className={[
+                'text-xs px-3 py-2.5 rounded-full border transition-colors shrink-0',
+                active === c
+                  ? 'bg-neutral-900 text-white border-neutral-900'
+                  : 'border-neutral-300 text-neutral-500 hover:border-neutral-600 hover:text-neutral-800',
+              ].join(' ')}
+            >
+              {c}
+            </button>
+          ))}
         </div>
       </div>
 

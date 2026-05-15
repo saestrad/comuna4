@@ -34,14 +34,14 @@ export default function LofiRenta() {
     <div>
 
       {/* Hero */}
-      <section className="px-6 md:px-12 pt-[104px] pb-[104px] border-b border-neutral-200">
+      <section className="px-6 md:px-12 pt-[140px] pb-20 border-b border-neutral-200">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-end">
           <motion.div
             initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-6">Renta</p>
-            <h1 className="text-[clamp(2.25rem,5.5vw,3.75rem)] font-display font-semibold text-neutral-900 tracking-tight leading-none mb-6 max-w-[16ch]">
+            <h1 className="text-[clamp(2rem,4.5vw,3.25rem)] font-display font-semibold text-neutral-900 tracking-tight leading-none mb-6 max-w-[16ch]">
               Tu idea necesita un espacio. Nosotros lo tenemos.
             </h1>
             <p className="text-base text-neutral-500 leading-relaxed">
@@ -71,26 +71,24 @@ export default function LofiRenta() {
       </section>
 
       {/* Filter */}
-      <div className="border-b border-neutral-200 px-6 md:px-12 py-5 bg-neutral-50">
-        <div className="max-w-5xl mx-auto flex items-center gap-2 flex-wrap">
-          <span className="text-xs font-mono uppercase tracking-widest text-neutral-500 w-20 shrink-0">Categoría</span>
-          <div className="flex gap-2 flex-wrap">
-            {categories.map((c) => (
-              <motion.button
-                key={c}
-                onClick={() => setActive(c)}
-                whileTap={{ scale: 0.95 }}
-                className={[
-                  'text-xs px-4 py-3 rounded-full border transition-colors',
-                  active === c
-                    ? 'bg-primary text-primary-foreground border-primary'
-                    : 'border-neutral-300 text-neutral-500 hover:border-neutral-600 hover:text-neutral-800',
-                ].join(' ')}
-              >
-                {c}
-              </motion.button>
-            ))}
-          </div>
+      <div className="border-b border-neutral-200 py-5 bg-neutral-50">
+        <div className="flex items-center gap-3 overflow-x-auto scrollbar-none px-6 md:px-12">
+          <span className="text-xs font-mono uppercase tracking-widest text-neutral-500 shrink-0">Categoría</span>
+          {categories.map((c) => (
+            <motion.button
+              key={c}
+              onClick={() => setActive(c)}
+              whileTap={{ scale: 0.95 }}
+              className={[
+                'text-xs px-4 py-2.5 rounded-full border transition-colors shrink-0',
+                active === c
+                  ? 'bg-neutral-900 text-white border-neutral-900'
+                  : 'border-neutral-300 text-neutral-500 hover:border-neutral-600 hover:text-neutral-800',
+              ].join(' ')}
+            >
+              {c}
+            </motion.button>
+          ))}
         </div>
       </div>
 

@@ -43,18 +43,18 @@ export default function LofiSobre() {
     <div>
 
       {/* Hero */}
-      <section className="px-6 md:px-12 pt-[104px] pb-[104px] border-b border-neutral-200">
+      <section className="px-6 md:px-12 pt-[140px] pb-20 border-b border-neutral-200">
         <motion.div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-end" variants={stagger} initial="hidden" animate="visible">
           <motion.div variants={fadeUp}>
             <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-6">Nosotros</p>
-            <h1 className="text-[clamp(2.25rem,5.5vw,3.75rem)] font-display font-semibold text-neutral-900 tracking-tight leading-none mb-6">
+            <h1 className="text-[clamp(2rem,4.5vw,3.25rem)] font-display font-semibold text-neutral-900 tracking-tight leading-none mb-6">
               Más que una agencia, un motor de cambio.
             </h1>
             <p className="text-base text-neutral-500 leading-relaxed">
               Somos Comuna 4. Un hub de producción y publicidad en Puerto Rico diseñado para fortalecer marcas y proyectar la creatividad de la isla al mundo.
             </p>
           </motion.div>
-          <motion.div variants={fadeUp} className="aspect-[4/3] lofi-img rounded-lg border border-neutral-200" />
+          <motion.div variants={fadeUp} className="aspect-[4/3] lofi-img rounded-2xl border border-neutral-200" />
         </motion.div>
       </section>
 
@@ -63,7 +63,7 @@ export default function LofiSobre() {
         <div className="max-w-5xl mx-auto">
           <InViewSection>
             <motion.h2 variants={fadeUp} className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-8">Manifiesto</motion.h2>
-            <motion.p variants={fadeUp} className="text-3xl font-display font-semibold text-neutral-900 tracking-tight leading-tight mb-8 max-w-[22ch]">
+            <motion.p variants={fadeUp} className="text-[clamp(1.75rem,3.5vw,2.75rem)] font-display font-bold text-neutral-900 tracking-tight leading-tight mb-8 max-w-[22ch]">
               No trabajamos con todas las marcas. Solo con las que quieren ganar.
             </motion.p>
             <motion.div variants={fadeUp} className="flex flex-col gap-4 text-sm text-neutral-500 leading-relaxed max-w-[56ch]">
@@ -126,7 +126,7 @@ export default function LofiSobre() {
       <section className="px-6 md:px-12 py-[120px]">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row md:items-end md:justify-between gap-8">
           <div>
-            <h2 className="text-[clamp(1.875rem,3.5vw,2.25rem)] font-display font-semibold text-neutral-900 tracking-tight leading-none mb-3">¿Trabajamos juntos?</h2>
+            <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-display font-semibold text-neutral-900 tracking-tight leading-none mb-3">¿Trabajamos juntos?</h2>
             <p className="text-sm text-neutral-500 leading-relaxed max-w-[38ch]">Sin compromisos. Cuéntanos el proyecto y vemos si hay fit.</p>
           </div>
           <div className="flex items-center gap-4 shrink-0">

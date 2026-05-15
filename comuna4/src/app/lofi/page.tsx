@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { motion, useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 import { stagger, fadeUp } from '@/lib/motion'
 
 const ticker = ['Producción de Contenido', 'Estrategia Creativa', 'Compra de Medios', 'Influencer Collabs', 'Renta de Espacios', 'Branding', 'Performance Digital']
@@ -75,14 +75,64 @@ function BentoShowcase() {
 }
 
 function HubSection() {
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const dragging = useRef(false)
+  const didDrag = useRef(false)
+  const startX = useRef(0)
+  const startScroll = useRef(0)
+  const paused = useRef(false)
+  const pauseTimer = useRef<ReturnType<typeof setTimeout>>()
+  const rafRef = useRef<number>()
+
+  useEffect(() => {
+    const el = scrollRef.current
+    if (!el) return
+    let prev = performance.now()
+    const SPEED = 0.09 // px per ms — 20% of base
+
+    function tick(now: number) {
+      rafRef.current = requestAnimationFrame(tick)
+      if (paused.current) { prev = now; return }
+      const dt = now - prev
+      prev = now
+      if (dt > 100) return
+      el!.scrollLeft += SPEED * dt
+      const half = el!.scrollWidth / 2
+      if (el!.scrollLeft >= half) el!.scrollLeft -= half
+    }
+
+    rafRef.current = requestAnimationFrame(tick)
+    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current) }
+  }, [])
+
+  const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    dragging.current = true
+    didDrag.current = false
+    paused.current = true
+    startX.current = e.clientX
+    startScroll.current = scrollRef.current!.scrollLeft
+    e.currentTarget.setPointerCapture(e.pointerId)
+    clearTimeout(pauseTimer.current)
+  }
+
+  const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!dragging.current) return
+    const el = scrollRef.current!
+    const dx = startX.current - e.clientX
+    if (Math.abs(dx) > 4) didDrag.current = true
+    let next = startScroll.current + dx
+    const half = el.scrollWidth / 2
+    next = ((next % half) + half) % half
+    el.scrollLeft = next
+  }
+
+  const onPointerUp = () => {
+    dragging.current = false
+    pauseTimer.current = setTimeout(() => { paused.current = false }, 80)
+  }
+
   return (
     <section className="border-b border-neutral-200 bg-neutral-50 py-[104px]">
-      <style>{`
-        @keyframes hub-slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-        .hub-track { animation: hub-slide 28s linear infinite; will-change: transform; }
-        .hub-track:hover { animation-play-state: paused; }
-      `}</style>
-
       <div className="px-6 md:px-12 mb-16">
         <div className="max-w-5xl mx-auto">
           <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-4">El Hub</p>
@@ -102,10 +152,22 @@ function HubSection() {
         </div>
       </div>
 
-      <div className="overflow-hidden">
-        <div className="hub-track flex gap-10 w-max">
+      <div
+        ref={scrollRef}
+        className="overflow-hidden cursor-grab active:cursor-grabbing select-none"
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerCancel={onPointerUp}
+      >
+        <div className="flex gap-10 w-max">
           {[...studios, ...studios].map((s, i) => (
-            <Link key={i} href={`/lofi/renta/${s.slug}`} className="group block shrink-0 w-[480px]">
+            <Link
+              key={i}
+              href={`/lofi/renta/${s.slug}`}
+              className="group block shrink-0 w-[480px]"
+              onClick={(e) => { if (didDrag.current) e.preventDefault() }}
+            >
               <div className="aspect-[4/3] lofi-img rounded-2xl border border-neutral-200 mb-6" />
               <h3 className="text-lg font-semibold text-neutral-900 leading-snug mb-2 group-hover:text-neutral-500 transition-colors">{s.name}</h3>
               <p className="text-sm text-neutral-400 leading-relaxed">{s.desc}</p>
@@ -132,24 +194,26 @@ export default function LofiHome() {
     <div>
 
       {/* Hero */}
-      <section className="lofi-img px-6 md:px-12 pt-[140px] pb-[120px] border-b border-neutral-200">
-        <motion.div className="max-w-5xl mx-auto flex flex-col items-center text-center" variants={stagger} initial="hidden" animate="visible">
-          <motion.p variants={fadeUp} className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-10">
+      <section className="lofi-img px-6 md:px-12 pt-[160px] pb-24 border-b border-neutral-200">
+        <motion.div className="max-w-5xl mx-auto" variants={stagger} initial="hidden" animate="visible">
+          <motion.p variants={fadeUp} className="text-xs font-mono uppercase tracking-widest text-neutral-400 mb-8">
             Agencia creativa — Puerto Rico
           </motion.p>
-          <motion.h1 variants={fadeUp} className="text-[clamp(2.5rem,7vw,4.5rem)] font-display font-semibold text-neutral-900 tracking-tight leading-none mb-8 max-w-[14ch]">
+          <motion.h1 variants={fadeUp} className="text-[clamp(2.25rem,5.5vw,4rem)] font-display font-semibold text-neutral-900 tracking-tight leading-none mb-12 max-w-[13ch]">
             Tu marca, construida para durar.
           </motion.h1>
-          <motion.p variants={fadeUp} className="text-lg text-neutral-500 leading-relaxed mb-14 max-w-[40ch]">
-            Meta, Google y TikTok con datos reales. Foto, video y activaciones. Rápido, con nivel.
-          </motion.p>
-          <motion.div variants={fadeUp} className="flex items-center gap-4">
-            <Link href="/lofi/solicitud" className="inline-flex items-center gap-2 bg-accent text-accent-foreground text-sm font-medium px-8 py-4 rounded-full transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2">
-              Solicitar <ArrowRight size={14} className="shrink-0" />
-            </Link>
-            <Link href="/lofi/trabajos" className="inline-block text-sm font-medium px-8 py-4 rounded-full border border-neutral-300 text-neutral-700 transition-colors hover:border-neutral-600 hover:text-neutral-900">
-              Ver trabajos
-            </Link>
+          <motion.div variants={fadeUp} className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
+            <p className="text-lg text-neutral-500 leading-relaxed max-w-[38ch]">
+              Meta, Google y TikTok con datos reales. Foto, video y activaciones. Rápido, con nivel.
+            </p>
+            <div className="flex items-center gap-4 shrink-0">
+              <Link href="/lofi/solicitud" className="inline-flex items-center gap-2 bg-accent text-accent-foreground text-sm font-medium px-8 py-4 rounded-full transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2">
+                Solicitar <ArrowRight size={14} className="shrink-0" />
+              </Link>
+              <Link href="/lofi/trabajos" className="inline-block text-sm font-medium px-8 py-4 rounded-full border border-neutral-300 text-neutral-700 transition-colors hover:border-neutral-600 hover:text-neutral-900">
+                Ver trabajos
+              </Link>
+            </div>
           </motion.div>
         </motion.div>
       </section>
@@ -167,7 +231,7 @@ export default function LofiHome() {
       </section>
 
       {/* Proyectos */}
-      <section className="px-6 md:px-12 py-[104px] border-b border-neutral-200">
+      <section className="px-6 md:px-12 py-20 md:py-28 border-b border-neutral-200">
         <div className="max-w-5xl mx-auto">
           <div className="flex items-baseline justify-between mb-16">
             <h2 className="text-xs font-mono uppercase tracking-widest text-neutral-500">Proyectos recientes</h2>
@@ -190,20 +254,27 @@ export default function LofiHome() {
       </section>
 
       {/* Servicios */}
-      <section className="px-6 md:px-12 py-[104px] border-b border-neutral-200">
+      <section className="px-6 md:px-12 py-16 md:py-24 border-b border-neutral-200">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-16">Lo que hacemos</h2>
-          <InViewSection className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-px bg-neutral-200">
+          <div className="flex items-baseline justify-between mb-10">
+            <h2 className="text-xs font-mono uppercase tracking-widest text-neutral-400">Lo que hacemos</h2>
+            <Link href="/lofi/servicios" className="inline-flex items-center gap-1.5 text-xs text-neutral-500 hover:text-neutral-900 transition-colors">
+              Ver servicios <ArrowRight size={12} className="shrink-0" />
+            </Link>
+          </div>
+          <InViewSection className="divide-y divide-neutral-200">
             {[
-              { name: 'Producción', desc: 'Contenido con propósito. Comerciales, foto y digital.' },
-              { name: 'Estrategia', desc: 'Ideas que conectan con tu audiencia y convierten.' },
-              { name: 'Medios', desc: 'Meta, Google y TikTok. Visibilidad real, no estimada.' },
-              { name: 'Influencers', desc: 'El talento adecuado para amplificar tu mensaje.' },
+              { num: '01', name: 'Producción', desc: 'Contenido con propósito. Comerciales, foto y digital.' },
+              { num: '02', name: 'Estrategia', desc: 'Ideas que conectan con tu audiencia y convierten.' },
+              { num: '03', name: 'Medios', desc: 'Meta, Google y TikTok. Visibilidad real, no estimada.' },
+              { num: '04', name: 'Influencers', desc: 'El talento adecuado para amplificar tu mensaje.' },
             ].map((s) => (
               <motion.div key={s.name} variants={fadeUp}>
-                <Link href="/lofi/servicios" className="bg-white p-8 hover:bg-neutral-50 transition-colors group block h-full">
-                  <p className="text-sm font-semibold text-neutral-800 mb-3">{s.name}</p>
-                  <p className="text-xs text-neutral-500 leading-relaxed">{s.desc}</p>
+                <Link href="/lofi/servicios" className="group flex items-center gap-6 md:gap-10 py-5 hover:pl-1.5 transition-all duration-200 -mx-1.5 px-1.5">
+                  <span className="font-mono text-xs text-neutral-300 w-6 shrink-0 tabular-nums">{s.num}</span>
+                  <span className="flex-1 text-xl md:text-2xl font-display font-semibold text-neutral-900 tracking-tight">{s.name}</span>
+                  <span className="hidden md:block text-sm text-neutral-400 max-w-[30ch] text-right leading-snug">{s.desc}</span>
+                  <ArrowRight size={16} className="text-neutral-300 group-hover:text-neutral-900 group-hover:translate-x-0.5 transition-all shrink-0" />
                 </Link>
               </motion.div>
             ))}
@@ -218,10 +289,10 @@ export default function LofiHome() {
       <HubSection />
 
       {/* CTA */}
-      <section className="px-6 md:px-12 py-[120px]">
+      <section className="px-6 md:px-12 py-24 md:py-32">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row md:items-end md:justify-between gap-10">
           <div>
-            <h2 className="text-[clamp(1.875rem,4.5vw,3rem)] font-display font-semibold text-neutral-900 tracking-tight leading-none mb-5">¿Tienes un proyecto?</h2>
+            <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-display font-semibold text-neutral-900 tracking-tight leading-none mb-5">¿Tienes un proyecto?</h2>
             <p className="text-base text-neutral-500 max-w-[38ch] leading-relaxed">Cuéntanos. Respondemos en menos de 24 horas.</p>
           </div>
           <Link href="/lofi/solicitud" className="shrink-0 inline-flex items-center gap-2 bg-accent text-accent-foreground text-sm font-medium px-8 py-4 rounded-full transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2">

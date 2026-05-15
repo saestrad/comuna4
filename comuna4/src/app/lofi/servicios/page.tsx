@@ -35,10 +35,10 @@ export default function LofiServicios() {
     <div>
 
       {/* Hero */}
-      <section className="px-6 md:px-12 pt-[104px] pb-[104px] border-b border-neutral-200">
+      <section className="px-6 md:px-12 pt-[140px] pb-20 border-b border-neutral-200">
         <motion.div className="max-w-5xl mx-auto" variants={stagger} initial="hidden" animate="visible">
           <motion.p variants={fadeUp} className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-6">Servicios</motion.p>
-          <motion.h1 variants={fadeUp} className="text-[clamp(2.25rem,5.5vw,3.75rem)] font-display font-semibold text-neutral-900 tracking-tight leading-none mb-6 max-w-[18ch]">
+          <motion.h1 variants={fadeUp} className="text-[clamp(2rem,4.5vw,3.25rem)] font-display font-semibold text-neutral-900 tracking-tight leading-none mb-6 max-w-[18ch]">
             Publicidad de alto nivel. Sin las barreras de costo tradicionales.
           </motion.h1>
           <motion.p variants={fadeUp} className="text-base text-neutral-500 leading-relaxed max-w-[48ch]">
@@ -55,7 +55,7 @@ export default function LofiServicios() {
               <motion.div key={s.name} variants={fadeUp} className="bg-white p-8 flex flex-col gap-5">
                 <div>
                   <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-2">{s.name}</p>
-                  <h2 className="text-2xl font-semibold text-neutral-900 tracking-tight leading-tight mb-3">{s.tagline}</h2>
+                  <h2 className="text-xl md:text-2xl font-display font-bold text-neutral-900 tracking-tight leading-tight mb-3">{s.tagline}</h2>
                   <p className="text-sm text-neutral-500 leading-relaxed">{s.description}</p>
                 </div>
                 <ul className="flex flex-col gap-1.5">
@@ -94,7 +94,7 @@ export default function LofiServicios() {
       <section className="px-6 md:px-12 py-[120px]">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row md:items-end md:justify-between gap-8">
           <div>
-            <h2 className="text-[clamp(1.875rem,3.5vw,2.25rem)] font-display font-semibold text-neutral-900 tracking-tight leading-none mb-3">¿Qué necesita tu marca?</h2>
+            <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-display font-semibold text-neutral-900 tracking-tight leading-none mb-3">¿Qué necesita tu marca?</h2>
             <p className="text-sm text-neutral-500 max-w-[38ch] leading-relaxed">Cuéntanos el reto. En 24 horas tienes respuesta.</p>
           </div>
           <Link href="/lofi/solicitud" className="shrink-0 inline-flex items-center gap-2 bg-accent text-accent-foreground text-sm font-medium px-8 py-4 rounded-full transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2">
