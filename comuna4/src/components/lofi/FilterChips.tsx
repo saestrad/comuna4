@@ -17,7 +17,7 @@ export function FilterChips({ label = 'Categoría', options, active, onChange, c
         {label && (
           <span className="text-xs font-mono uppercase tracking-widest text-neutral-500 shrink-0 leading-none">{label}</span>
         )}
-        <div className="flex items-center gap-3 overflow-x-auto scrollbar-none">
+        <div className="flex items-center gap-3 overflow-x-auto scrollbar-none min-w-0">
         {options.map((opt) => (
           <motion.button
             key={opt}
