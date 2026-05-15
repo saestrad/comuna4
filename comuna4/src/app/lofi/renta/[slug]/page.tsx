@@ -203,8 +203,8 @@ export default function RentaDetail({ params }: { params: Promise<{ slug: string
 
       </div>
 
-      {/* Panel de reserva — desktop sticky, full height, no scroll */}
-      <aside className="hidden lg:flex flex-col sticky top-0 h-screen w-[300px] shrink-0 border-l border-neutral-200 bg-white">
+      {/* Panel de reserva — desktop sticky, flota con margen para respirar */}
+      <aside className="hidden lg:flex flex-col sticky top-6 self-start w-[300px] shrink-0 mr-6 mt-[80px] rounded-2xl border border-neutral-200 bg-white shadow-sm overflow-hidden" style={{ maxHeight: 'calc(100vh - 104px)' }}>
 
         {/* Header */}
         <div className="px-5 pt-6 pb-4 border-b border-neutral-100">
