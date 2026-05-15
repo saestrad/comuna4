@@ -80,18 +80,16 @@ export default function LofiTrabajos() {
             {discipline !== 'Todos' && <span className="ml-2 text-neutral-400">— {discipline}</span>}
           </p>
 
-          <motion.div layout className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-14">
+          <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-16">
             <AnimatePresence mode="popLayout">
               {filtered.map((p) => (
                 <motion.div key={p.slug} layout variants={cardVariants} initial="hidden" animate="visible" exit="exit">
                   <Link href={`/lofi/trabajos/${p.slug}`} className="group block">
-                    <div className="aspect-[4/3] lofi-img rounded-lg border border-neutral-200 mb-5" />
-                    <p className="text-xs font-mono uppercase tracking-widest text-neutral-400 mb-3">{p.category} · {p.sector}</p>
-                    <p className="text-sm font-semibold text-neutral-800 leading-snug mb-4 group-hover:text-neutral-500 transition-colors">{p.title}</p>
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-sm font-semibold text-neutral-900">{p.metric}</span>
-                      {p.period && <span className="text-xs text-neutral-400">{p.period}</span>}
-                    </div>
+                    <div className="aspect-[4/3] lofi-img rounded-2xl border border-neutral-200 mb-6" />
+                    <h3 className="text-lg font-semibold text-neutral-900 leading-snug mb-2 group-hover:text-neutral-500 transition-colors">
+                      {p.client} — {p.title}
+                    </h3>
+                    <p className="text-sm text-neutral-400">{p.metric}{p.period && ` · ${p.period}`}</p>
                   </Link>
                 </motion.div>
               ))}

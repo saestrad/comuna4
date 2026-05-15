@@ -65,19 +65,14 @@ export default function LofiBlog() {
           <p className="text-xs font-mono uppercase tracking-widest text-neutral-400 mb-8">
             {active === 'Todos' ? 'Todos los artículos' : active} — {filtered.length} {filtered.length === 1 ? 'artículo' : 'artículos'}
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-16">
             {filtered.map((a) => (
               <Link key={a.slug} href={`/lofi/blog/${a.slug}`} className="group block">
-                <div className="aspect-[16/9] lofi-img rounded-lg border border-neutral-200 mb-4" />
-                <div className="flex items-center gap-3 mb-2">
-                  <span className="text-xs font-mono uppercase tracking-widest text-neutral-500">{a.category}</span>
-                  <span className="text-xs text-neutral-300">·</span>
-                  <span className="text-xs text-neutral-500">{a.readTime}</span>
-                </div>
-                <p className="text-sm font-semibold text-neutral-800 leading-snug mb-2 group-hover:text-neutral-600 transition-colors">
+                <div className="aspect-[4/3] lofi-img rounded-2xl border border-neutral-200 mb-6" />
+                <h3 className="text-base font-semibold text-neutral-900 leading-snug mb-2 group-hover:text-neutral-500 transition-colors">
                   {a.title}
-                </p>
-                <p className="text-xs text-neutral-500 leading-relaxed line-clamp-2">{a.excerpt}</p>
+                </h3>
+                <p className="text-sm text-neutral-400 leading-relaxed line-clamp-2">{a.excerpt}</p>
               </Link>
             ))}
           </div>

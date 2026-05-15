@@ -100,15 +100,14 @@ export default function LofiRenta() {
           <p className="text-xs font-mono uppercase tracking-widest text-neutral-400 mb-8">
             {active === 'Todos' ? 'Todo el equipo' : active} — {filtered.length} {filtered.length === 1 ? 'item' : 'items'}
           </p>
-          <motion.div layout className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-16">
             <AnimatePresence mode="popLayout">
               {filtered.map((item) => (
                 <motion.div key={item.slug} layout variants={cardVariants} initial="hidden" animate="visible" exit="exit">
                   <Link href={`/lofi/renta/${item.slug}`} className="group block">
-                    <div className="aspect-[4/3] lofi-img rounded-lg border border-neutral-200 mb-4" />
-                    <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-1.5">{item.category} · {item.size}</p>
-                    <p className="text-sm font-semibold text-neutral-800 leading-snug mb-2 group-hover:text-neutral-600 transition-colors">{item.name}</p>
-                    <p className="text-xs text-neutral-500 leading-relaxed line-clamp-2">{item.desc}</p>
+                    <div className="aspect-[4/3] lofi-img rounded-2xl border border-neutral-200 mb-6" />
+                    <h3 className="text-base font-semibold text-neutral-900 leading-snug mb-2 group-hover:text-neutral-500 transition-colors">{item.name}</h3>
+                    <p className="text-sm text-neutral-400 leading-relaxed line-clamp-2">{item.desc}</p>
                   </Link>
                 </motion.div>
               ))}

@@ -23,6 +23,49 @@ const studios = [
   { name: 'Estudio Multiusos', size: "25' × 25'", desc: 'Entrevistas, campañas digitales y cualquier formato.', slug: 'estudio-multiusos' },
 ]
 
+function BentoShowcase() {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-10%' })
+
+  const sp = { type: 'spring' as const, stiffness: 30, damping: 20 }
+  const col1 = { hidden: { opacity: 0, y: 130 }, visible: { opacity: 1, y: 0, transition: sp } }
+  const col2 = { hidden: { opacity: 0, y: 80  }, visible: { opacity: 1, y: 0, transition: { ...sp, delay: 0.08 } } }
+  const col3 = { hidden: { opacity: 0, y: 110 }, visible: { opacity: 1, y: 0, transition: { ...sp, delay: 0.16 } } }
+
+  return (
+    <section ref={ref} className="border-b border-neutral-200 px-6 md:px-12 py-16 md:py-24">
+
+      {/* Mobile: columna única — celdas 1, 7, 2 */}
+      <div className="md:hidden flex flex-col gap-6">
+        <div className="rounded-2xl bg-neutral-100 aspect-[4/3] flex flex-col items-center justify-center gap-1"><span className="text-neutral-400 font-mono text-sm">1</span><span className="text-neutral-400 font-mono text-xs">Componente</span></div>
+        <div className="rounded-2xl bg-neutral-100 aspect-[9/19] flex flex-col items-center justify-center gap-1"><span className="text-neutral-400 font-mono text-sm">7</span><span className="text-neutral-400 font-mono text-xs">Mobile</span></div>
+        <div className="rounded-2xl bg-neutral-100 aspect-[4/3] flex flex-col items-center justify-center gap-1"><span className="text-neutral-400 font-mono text-sm">2</span><span className="text-neutral-400 font-mono text-xs">Componente</span></div>
+      </div>
+
+      {/* Desktop: 3 cols */}
+      <div className="hidden md:flex gap-8 h-[1200px]">
+
+        <motion.div variants={col1} initial="hidden" animate={isInView ? 'visible' : 'hidden'} className="flex-1 flex flex-col gap-8">
+          <div className="rounded-2xl bg-neutral-100 flex flex-col items-center justify-center gap-1" style={{ flex: 10 }}><span className="text-neutral-400 font-mono text-sm">1</span><span className="text-neutral-400 font-mono text-xs">Componente</span></div>
+          <div className="rounded-2xl bg-neutral-100 flex flex-col items-center justify-center gap-1" style={{ flex: 30 }}><span className="text-neutral-400 font-mono text-sm">2</span><span className="text-neutral-400 font-mono text-xs">Componente</span></div>
+          <div className="rounded-2xl bg-neutral-100 flex flex-col items-center justify-center gap-1" style={{ flex: 60 }}><span className="text-neutral-400 font-mono text-sm">3</span><span className="text-neutral-400 font-mono text-xs">Mobile</span></div>
+        </motion.div>
+
+        <motion.div variants={col2} initial="hidden" animate={isInView ? 'visible' : 'hidden'} className="flex-1 flex flex-col gap-8">
+          <div className="rounded-2xl bg-neutral-100 flex flex-col items-center justify-center gap-1" style={{ flex: 70 }}><span className="text-neutral-400 font-mono text-sm">4</span><span className="text-neutral-400 font-mono text-xs">Mobile</span></div>
+          <div className="rounded-2xl bg-neutral-100 flex flex-col items-center justify-center gap-1" style={{ flex: 30 }}><span className="text-neutral-400 font-mono text-sm">5</span><span className="text-neutral-400 font-mono text-xs">Componente</span></div>
+        </motion.div>
+
+        <motion.div variants={col3} initial="hidden" animate={isInView ? 'visible' : 'hidden'} className="flex-1 flex flex-col gap-8">
+          <div className="rounded-2xl bg-neutral-100 flex flex-col items-center justify-center gap-1" style={{ flex: 40 }}><span className="text-neutral-400 font-mono text-sm">6</span><span className="text-neutral-400 font-mono text-xs">Dashboard</span></div>
+          <div className="rounded-2xl bg-neutral-100 flex flex-col items-center justify-center gap-1" style={{ flex: 60 }}><span className="text-neutral-400 font-mono text-sm">7</span><span className="text-neutral-400 font-mono text-xs">Mobile</span></div>
+        </motion.div>
+
+      </div>
+    </section>
+  )
+}
+
 function InViewSection({ children, className }: { children: React.ReactNode; className?: string }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-80px' })
@@ -85,13 +128,9 @@ export default function LofiHome() {
             {projects.map((p) => (
               <motion.div key={p.slug} variants={fadeUp}>
                 <Link href={`/lofi/trabajos/${p.slug}`} className="group block">
-                  <div className="aspect-[4/3] lofi-img rounded-lg border border-neutral-200 mb-5" />
-                  <p className="text-xs font-mono uppercase tracking-widest text-neutral-400 mb-3">{p.category} · {p.sector}</p>
-                  <p className="text-sm font-semibold text-neutral-800 leading-snug mb-4 group-hover:text-neutral-500 transition-colors">{p.title}</p>
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-sm font-semibold text-neutral-900">{p.metric}</span>
-                    {p.period && <span className="text-xs text-neutral-400">{p.period}</span>}
-                  </div>
+                  <div className="aspect-[4/3] lofi-img rounded-2xl border border-neutral-200 mb-6" />
+                  <h3 className="text-base font-semibold text-neutral-900 leading-snug mb-2 group-hover:text-neutral-500 transition-colors">{p.title}</h3>
+                  <p className="text-sm text-neutral-400">{p.metric}{p.period && ` · ${p.period}`}</p>
                 </Link>
               </motion.div>
             ))}
@@ -121,6 +160,9 @@ export default function LofiHome() {
         </div>
       </section>
 
+      {/* Bento showcase */}
+      <BentoShowcase />
+
       {/* Hub */}
       <section className="px-6 md:px-12 py-[120px] border-b border-neutral-200 bg-neutral-50">
         <div className="max-w-5xl mx-auto">
@@ -135,10 +177,9 @@ export default function LofiHome() {
             {studios.map((s) => (
               <motion.div key={s.name} variants={fadeUp}>
                 <Link href={`/lofi/renta/${s.slug}`} className="group bg-white p-8 block hover:bg-neutral-50 transition-colors">
-                  <div className="aspect-[4/3] lofi-img rounded-lg border border-neutral-200 mb-5" />
-                  <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-1">{s.size}</p>
-                  <p className="text-sm font-semibold text-neutral-800 mb-2 group-hover:text-neutral-500 transition-colors">{s.name}</p>
-                  <p className="text-xs text-neutral-500 leading-relaxed">{s.desc}</p>
+                  <div className="aspect-[4/3] lofi-img rounded-2xl border border-neutral-200 mb-6" />
+                  <h3 className="text-base font-semibold text-neutral-900 mb-2 group-hover:text-neutral-500 transition-colors">{s.name}</h3>
+                  <p className="text-sm text-neutral-400 leading-relaxed">{s.desc}</p>
                 </Link>
               </motion.div>
             ))}
