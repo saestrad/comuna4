@@ -12,8 +12,8 @@ interface FilterChipsProps {
 
 export function FilterChips({ label = 'Categoría', options, active, onChange, className = 'bg-neutral-50' }: FilterChipsProps) {
   return (
-    <div className={`border-b border-neutral-200 py-5 ${className}`}>
-      <div className="flex items-center gap-3 px-6 md:px-12 max-w-5xl mx-auto">
+    <div className={`border-b border-neutral-200 py-5 ${className} px-6 md:px-12`}>
+      <div className="flex items-center gap-3 max-w-5xl mx-auto">
         {label && (
           <span className="text-xs font-mono uppercase tracking-widest text-neutral-500 shrink-0 leading-none">{label}</span>
         )}
